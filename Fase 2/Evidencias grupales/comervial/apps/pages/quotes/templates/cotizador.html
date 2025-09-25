@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Cotizador | Comervial{% endblock %}
+
+{% block content %}
+<main class="pt-5 mt-5">
+  <div class="container py-5">
+    <h1 class="h3 mb-4">Cotizador</h1>
+    <form method="post" class="row g-3">
+      {% csrf_token %}
+      <div class="col-md-6">
+        <label class="form-label">Nombre</label>
+        {{ form.nombre|add_class:"form-control" }}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Email</label>
+        {{ form.email|add_class:"form-control" }}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Teléfono</label>
+        {{ form.telefono|add_class:"form-control" }}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Categoría</label>
+        {{ form.categoria|add_class:"form-control" }}
+      </div>
+      <div class="col-12">
+        <label class="form-label">Mensaje</label>
+        {{ form.mensaje|add_class:"form-control" }}
+      </div>
+      <div class="col-12">
+        <button class="btn btn-primary">Enviar</button>
+      </div>
+    </form>
+  </div>
+</main>
+{% endblock %}

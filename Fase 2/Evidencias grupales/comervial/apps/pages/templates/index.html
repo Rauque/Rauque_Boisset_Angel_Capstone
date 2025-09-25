@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Inicio | Comervial{% endblock %}
+
+{% block content %}
+<header class="hero" style="background-image:url('{% static 'img/hero-1.jpg' %}')">
+  <div class="hero-content container text-center text-white">
+    <h1 class="display-5 fw-semibold">Vidriería Comervial</h1>
+    <p class="lead mb-4">Un mundo en cristales — calidad, seguridad y diseño</p>
+    <a href="{% url 'cotizador' %}" class="btn btn-ghost">Cotizar</a>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <h2 class="h3 mb-3">Servicios destacados</h2>
+    <p>Contenido de ejemplo para continuar con tu maquetación…</p>
+  </div>
+</section>
+{% endblock %}
