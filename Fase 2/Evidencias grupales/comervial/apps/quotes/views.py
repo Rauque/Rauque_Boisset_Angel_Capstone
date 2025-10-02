@@ -17,7 +17,13 @@ Categoría: {obj.categoria}
 Mensaje:
 {obj.mensaje}
 """
-            send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [settings.COTIZADOR_TO])
+            send_mail(
+                subject, body,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.COTIZADOR_TO],
+                fail_silently=False,
+                reply_to=[obj.email],  # para responder directo al cliente
+            )
             return redirect("cotizador_ok")
     else:
         form = QuoteRequestForm()
@@ -39,7 +45,13 @@ Ubicación: {obj.ubicacion}
 Detalles:
 {obj.detalles}
 """
-            send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [settings.COTIZADOR_TO])
+            send_mail(
+                subject, body,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.COTIZADOR_TO],
+                fail_silently=False,
+                reply_to=[obj.email],  # responder directo
+            )
             return redirect("cotizador_ok")
     else:
         form = CustomQuoteRequestForm()

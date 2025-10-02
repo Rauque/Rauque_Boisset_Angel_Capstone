@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} | Comervial{% endblock %}
+
+{% block content %}
+<main class="pt-5 mt-5">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-12 col-md-6">
+        {% if product.image %}
+          <img src="{{ product.image.url }}" class="img-fluid rounded shadow-sm" alt="{{ product.name }}">
+        {% else %}
+          <div class="bg-light border rounded p-5 text-center">Sin imagen</div>
+        {% endif %}
+      </div>
+      <div class="col-12 col-md-6">
+        <h1 class="h4">{{ product.name }}</h1>
+        <div class="text-secondary mb-2">{{ product.category.name }}</div>
+        <div class="display-6 fw-semibold mb-3">${{ product.price|floatformat:0 }}</div>
+
+        <ul class="list-unstyled small">
+          <li><strong>Material:</strong> {{ product.get_material_display }}</li>
+          <li><strong>Cristal:</strong> {{ product.get_glass_type_display }}</li>
+          <li><strong>Espesor:</strong> {{ product.get_thickness_display }}</li>
+          <li><strong>Color:</strong> {{ product.get_color_display }}</li>
+        </ul>
+
+        <a class="btn btn-primary" href="{% url 'cotizador' %}">Cotizar este producto</a>
+        <a class="btn btn-link" href="{% url 'catalog:catalog_list' %}">Volver al catálogo</a>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

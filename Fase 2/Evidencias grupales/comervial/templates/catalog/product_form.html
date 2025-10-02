@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<main class="pt-5 mt-5">
+  <div class="container py-4" style="max-width: 820px;">
+    <h1 class="h4 mb-3">{{ title }}</h1>
+    <form method="post" enctype="multipart/form-data" class="row g-3">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      {% for field in form %}
+        <div class="col-12">
+          <label class="form-label">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}<div class="text-danger small">{{ field.errors|striptags }}</div>{% endif %}
+        </div>
+      {% endfor %}
+      <div class="col-12 d-flex gap-2">
+        <button class="btn btn-primary">Guardar</button>
+        <a class="btn btn-secondary" href="{% url 'catalog:catalog_manage' %}">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Catálogo | Comervial{% endblock %}
+
+{% block content %}
+<main class="pt-5 mt-5">
+  <div class="container py-4">
+
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <h1 class="h4 mb-0">Catálogo</h1>
+      <a class="btn btn-outline-secondary btn-sm" href="{% url 'catalog:catalog_list' %}">Limpiar filtros</a>
+    </div>
+
+    <form method="get" class="row g-3 mb-4">
+      <div class="col-12 col-md-2">
+        <label class="form-label">Material</label>
+        <select name="material" class="form-select">
+          <option value="">Todos</option>
+          {% for v,label in MATERIAL_CHOICES %}
+            <option value="{{ v }}" {% if current.material == v %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-12 col-md-3">
+        <label class="form-label">Cristal</label>
+        <select name="cristal" class="form-select">
+          <option value="">Todos</option>
+          {% for v,label in GLASS_CHOICES %}
+            <option value="{{ v }}" {% if current.cristal == v %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-6 col-md-2">
+        <label class="form-label">Espesor</label>
+        <select name="espesor" class="form-select">
+          <option value="">Todos</option>
+          {% for v,label in THICKNESS_CHOICES %}
+            <option value="{{ v }}" {% if current.espesor == v %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-6 col-md-2">
+        <label class="form-label">Color</label>
+        <select name="color" class="form-select">
+          <option value="">Todos</option>
+          {% for v,label in COLOR_CHOICES %}
+            <option value="{{ v }}" {% if current.color == v %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-12 col-md-3">
+        <label class="form-label">Categoría</label>
+        <select name="categoria" class="form-select">
+          <option value="">Todas</option>
+          {% for c in categories %}
+            <option value="{{ c.slug }}" {% if current.categoria == c.slug %}selected{% endif %}>{{ c.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-12">
+        <button class="btn btn-primary">Aplicar filtros</button>
+      </div>
+    </form>
+
+    {% if products %}
+      <div class="row g-4">
+        {% for p in products %}
+          <div class="col-12 col-sm-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+              {% if p.image %}
+                <img src="{{ p.image.url }}" class="card-img-top" alt="{{ p.name }}">
+              {% else %}
+                <img src="{% static 'img/placeholder-4x3.png' %}" class="card-img-top" alt="{{ p.name }}">
+              {% endif %}
+              <div class="card-body">
+                <h2 class="h6 card-title mb-1">
+                  <a class="stretched-link text-decoration-none" href="{% url 'catalog:product_detail' p.slug %}">{{ p.name }}</a>
+                </h2>
+                <div class="small text-secondary">{{ p.category.name }}</div>
+                <div class="fw-semibold mt-2">${{ p.price|floatformat:0 }}</div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if products.paginator.num_pages > 1 %}
+        <nav class="mt-4">
+          <ul class="pagination">
+            {% if products.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}{% if request.GET.urlencode %}&{{ request.GET.urlencode|cut:'page='|cut:products.number %}{% endif %}">Anterior</a></li>
+            {% else %}
+              <li class="page-item disabled"><span class="page-link">Anterior</span></li>
+            {% endif %}
+
+            <li class="page-item disabled"><span class="page-link">Página {{ products.number }} de {{ products.paginator.num_pages }}</span></li>
+
+            {% if products.has_next %}
+              <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}{% if request.GET.urlencode %}&{{ request.GET.urlencode|cut:'page='|cut:products.number %}{% endif %}">Siguiente</a></li>
+            {% else %}
+              <li class="page-item disabled"><span class="page-link">Siguiente</span></li>
+            {% endif %}
+          </ul>
+        </nav>
+      {% endif %}
+    {% else %}
+      <div class="alert alert-info">No hay productos que coincidan con los filtros.</div>
+    {% endif %}
+
+  </div>
+</main>
+{% endblock %}
