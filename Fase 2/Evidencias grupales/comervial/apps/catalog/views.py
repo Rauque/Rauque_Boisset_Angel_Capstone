@@ -1,7 +1,8 @@
 # apps/catalog/views.py
+# apps/catalog/views.py
 from django.contrib import messages
 from .forms import ProductForm
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import (

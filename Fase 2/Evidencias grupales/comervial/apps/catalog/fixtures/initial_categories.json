@@ -1,0 +1,28 @@
+[
+  {"model": "catalog.category", "fields": {"name": "Cristales", "slug": "cristales", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Laminado", "slug": "laminado", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Templado", "slug": "templado", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Termopanel", "slug": "termopanel", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Monolítico", "slug": "monolitico", "is_active": true}},
+
+  {"model": "catalog.category", "fields": {"name": "Ventanas", "slug": "ventanas", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Corredera", "slug": "corredera", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Abatible", "slug": "abatible", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Oscilobatiente", "slug": "oscilobatiente", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Proyectante", "slug": "proyectante", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Fija", "slug": "fija", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Bow Window", "slug": "bow-window", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Medio Punto", "slug": "medio-punto", "is_active": true}},
+
+  {"model": "catalog.category", "fields": {"name": "Puertas", "slug": "puertas", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Abatibles", "slug": "puertas-abatibles", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Correderas", "slug": "puertas-correderas", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Elevadoras", "slug": "puertas-elevadoras", "is_active": true}},
+
+  {"model": "catalog.category", "fields": {"name": "Espejos", "slug": "espejos", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Barandas", "slug": "barandas", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Shower Door", "slug": "shower-door", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Mamparas", "slug": "mamparas", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Muebles", "slug": "muebles", "is_active": true}},
+  {"model": "catalog.category", "fields": {"name": "Reposición de Cristales", "slug": "reposicion-cristales", "is_active": true}}
+]

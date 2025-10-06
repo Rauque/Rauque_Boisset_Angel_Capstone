@@ -4,6 +4,7 @@ from django.utils.text import slugify
 class Category(models.Model):
     name = models.CharField(max_length=120, unique=True)
     slug = models.SlugField(max_length=140, unique=True, blank=True)
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = "Categoría"
@@ -45,7 +46,7 @@ COLOR_CHOICES = [
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name="products")
     name = models.CharField(max_length=180)
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    slug = models.SlugField(max_length=150, unique=True, blank=True)
 
     material = models.CharField(max_length=3, choices=MATERIAL_CHOICES)
     glass_type = models.CharField(max_length=4, choices=GLASS_CHOICES)
@@ -65,14 +66,15 @@ class Product(models.Model):
         ]
 
     def save(self, *args, **kwargs):
-        if not self.slug:
+        if not self.slug and self.name:
             base = slugify(self.name)
-            i, candidate = 1, base
+            candidate = base
+            i = 1
             while Product.objects.filter(slug=candidate).exclude(pk=self.pk).exists():
                 i += 1
                 candidate = f"{base}-{i}"
             self.slug = candidate
-        return super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
