@@ -13,8 +13,8 @@
         <h1 class="display-5 fw-semibold">VIDRIERÍA COMERVIAL</h1>
         <p class="lead mb-4">Un mundo en cristales</p>
         <div class="d-flex gap-2 justify-content-center">
-          <a href="{% url 'cotizador' %}" class="btn btn-ghost">Cotizar</a>
-          <a href="{% url 'cotizador_personalizado' %}" class="btn btn-light">Cotización personalizada</a>
+          <a href="{% url 'quotes:cotizador' %}" class="btn btn-ghost">Cotizar</a>
+          <a href="{% url 'quotes:cotizador_personalizado' %}" class="btn btn-light">Cotización personalizada</a>
         </div>
       </div>
     </div>
@@ -33,7 +33,7 @@
       <div class="hero-content container text-center text-white">
         <h2 class="display-6 fw-semibold">Instalación, Reparación y Mantención</h2>
         <p class="lead mb-4">Equipo técnico certificado</p>
-        <a href="{% url 'cotizador_personalizado' %}" class="btn btn-light">Cotización personalizada</a>
+        <a href="{% url 'quotes:cotizador_personalizado' %}" class="btn btn-light">Cotización personalizada</a>
       </div>
     </div>
   </div>
@@ -94,8 +94,8 @@
         <p class="mb-0">Pide la visita de un especialista y consigue la mejor solución.</p>
       </div>
       <div class="col-lg-6 text-lg-end">
-        <a href="{% url 'cotizador' %}" class="btn btn-dark me-2">Cotizador</a>
-        <a href="{% url 'cotizador_personalizado' %}" class="btn btn-outline-dark">Cotizador personalizado</a>
+        <a href="{% url 'quotes:cotizador' %}" class="btn btn-dark me-2">Cotizador</a>
+        <a href="{% url 'quotes:cotizador_personalizado' %}" class="btn btn-outline-dark">Cotizador personalizado</a>
       </div>
     </div>
   </div>

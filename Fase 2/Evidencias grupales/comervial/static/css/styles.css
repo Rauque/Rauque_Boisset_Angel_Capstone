@@ -101,7 +101,7 @@
   padding-top: 30vh;
 }
 
-/* === Botón Cotizador (dropdown) === */
+/* === Botón Cotizador (dropdown) — versión final y compacta === */
 
 /* Siempre en negrita */
 .btn-cta{
@@ -125,7 +125,7 @@
   background:#fff;
   border-color:#fff;
 }
-/* Caret blanco hecho con bordes */
+/* Caret blanco (con bordes) */
 .navbar-dark .btn-cta.dropdown-toggle::after{
   content:"";
   margin-left:.255em;
@@ -147,7 +147,7 @@
   background:#111;
   border-color:#111;
 }
-/* Caret oscuro hecho con bordes */
+/* Caret oscuro (con bordes) */
 .navbar-light .btn-cta.dropdown-toggle::after{
   content:"";
   margin-left:.255em;
@@ -156,4 +156,63 @@
   border-right:.3em solid transparent;
   border-left:.3em solid transparent;
   border-bottom:0;
+}
+
+/* ==== Footer theme ==== */
+:root{
+  /* elige tus colores aquí */
+  --footer-bg: #0b2239;      /* fondo del footer */
+  --footer-text: #cfd8e3;    /* texto principal */
+  --footer-link: #e2e8f0;    /* links */
+  --footer-link-hover: #11b8e4; /* hover */
+  --footer-border: rgba(255,255,255,.12); /* líneas sutiles si usas separadores */
+}
+
+/* bloque principal del footer */
+.site-footer{
+  background: var(--footer-bg) !important;
+  color: var(--footer-text);
+  padding: 48px 0 28px;
+}
+
+/* títulos/strong */
+.site-footer h5,
+.site-footer .h5,
+.site-footer .fw-bold{
+  color: #fff;
+}
+
+/* links */
+.site-footer a{
+  color: var(--footer-link);
+  text-decoration: none;
+}
+.site-footer a:hover{
+  color: var(--footer-link-hover);
+}
+
+/* líneas finas opcionales (si las usas) */
+.site-footer hr{
+  border-color: var(--footer-border);
+  opacity: 1;
+}
+
+/* íconos sociales si los tienes en el footer */
+.site-footer .social a{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:36px; height:36px; border-radius:999px;
+  border:1px solid var(--footer-border);
+  color: var(--footer-link);
+}
+.site-footer .social a:hover{
+  background: var(--footer-link-hover);
+  border-color: var(--footer-link-hover);
+  color:#0b2239;
+}
+
+/* notas de copyright */
+.site-footer .copyright{
+  color: var(--footer-text);
+  opacity:.85;
+  font-size:.925rem;
 }

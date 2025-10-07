@@ -1,51 +1,70 @@
 {% extends "base.html" %}
 {% load form_extras %}
-{% block title %}Cotizador | Comervial{% endblock %}
-{% extends "base.html" %}
 {% block title %}Cotizador Personalizado | Comervial{% endblock %}
 
 {% block content %}
 <main class="pt-5 mt-5">
-  <div class="container py-5">
-    <h1 class="h3 mb-4">Cotizador Personalizado</h1>
-    <form method="post" class="row g-3">
+  <div class="container py-4">
+    <h1 class="h3 mb-3">Cotizador personalizado</h1>
+
+    {% if messages %}
+      {% for m in messages %}<div class="alert alert-{{ m.tags }}">{{ m }}</div>{% endfor %}
+    {% endif %}
+
+    <form method="post" id="quoteForm" class="row g-3">
       {% csrf_token %}
-      <div class="col-md-4">
-        <label class="form-label">Nombre</label>
-        {{ form.nombre|add_class:"form-control" }}
+
+      <div class="col-md-4"><label class="form-label">Tipo</label>{{ form.tipo|add_class:"form-select" }}</div>
+      <div class="col-md-2"><label class="form-label">Cantidad</label>{{ form.cantidad|add_class:"form-control" }}</div>
+      <div class="col-md-3"><label class="form-label">Ancho (mm)</label>{{ form.ancho_mm|add_class:"form-control" }}</div>
+      <div class="col-md-3"><label class="form-label">Alto (mm)</label>{{ form.alto_mm|add_class:"form-control" }}</div>
+
+      <div class="col-12" data-group="mirror">
+        <div class="row g-3">
+          <div class="col-md-4"><label class="form-label">Marco</label>{{ form.marco|add_class:"form-select" }}</div>
+          <div class="col-md-4" data-cond="marco:none"><label class="form-label">Borde</label>{{ form.borde|add_class:"form-select" }}</div>
+        </div>
       </div>
-      <div class="col-md-4">
-        <label class="form-label">Email</label>
-        {{ form.email|add_class:"form-control" }}
+
+      <div class="col-12" data-group="window">
+        <div class="row g-3">
+          <div class="col-md-4"><label class="form-label">Cristal</label>{{ form.cristal|add_class:"form-select" }}</div>
+          <div class="col-md-4"><label class="form-label">Espesor</label>{{ form.espesor_mm|add_class:"form-select" }}</div>
+          <div class="col-md-4"><label class="form-label">Color perfilería</label>{{ form.color_perfileria|add_class:"form-select" }}</div>
+        </div>
       </div>
-      <div class="col-md-4">
-        <label class="form-label">Teléfono</label>
-        {{ form.telefono|add_class:"form-control" }}
-      </div>
-      <div class="col-md-6">
-        <label class="form-label">Tipo</label>
-        {{ form.tipo|add_class:"form-control" }}
-      </div>
-      <div class="col-md-3">
-        <label class="form-label">Ancho (mm)</label>
-        {{ form.ancho_mm|add_class:"form-control" }}
-      </div>
-      <div class="col-md-3">
-        <label class="form-label">Alto (mm)</label>
-        {{ form.alto_mm|add_class:"form-control" }}
-      </div>
-      <div class="col-md-6">
-        <label class="form-label">Ubicación</label>
-        {{ form.ubicacion|add_class:"form-control" }}
-      </div>
-      <div class="col-12">
-        <label class="form-label">Detalles</label>
-        {{ form.detalles|add_class:"form-control" }}
-      </div>
-      <div class="col-12">
-        <button class="btn btn-primary">Enviar</button>
-      </div>
+
+      <hr class="my-3">
+
+      <div class="col-md-4"><label class="form-label">Nombre</label>{{ form.nombre|add_class:"form-control" }}</div>
+      <div class="col-md-4"><label class="form-label">Email</label>{{ form.email|add_class:"form-control" }}</div>
+      <div class="col-md-4"><label class="form-label">Teléfono</label>{{ form.telefono|add_class:"form-control" }}</div>
+      <div class="col-md-6"><label class="form-label">Ubicación</label>{{ form.ubicacion|add_class:"form-control" }}</div>
+      <div class="col-12"><label class="form-label">Detalles</label>{{ form.detalles|add_class:"form-control" }}</div>
+
+      <div class="col-12"><button class="btn btn-primary">Enviar</button></div>
     </form>
   </div>
 </main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function(){
+  const $ = s=>document.querySelector(s);
+  const tipo = $('#id_tipo'); const marco = $('#id_marco');
+
+  function toggle(){
+    const isMirror = tipo.value === 'mirror';
+    document.querySelector('[data-group="mirror"]').style.display = isMirror ? '' : 'none';
+    document.querySelector('[data-group="window"]').style.display = isMirror ? 'none' : '';
+    const bordeWrap = document.querySelector('[data-cond="marco:none"]');
+    if (bordeWrap) bordeWrap.style.display = (isMirror && marco.value === 'none') ? '' : 'none';
+  }
+  document.addEventListener('change', e=>{
+    if (e.target.id === 'id_tipo' || e.target.id === 'id_marco') toggle();
+  }, {passive:true});
+  toggle();
+})();
+</script>
 {% endblock %}

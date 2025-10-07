@@ -1,36 +1,35 @@
-// Navbar transparente → blanco al scrollear
-(function(){
+// Navbar: oscuro en home (transparente) y claro al scrollear.
+// En el resto de páginas, siempre claro desde arriba.
+(function () {
   const nav = document.getElementById('mainNav');
-  if(!nav) return;
-  const onScroll = () => {
-    if (window.scrollY > 10) {
-      nav.classList.add('navbar-scrolled');
-      nav.classList.remove('navbar-initial');
-    } else {
-      nav.classList.add('navbar-initial');
-      nav.classList.remove('navbar-scrolled');
-    }
-  };
-  onScroll();
-  document.addEventListener('scroll', onScroll, { passive: true });
-})();
+  if (!nav) return;
 
-const nav = document.getElementById('mainNav');
-const logo = document.getElementById('brandLogo');
+  // soporta data-is-home="1" (nuevo) y data-home="1" (por si quedó del anterior)
+  const isHome =
+    nav.dataset.isHome === '1' || nav.dataset.home === '1';
 
-function onScroll() {
-  if (window.scrollY > 10) {
-    nav.classList.add('scrolled');       // tu clase que pone fondo blanco
-    nav.classList.remove('navbar-dark');
-    nav.classList.add('navbar-light');   // para que el toggler se vea en fondo blanco
-    if (logo) logo.src = '/static/img/comervial-logo-dark.png';
-  } else {
-    nav.classList.remove('scrolled');
-    nav.classList.add('navbar-dark');
-    nav.classList.remove('navbar-light');
-    if (logo) logo.src = '/static/img/comervial-logo-light.png';
+  const logo = document.getElementById('brandLogo');
+  const lightLogo = logo ? (logo.dataset.light || '/static/img/comervial-logo-light.png') : null;
+  const darkLogo  = logo ? (logo.dataset.dark  || '/static/img/comervial-logo-dark.png')  : null;
+
+  function setInitial() {
+    nav.classList.add('navbar-initial', 'navbar-dark');
+    nav.classList.remove('navbar-scrolled', 'navbar-light');
+    if (logo && lightLogo) logo.src = lightLogo;
   }
-}
-window.addEventListener('scroll', onScroll);
-onScroll();
 
+  function setScrolled() {
+    nav.classList.add('navbar-scrolled', 'navbar-light');
+    nav.classList.remove('navbar-initial', 'navbar-dark');
+    if (logo && darkLogo) logo.src = darkLogo;
+  }
+
+  if (isHome) {
+    const onScroll = () => (window.scrollY > 10 ? setScrolled() : setInitial());
+    onScroll(); // estado correcto al cargar
+    window.addEventListener('scroll', onScroll, { passive: true });
+  } else {
+    // páginas no-home: navbar claro desde arriba, logo oscuro
+    setScrolled();
+  }
+})();

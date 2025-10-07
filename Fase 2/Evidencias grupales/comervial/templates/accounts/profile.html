@@ -12,8 +12,8 @@
       <hr class="my-4">
       <h2 class="h5 mb-3">Panel de administración rápido</h2>
       <div class="d-flex gap-2 flex-wrap">
-        <a class="btn btn-outline-primary" href="{% url 'catalog_manage' %}">Gestionar catálogo</a>
-        <a class="btn btn-outline-primary" href="{% url 'product_create' %}">Crear producto</a>
+        <a class="btn btn-outline-primary" href="{% url 'catalog:catalog_manage' %}">Gestionar catálogo</a>
+        <a class="btn btn-outline-primary" href="{% url 'catalog:product_create' %}">Crear producto</a>
         <a class="btn btn-outline-secondary" href="/panel/">Ir a Django Admin</a>
       </div>
     {% endif %}

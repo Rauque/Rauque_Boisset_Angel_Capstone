@@ -1,13 +1,19 @@
-
 {% load static %}
-<nav class="navbar navbar-expand-lg fixed-top navbar-custom navbar-initial navbar-dark" id="mainNav">
+<nav
+  id="mainNav"
+  class="navbar navbar-expand-lg fixed-top navbar-custom {% if is_home %}navbar-initial navbar-dark{% else %}navbar-scrolled navbar-light{% endif %}"
+  data-is-home="{% if is_home %}1{% else %}0{% endif %}"
+>
   <div class="container">
     <a class="navbar-brand fw-bold text-uppercase" href="{% url 'index' %}">
-      <img id="brandLogo"
-     src="{% static 'img/comervial-logo-light.png' %}"
-     data-src-light="{% static 'img/comervial-logo-light.png' %}"
-     data-src-dark="{% static 'img/comervial-logo-dark.png' %}"
-     alt="Comervial" style="height:42px">
+      <img
+        id="brandLogo"
+        alt="Comervial"
+        style="height:42px"
+        src="{% static 'img/comervial-logo-' %}{% if is_home %}light{% else %}dark{% endif %}.png"
+        data-light="{% static 'img/comervial-logo-light.png' %}"
+        data-dark="{% static 'img/comervial-logo-dark.png' %}"
+      >
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent"
@@ -18,10 +24,8 @@
     <div class="collapse navbar-collapse" id="navContent">
       <ul class="navbar-nav ms-auto align-items-lg-center">
 
-        <!-- Inicio -->
         <li class="nav-item"><a class="nav-link px-lg-3" href="{% url 'index' %}">Inicio</a></li>
 
-        <!-- Cristales -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle px-lg-3" href="#" data-bs-toggle="dropdown">Cristales</a>
           <ul class="dropdown-menu shadow">
@@ -33,7 +37,6 @@
           </ul>
         </li>
 
-        <!-- Ventanas -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle px-lg-3" href="#" data-bs-toggle="dropdown">Ventanas</a>
           <ul class="dropdown-menu shadow">
@@ -47,7 +50,6 @@
           </ul>
         </li>
 
-        <!-- Puertas -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle px-lg-3" href="#" data-bs-toggle="dropdown">Puertas</a>
           <ul class="dropdown-menu shadow">
@@ -57,30 +59,25 @@
           </ul>
         </li>
 
-        <!-- Cotizador -->
         <li class="nav-item dropdown ms-lg-2">
-          <a class="btn btn-cta dropdown-toggle" href="#" data-bs-toggle="dropdown">Cotizador</a>
+          <a class="btn btn-outline-light btn-cta dropdown-toggle" href="#" data-bs-toggle="dropdown">Cotizador</a>
           <ul class="dropdown-menu dropdown-menu-end shadow">
-            <li><a class="dropdown-item" href="{% url 'cotizador' %}">Cotizador</a></li>
-            <li><a class="dropdown-item" href="{% url 'cotizador_personalizado' %}">Cotizador Personalizado</a></li>
+            <li><a class="dropdown-item" href="{% url 'quotes:cotizador' %}">Cotizador</a></li>
+            <li><a class="dropdown-item" href="{% url 'quotes:cotizador_personalizado' %}">Cotizador Personalizado</a></li>
           </ul>
         </li>
 
-        <!-- Contacto (ancla al footer o página) -->
         <li class="nav-item ms-lg-2"><a class="nav-link px-lg-3" href="#contacto">Contacto</a></li>
         <li class="nav-item"><a class="nav-link px-lg-3" href="{% url 'catalog:catalog_list' %}">Catálogo</a></li>
-        
-        {# --- Autenticación en navbar --- #}
-        {# --- Perfil (dropdown único) --- #}
+
+        <!-- Perfil -->
         <li class="nav-item dropdown ms-lg-2">
           <a class="nav-link dropdown-toggle px-lg-3" href="#" data-bs-toggle="dropdown">
             {% if request.user.is_authenticated %}{{ request.user.username }}{% else %}Perfil{% endif %}
           </a>
-
           <ul class="dropdown-menu dropdown-menu-end shadow">
             {% if request.user.is_authenticated %}
               <li><a class="dropdown-item" href="{% url 'profile' %}">Mi cuenta</a></li>
-
               {% if request.user.is_superuser %}
                 <li><hr class="dropdown-divider"></li>
                 <li class="dropdown-header">Gestión</li>
@@ -88,7 +85,6 @@
                 <li><a class="dropdown-item" href="{% url 'catalog:product_create' %}">Nuevo producto</a></li>
                 <li><a class="dropdown-item" href="/panel/">Django Admin</a></li>
               {% endif %}
-
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li>
             {% else %}
@@ -96,9 +92,8 @@
               <li><a class="dropdown-item" href="{% url 'signup' %}">Registrarse</a></li>
             {% endif %}
           </ul>
-
-
         </li>
+
       </ul>
     </div>
   </div>

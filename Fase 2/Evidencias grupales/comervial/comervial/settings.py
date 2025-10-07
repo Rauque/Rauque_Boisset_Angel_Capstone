@@ -19,7 +19,7 @@ INSTALLED_APPS = [
     # Tus apps
     "apps.pages",
     "apps.quotes",
-    "apps.accounts",   # ← AÑADIDA AQUÍ (no vuelvas a declarar INSTALLED_APPS más abajo)
+    "apps.accounts",   
     "apps.catalog",
 ]
 

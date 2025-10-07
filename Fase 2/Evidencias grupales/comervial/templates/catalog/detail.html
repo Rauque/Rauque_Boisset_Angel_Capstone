@@ -24,7 +24,7 @@
           <li><strong>Color:</strong> {{ product.get_color_display }}</li>
         </ul>
 
-        <a class="btn btn-primary" href="{% url 'cotizador' %}">Cotizar este producto</a>
+        <a class="btn btn-primary" href="{% url 'quotes:cotizador' %}">Cotizar este producto</a>
         <a class="btn btn-link" href="{% url 'catalog:catalog_list' %}">Volver al catálogo</a>
       </div>
     </div>
