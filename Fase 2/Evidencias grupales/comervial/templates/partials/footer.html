@@ -19,10 +19,11 @@
         <h6 class="text-uppercase text-secondary fw-bold mb-3">Cristales</h6>
         <ul class="list-unstyled footer-links">
           <li><a href="{% url 'barandas' %}">Barandas</a></li>
-          <li><a href="#">Shower Doors</a></li>
-          <li><a href="#">Muebles</a></li>
-          <li><a href="#">Mamparas</a></li>
-          <li><a href="#">Reposición de Cristales</a></li>
+          <li><a class="dropdown-item" href="{% url 'muebles' %}">Muebles</a></li>
+          <li><a class="dropdown-item" href="{% url 'shower_door' %}">Shower Door</a></li>
+          <li><a class="dropdown-item" href="{% url 'mamparas' %}">Mamparas</a></li>
+          <li><a class="dropdown-item" href="{% url 'reposicion_cristales' %}">Reposición de Cristales</a></li>
+
         </ul>
       </div>
 

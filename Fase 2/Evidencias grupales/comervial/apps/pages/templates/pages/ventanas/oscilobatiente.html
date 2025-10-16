@@ -1,0 +1,38 @@
+{% extends "base.html" %}{% load static %}
+{% block title %}Ventana Oscilobatiente | Comervial{% endblock %}
+{% block content %}
+<main class="pt-5 mt-5">
+  <section class="container py-5">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6">
+        <h1 class="h3 mb-3">Ventana oscilobatiente</h1>
+        <p>
+          Doble función en una hoja: abre lateralmente (abatible) y bascula desde la
+          parte superior para ventilación segura. Muy usada en dormitorios y cocinas.
+        </p>
+        <ul class="mb-3">
+          <li>Ventilación controlada sin abrir completamente.</li>
+          <li>Excelente sellado en modo abatible.</li>
+          <li>Seguridad y confort con un mismo herraje.</li>
+        </ul>
+
+        <h2 class="h6 mt-4">Especificaciones</h2>
+        <ul>
+          <li><strong>Perfilería:</strong> PVC o Aluminio RPT (líneas batientes).</li>
+          <li><strong>Vidrios:</strong> DVH recomendado (baja emisividad opcional).</li>
+          <li><strong>Espesores:</strong> simples 4–6 mm; DVH 20–28 mm.</li>
+          <li><strong>Herrajes:</strong> oscilobatiente europeo, multipunto, microventilación.</li>
+          <li><strong>Sellos:</strong> burletes perimetrales de alto desempeño.</li>
+        </ul>
+
+        <a class="btn btn-primary mt-3" href="{% url 'quotes:cotizador_personalizado' %}">Quiero cotizar</a>
+      </div>
+      <div class="col-lg-6">
+        <img class="img-fluid rounded-3 shadow-sm"
+             src="{% static 'img/ventanas/oscilobatiente.jpg' %}"
+             alt="Ventana oscilobatiente Comervial">
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

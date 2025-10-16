@@ -1,11 +1,166 @@
 {% extends "base.html" %}
-{% block title %}Barandas | Comervial{% endblock %}
-
+{% block title %}Barandas de Vidrio | Comervial{% endblock %}
+{% load static %}
 {% block content %}
 <main class="pt-5 mt-5">
-  <div class="container py-5">
-    <h1 class="h2 mb-3">Barandas de Cristal</h1>
-    <p class="lead">Información de tipos de barandas, espesores, herrajería, seguridad, normativa, etc.</p>
-  </div>
+  <section class="container py-5">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-6">
+        <h1 class="h3 mb-3">Barandas de vidrio templado</h1>
+        <p class="text-secondary mb-3">
+          Diseñamos, fabricamos e instalamos barandas en vidrio templado de alta resistencia para
+          <strong>interior y exterior</strong>: escaleras, balcones, terrazas y pasarelas.
+          Combinamos estética minimalista con seguridad y durabilidad.
+        </p>
+
+        <div class="border rounded-3 p-3 mb-3">
+          <h2 class="h5 mb-2">¿Por qué usamos vidrio templado?</h2>
+          <ul class="mb-0">
+            <li><strong>4–5× más resistente</strong> que un vidrio común del mismo espesor.</li>
+            <li><strong>Seguridad:</strong> si se fractura, se granula en trozos pequeños, reduciendo riesgo de cortes.</li>
+            <li><strong>Estabilidad dimensional</strong> y mejor desempeño frente a cargas de viento y uso diario.</li>
+          </ul>
+        </div>
+
+        <div class="border rounded-3 p-3">
+          <h2 class="h5 mb-2">Espesores y configuraciones habituales</h2>
+          <ul class="mb-0">
+            <li><strong>Vidrio templado monolítico:</strong> 10 mm · 12 mm · 15 mm (según luz y carga).</li>
+            <li><strong>Vidrio laminado templado:</strong> 5+5 mm, 6+6 mm, 8+8 mm con interlámina PVB o Sentry (mayor seguridad y retención de fragmentos).</li>
+            <li><strong>Bordes:</strong> pulido recto, canto biselado opcional; esquinas redondeadas a pedido.</li>
+            <li><strong>Terminaciones:</strong> claro, extraclaro, serigrafiado/fritado, esmerilado o lámina de privacidad.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <img class="img-fluid rounded-3 shadow-sm" src="{% static 'img/baranda2.jpg' %}" alt="Baranda de vidrio templado Comervial">
+      </div>
+    </div>
+  </section>
+
+  <section class="container pb-5">
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h3 class="h5 mb-2">Sistemas de montaje</h3>
+            <ul class="mb-3">
+              <li><strong>Canal perimetral (perfil U continuo):</strong> máxima limpieza visual; apto para balcones/terrazas.</li>
+              <li><strong>Herrajes puntuales (spigots/pines):</strong> estética liviana y fácil limpieza del piso.</li>
+              <li><strong>Postes y pasamanos:</strong> solución versátil para escaleras y tramos largos.</li>
+              <li><strong>Pasamanos:</strong> aluminio, acero inoxidable o madera, según proyecto.</li>
+            </ul>
+            <p class="small text-secondary mb-0">
+              Herrajes en <strong>acero inoxidable 304</strong> (interior) o <strong>316</strong> (ambiente costero/exterior).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h3 class="h5 mb-2">Parámetros de diseño (referenciales)</h3>
+            <ul class="mb-0">
+              <li><strong>Altura baranda:</strong> 100–110 cm (según uso y normativa local).</li>
+              <li><strong>Luz entre fijaciones:</strong> definida por cálculo y ensayos del sistema elegido.</li>
+              <li><strong>Elección de espesor:</strong> depende de luz, viento, uso (residencial/comercial) y tipo de fijación.</li>
+              <li><strong>Recomendación:</strong> en balcones y zonas altas, preferir <em>laminado templado</em> por retención de fragmentos.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Beneficios -->
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h3 class="h5 mb-2">Beneficios</h3>
+            <ul class="mb-0">
+              <li><strong>Estética limpia:</strong> máxima entrada de luz y vista despejada.</li>
+              <li><strong>Durabilidad:</strong> resistencia a rayos UV y ambientes exigentes con herrajes adecuados.</li>
+              <li><strong>Mantenimiento sencillo:</strong> limpieza rápida con paño suave y detergente neutro.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mantención -->
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h3 class="h5 mb-2">Mantención</h3>
+            <ul class="mb-0">
+              <li>Limpieza regular con agua y jabón neutro; evitar abrasivos.</li>
+              <li>Inspección semestral de fijaciones, sellos y aprietes.</li>
+              <li>En costa: lavado de herrajes 316 con agua dulce para controlar salitre.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="bg-light rounded-3 p-4 mt-4 d-flex flex-column flex-lg-row align-items-lg-center justify-content-between">
+      <div class="me-lg-3">
+        <h3 class="h5 mb-1">¿Buscas una baranda a medida?</h3>
+        <p class="mb-0 text-secondary">Te asesoramos en la elección del sistema, espesor y terminaciones según tu proyecto.</p>
+      </div>
+      <div class="mt-3 mt-lg-0">
+        <a class="btn btn-primary me-2" href="{% url 'quotes:cotizador_personalizado' %}">Cotizar proyecto</a>
+        <a class="btn btn-outline-secondary" href="#contacto">Hablar con un asesor</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="container pb-5">
+    <h2 class="h5 mb-3">Preguntas frecuentes</h2>
+    <div class="accordion" id="faqBarandas">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faq1h">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">
+            ¿Templado monolítico o laminado templado?
+          </button>
+        </h2>
+        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqBarandas">
+          <div class="accordion-body">
+            El <strong>laminado templado</strong> agrega una interlámina que retiene los fragmentos ante rotura,
+            recomendado en balcones y zonas de altura. El <em>monolítico</em> es válido para interiores o usos con menor
+            exigencia. La elección depende de altura, exposición al viento y normativa aplicable.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faq2h">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+            ¿Qué espesor necesito?
+          </button>
+        </h2>
+        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqBarandas">
+          <div class="accordion-body">
+            Usualmente 10–12 mm monolítico o 5+5 / 6+6 mm laminado templado. Confirmamos el espesor tras
+            revisar luz entre fijaciones, altura, exposición al viento y el sistema de montaje seleccionado.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faq3h">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+            ¿Qué herrajes usan?
+          </button>
+        </h2>
+        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqBarandas">
+          <div class="accordion-body">
+            Herrajes certificados en <strong>acero inoxidable 304</strong> para interior y <strong>316</strong> para zonas
+            costeras o alta intemperie. También perfiles de aluminio anodizado o con terminación pintura.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 {% endblock %}

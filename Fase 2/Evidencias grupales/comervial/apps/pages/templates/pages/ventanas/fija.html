@@ -1,0 +1,38 @@
+{% extends "base.html" %}{% load static %}
+{% block title %}Ventana Fija | Comervial{% endblock %}
+{% block content %}
+<main class="pt-5 mt-5">
+  <section class="container py-5">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6">
+        <h1 class="h3 mb-3">Ventana fija</h1>
+        <p>
+          Paño sin apertura, pensado para maximizar el ingreso de luz y vistas,
+          con el mejor desempeño térmico al no incorporar herrajes de apertura.
+        </p>
+        <ul class="mb-3">
+          <li>Solución económica para iluminar y enmarcar paisajes.</li>
+          <li>Excelente hermeticidad y aislación con DVH.</li>
+          <li>Se combina con módulos abatibles/corredizos aledaños.</li>
+        </ul>
+
+        <h2 class="h6 mt-4">Especificaciones</h2>
+        <ul>
+          <li><strong>Perfilería:</strong> PVC o Aluminio (fijo). Posibilidad de fachadas livianas.</li>
+          <li><strong>Vidrios:</strong> Monolítico, laminado o DVH (Low-E opcional).</li>
+          <li><strong>Espesores:</strong> 4–10 mm; DVH 18–32 mm según perfil.</li>
+          <li><strong>Herrajes:</strong> — (no aplica apertura).</li>
+          <li><strong>Sellos:</strong> cordones perimetrales y calzos estructurales.</li>
+        </ul>
+
+        <a class="btn btn-primary mt-3" href="{% url 'quotes:cotizador_personalizado' %}">Quiero cotizar</a>
+      </div>
+      <div class="col-lg-6">
+        <img class="img-fluid rounded-3 shadow-sm"
+             src="{% static 'img/ventanas/fija.jpg' %}"
+             alt="Ventana fija Comervial">
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

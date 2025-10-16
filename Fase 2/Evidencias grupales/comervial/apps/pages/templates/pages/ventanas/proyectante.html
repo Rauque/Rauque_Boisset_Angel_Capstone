@@ -1,0 +1,38 @@
+{% extends "base.html" %}{% load static %}
+{% block title %}Ventana Proyectante | Comervial{% endblock %}
+{% block content %}
+<main class="pt-5 mt-5">
+  <section class="container py-5">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6">
+        <h1 class="h3 mb-3">Ventana proyectante</h1>
+        <p>
+          Hoja que se proyecta hacia el exterior mediante brazos/compases. Permite
+          ventilar protegiendo de lluvia y es muy usada en oficinas y aulas.
+        </p>
+        <ul class="mb-3">
+          <li>Control de apertura con compases y limitadores.</li>
+          <li>Ideal para módulos altos o y/o paños corridos con ritmo.</li>
+          <li>Compatible con DVH para eficiencia energética.</li>
+        </ul>
+
+        <h2 class="h6 mt-4">Especificaciones</h2>
+        <ul>
+          <li><strong>Perfilería:</strong> Aluminio (líneas proyectantes / fachadas livianas).</li>
+          <li><strong>Vidrios:</strong> Templado, laminado o DVH según cálculo.</li>
+          <li><strong>Espesores:</strong> 4–10 mm; DVH 18–28 mm.</li>
+          <li><strong>Herrajes:</strong> compases proyectantes, cremona, topes de apertura.</li>
+          <li><strong>Sellos:</strong> burletes + escurrimientos para lluvia.</li>
+        </ul>
+
+        <a class="btn btn-primary mt-3" href="{% url 'quotes:cotizador_personalizado' %}">Quiero cotizar</a>
+      </div>
+      <div class="col-lg-6">
+        <img class="img-fluid rounded-3 shadow-sm"
+             src="{% static 'img/ventanas/proyectante.jpg' %}"
+             alt="Ventana proyectante Comervial">
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
