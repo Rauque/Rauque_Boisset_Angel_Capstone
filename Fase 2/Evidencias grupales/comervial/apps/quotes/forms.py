@@ -5,51 +5,33 @@ from .models import (
     PRODUCT_TYPES, EDGE_TYPES, FRAME_TYPES, GLASS_TYPES, THICKNESS, PERF_COLOR
 )
 
-class QuoteRequestForm(forms.ModelForm):
-    class Meta:
-        model = QuoteRequest
-        fields = ["nombre","email","telefono","categoria","mensaje"]
-        widgets = {"mensaje": forms.Textarea(attrs={"rows":4})}
+class QuoteRequestForm(forms.Form):
+    nombre = forms.CharField(max_length=150)
+    correo = forms.EmailField()
+    telefono = forms.CharField(max_length=50)
+    mensaje = forms.CharField(widget=forms.Textarea)
+
+    def save(self, commit=True):
+        """
+        Crea una instancia de QuoteRequest a partir de los campos del formulario.
+        """
+        data = self.cleaned_data
+        return QuoteRequest.objects.create(
+            nombre=data.get("nombre", ""),
+            email=data.get("correo", ""),
+            telefono=data.get("telefono", ""),
+            mensaje=data.get("mensaje", "")
+        )
 
 class CustomQuoteRequestForm(forms.ModelForm):
     class Meta:
         model = CustomQuoteRequest
         fields = [
-            "nombre","email","telefono","tipo",
-            "ancho_mm","alto_mm","cantidad",
-            "marco","borde",            # espejo
-            "cristal","espesor_mm","color_perfileria",  # ventana
-            "ubicacion","detalles",
+            "nombre", "email", "telefono", "tipo",
+            "ancho_mm", "alto_mm", "cantidad",
+            "marco", "borde", "cristal", "espesor_mm",
+            "color_perfileria", "ubicacion", "detalles",
         ]
-        widgets = {
-            "detalles": forms.Textarea(attrs={"rows":4}),
-        }
 
-    # reglas condicionales
-    def clean(self):
-        data = super().clean()
-        t = data.get("tipo")
-        if not t:
-            return data
-
-        if data.get("cantidad") in (None, 0):
-            data["cantidad"] = 1
-
-        if t == "mirror":
-            if not data.get("marco"):
-                self.add_error("marco", "Selecciona si lleva marco o no.")
-            if data.get("marco") == "none" and not data.get("borde"):
-                self.add_error("borde", "Indica el tipo de borde.")
-            # limpiar campos de ventana para evitar “ruido”
-            for f in ("cristal", "espesor_mm", "color_perfileria"):
-                if not data.get(f):
-                    data[f] = ""
-        elif t == "window":
-            for f in ("cristal", "espesor_mm", "color_perfileria"):
-                if not data.get(f):
-                    self.add_error(f, "Campo obligatorio para ventana.")
-            # limpiar campos de espejo
-            for f in ("marco", "borde"):
-                if not data.get(f):
-                    data[f] = ""
-        return data
+# Alias de compatibilidad: ContactForm esperado por los tests
+ContactForm = QuoteRequestForm

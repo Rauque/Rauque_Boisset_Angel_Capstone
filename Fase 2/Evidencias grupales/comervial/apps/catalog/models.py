@@ -47,6 +47,8 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name="products")
     name = models.CharField(max_length=180)
     slug = models.SlugField(max_length=150, unique=True, blank=True)
+    personalizado = models.BooleanField(default=False)
+    aprobado = models.BooleanField(default=False)
 
     material = models.CharField(max_length=3, choices=MATERIAL_CHOICES)
     glass_type = models.CharField(max_length=4, choices=GLASS_CHOICES)

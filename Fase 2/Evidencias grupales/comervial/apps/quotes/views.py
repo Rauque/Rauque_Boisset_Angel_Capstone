@@ -4,6 +4,22 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import QuoteRequestForm, CustomQuoteRequestForm
+from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import redirect, render
+from django.http import HttpResponseForbidden
+
+@user_passes_test(lambda u: u.is_superuser)
+def pricing_rules(request):
+    """
+    Vista mínima para que solo superusers modifiquen reglas de cálculo.
+    Implementa POST para guardar reglas reales si las tienes.
+    """
+    if request.method == "POST":
+        # procesar datos recibidos y almacenarlos en tu modelo/setting
+        # ejemplo mínimo: redirigir a la misma página
+        return redirect("quotes:pricing_rules")
+    # GET puede devolver una plantilla o 200 vacío
+    return render(request, "quotes/pricing_rules.html", {})
 
 def cotizador(request):
     if request.method == "POST":
