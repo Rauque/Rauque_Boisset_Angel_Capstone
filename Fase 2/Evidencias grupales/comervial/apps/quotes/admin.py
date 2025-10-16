@@ -3,9 +3,10 @@ from .models import CustomQuoteRequest, Order
 
 @admin.register(CustomQuoteRequest)
 class CustomQuoteRequestAdmin(admin.ModelAdmin):
-    list_display = ("nombre", "email", "tipo", "price", "aprobado", "created_at")
+    # Evitar 'price' si el modelo no lo tiene; usar campos seguros que existen
+    list_display = ("nombre", "email", "tipo", "aprobado", "created_at")
     list_filter = ("aprobado", "tipo", "created_at")
-    search_fields = ("nombre", "email")
+    search_fields = ("nombre", "email", "tipo")
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
