@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Puertas Abatibles | Comervial{% endblock %}
+{% block extra_head %}
+<meta name="description" content="Puertas abatibles en PVC y aluminio, cierre hermético, multipunto, vidrio templado o laminado. Fabricación a medida y servicio de instalación.">
+{% endblock %}
+
+{% block content %}
+<main class="pt-5 mt-5">
+  <section class="section">
+    <div class="container">
+      <h1 class="h3 mb-3">Puertas Abatibles</h1>
+      <p class="text-secondary">Solución clásica y versátil para accesos principales e interiores. Destacan por su excelente hermeticidad, seguridad y facilidad de mantención.</p>
+
+      <div class="row g-4 mt-2">
+        <div class="col-lg-6">
+          <img class="img-fluid rounded shadow-sm" src="{% static 'img/abatible.webp' %}" alt="Puerta abatible Comervial" onerror="this.src='{% static 'img/placeholder-4x3.png' %}'">
+        </div>
+        <div class="col-lg-6">
+          <h2 class="h5">¿Por qué elegirla?</h2>
+          <ul class="mb-3">
+            <li>Cierre perimetral y opción de <strong>herraje multipunto</strong> para mayor seguridad.</li>
+            <li>Gran rendimiento térmico y acústico (PVC o aluminio con/ sin RPT).</li>
+            <li>Apertura interior o exterior, con o sin umbral.</li>
+          </ul>
+
+          <h3 class="h6">Especificaciones rápidas</h3>
+          <div class="row">
+            <div class="col-sm-6">
+              <ul class="small">
+                <li><strong>Material:</strong> PVC / Aluminio</li>
+                <li><strong>Vidrio:</strong> Templado o Laminado</li>
+                <li><strong>Espesores típicos:</strong> 4–10 mm (simple) o termopanel*</li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <ul class="small">
+                <li><strong>Herrajes:</strong> bisagras reforzadas, cierre multipunto</li>
+                <li><strong>Sellos:</strong> doble felpa / EPDM</li>
+                <li><strong>Opciones:</strong> hoja simple o doble, fijo lateral/superior</li>
+              </ul>
+            </div>
+          </div>
+          <p class="small text-secondary mb-3">*Termopanel: Doble Vidriado Hermético para mayor aislación.</p>
+
+          <div class="d-flex gap-2">
+            <a class="btn btn-primary" href="{% url 'quotes:cotizador_personalizado' %}">Cotizar a medida</a>
+            <a class="btn btn-outline-secondary" href="{% url 'quotes:cotizador' %}">Consulta rápida</a>
+
+        </div>
+      </div>
+
+      <hr class="my-5">
+
+      <h2 class="h5">Aplicaciones recomendadas</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="p-3 border rounded h-100">
+            <h3 class="h6">Accesos principales</h3>
+            <p class="small text-secondary mb-0">Excelente estanqueidad y seguridad para casas, oficinas o locales.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 border rounded h-100">
+            <h3 class="h6">Interiores</h3>
+            <p class="small text-secondary mb-0">Habitaciones, oficinas internas o divisiones con tránsito controlado.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 border rounded h-100">
+            <h3 class="h6">Salidas a terraza</h3>
+            <p class="small text-secondary mb-0">Con fijo lateral o superior para aumentar luminosidad.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-4">
+        <strong>Tip técnico:</strong> Para climas fríos o zonas de ruido, recomendamos termopanel (doble vidrio) + marco con RPT.
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

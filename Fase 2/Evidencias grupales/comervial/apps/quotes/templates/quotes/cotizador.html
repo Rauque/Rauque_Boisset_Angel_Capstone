@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load form_extras %} {# quítalo si no usas el filtro add_class #}
 {% block title %}Cotizador | Comervial{% endblock %}
 
 {% block content %}
@@ -8,7 +7,6 @@
     <h1 class="h3 mb-3">Cotizador</h1>
     <p class="text-secondary mb-4">Completa el formulario y te contactaremos.</p>
 
-    {# Errores generales del form #}
     {% if form.non_field_errors %}
       <div class="alert alert-danger">{{ form.non_field_errors }}</div>
     {% endif %}
@@ -18,31 +16,31 @@
 
       <div class="col-md-6">
         <label class="form-label">Nombre</label>
-        {{ form.nombre|add_class:"form-control" }}
+        {{ form.nombre }}
         {% for e in form.nombre.errors %}<div class="invalid-feedback d-block">{{ e }}</div>{% endfor %}
       </div>
 
       <div class="col-md-6">
         <label class="form-label">Email</label>
-        {{ form.email|add_class:"form-control" }}
+        {{ form.email }}
         {% for e in form.email.errors %}<div class="invalid-feedback d-block">{{ e }}</div>{% endfor %}
       </div>
 
       <div class="col-md-6">
         <label class="form-label">Teléfono</label>
-        {{ form.telefono|add_class:"form-control" }}
+        {{ form.telefono }}
         {% for e in form.telefono.errors %}<div class="invalid-feedback d-block">{{ e }}</div>{% endfor %}
       </div>
 
       <div class="col-md-6">
         <label class="form-label">Categoría</label>
-        {{ form.categoria|add_class:"form-select" }}
+        {{ form.categoria }}
         {% for e in form.categoria.errors %}<div class="invalid-feedback d-block">{{ e }}</div>{% endfor %}
       </div>
 
       <div class="col-12">
         <label class="form-label">Mensaje</label>
-        {{ form.mensaje|add_class:"form-control" }}
+        {{ form.mensaje }}
         {% for e in form.mensaje.errors %}<div class="invalid-feedback d-block">{{ e }}</div>{% endfor %}
       </div>
 

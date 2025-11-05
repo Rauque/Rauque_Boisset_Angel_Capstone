@@ -25,3 +25,15 @@ def proyectante(request):     return render(request, "pages/ventanas/proyectante
 def fija(request):            return render(request, "pages/ventanas/fija.html")
 def bow_window(request):      return render(request, "pages/ventanas/bow_window.html")
 def medio_punto(request):     return render(request, "pages/ventanas/medio_punto.html")
+
+def puertas_abatibles(request):
+    return render(request, "pages/puertas/abatibles.html")
+
+def puertas_correderas(request):
+    return render(request, "pages/puertas/correderas.html")
+
+def puertas_elevadoras(request):
+    return render(request, "pages/puertas/elevadoras.html")
+
+def puertas_templado(request):
+    return render(request, "pages/puertas/templado.html")

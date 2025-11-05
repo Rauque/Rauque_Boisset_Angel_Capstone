@@ -18,4 +18,8 @@ urlpatterns = [
     path("ventanas/fija/", views.fija, name="fija"),
     path("ventanas/bow-window/", views.bow_window, name="bow_window"),
     path("ventanas/medio-punto/", views.medio_punto, name="medio_punto"),
+    path("puertas/abatibles/", views.puertas_abatibles, name="puertas_abatibles"),
+    path("puertas/correderas/", views.puertas_correderas, name="puertas_correderas"),
+    path("puertas/elevadoras/", views.puertas_elevadoras, name="puertas_elevadoras"),
+    path("puertas/templado/",    views.puertas_templado,    name="puertas_templado"),
 ]

@@ -6,20 +6,41 @@ from .models import (
 )
 
 class QuoteRequestForm(forms.Form):
-    nombre = forms.CharField(max_length=150)
-    correo = forms.EmailField()
-    telefono = forms.CharField(max_length=50)
-    mensaje = forms.CharField(widget=forms.Textarea)
+    CATEGORIAS = [
+        ("ventanas", "Ventanas"),
+        ("cristales", "Cristales"),
+        ("shower", "Shower door"),
+        ("mamparas", "Mamparas"),
+        ("otros", "Otros"),
+    ]
+
+    nombre = forms.CharField(
+        max_length=150,
+        widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+    # ⚠️ renombrado de 'correo' a 'email' para que calce con el template
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={"class": "form-control"})
+    )
+    telefono = forms.CharField(
+        max_length=50,
+        widget=forms.TextInput(attrs={"class": "form-control"})
+    )
+    categoria = forms.ChoiceField(
+        choices=CATEGORIAS,
+        widget=forms.Select(attrs={"class": "form-select"})
+    )
+    mensaje = forms.CharField(
+        widget=forms.Textarea(attrs={"class": "form-control", "rows": 4})
+    )
 
     def save(self, commit=True):
-        """
-        Crea una instancia de QuoteRequest a partir de los campos del formulario.
-        """
         data = self.cleaned_data
         return QuoteRequest.objects.create(
             nombre=data.get("nombre", ""),
-            email=data.get("correo", ""),
+            email=data.get("email", ""),   # ← ahora mapea a 'email'
             telefono=data.get("telefono", ""),
+            categoria=data.get("categoria", ""),
             mensaje=data.get("mensaje", "")
         )
 
