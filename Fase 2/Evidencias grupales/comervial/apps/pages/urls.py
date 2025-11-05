@@ -22,4 +22,5 @@ urlpatterns = [
     path("puertas/correderas/", views.puertas_correderas, name="puertas_correderas"),
     path("puertas/elevadoras/", views.puertas_elevadoras, name="puertas_elevadoras"),
     path("puertas/templado/",    views.puertas_templado,    name="puertas_templado"),
+    path("contacto/", views.contacto, name="contacto"),
 ]

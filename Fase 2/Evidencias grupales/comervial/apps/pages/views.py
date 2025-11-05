@@ -1,4 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.conf import settings
+from django.core.mail import send_mail
+from django import forms as dj_forms
+
+from apps.quotes.forms import ContactForm  # alias de QuoteRequestForm
 
 def index(request):
     return render(request, "pages/index.html")
@@ -37,3 +43,34 @@ def puertas_elevadoras(request):
 
 def puertas_templado(request):
     return render(request, "pages/puertas/templado.html")
+
+def contacto(request):
+    form = ContactForm(request.POST or None)
+
+    # Ocultar categoría y forzar valor “otros”
+    if "categoria" in form.fields:
+        form.fields["categoria"].initial = "otros"
+        form.fields["categoria"].widget = dj_forms.HiddenInput()
+
+    if request.method == "POST" and form.is_valid():
+        obj = form.save()
+
+        # destinatario: CONTACT_TO -> COTIZADOR_TO -> DEFAULT_FROM_EMAIL
+        to = getattr(settings, "CONTACT_TO",
+             getattr(settings, "COTIZADOR_TO", getattr(settings, "DEFAULT_FROM_EMAIL", None)))
+        if to:
+            try:
+                send_mail(
+                    "Nuevo contacto (Comervial)",
+                    f"Nombre: {obj.nombre}\nEmail: {obj.email}\nTeléfono: {obj.telefono}\n\nMensaje:\n{obj.mensaje}",
+                    getattr(settings, "DEFAULT_FROM_EMAIL", obj.email),
+                    [to],
+                    fail_silently=True,
+                )
+            except Exception:
+                pass
+
+        messages.success(request, "¡Gracias! Te contactaremos pronto.")
+        return redirect("quotes:cotizador_ok")
+
+    return render(request, "pages/contacto.html", {"form": form})

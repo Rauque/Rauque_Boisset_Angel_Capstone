@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Contacto | Comervial{% endblock %}
+
+{% block content %}
+<main class="pt-5 mt-5">
+  <section class="container py-5">
+    <div class="row g-4">
+      <!-- Formulario -->
+      <div class="col-lg-6">
+        <h1 class="h3 mb-3">Contáctanos</h1>
+        <p class="text-secondary">Completa el formulario y te responderemos a la brevedad.</p>
+
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            {{ form.nombre }}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            {{ form.email }}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Teléfono</label>
+            {{ form.telefono }}
+          </div>
+
+          {# El campo categoria viene oculto y forzado a "otros" desde la vista #}
+          {% if form.categoria %}{{ form.categoria }}{% endif %}
+
+          <div class="mb-3">
+            <label class="form-label">Mensaje</label>
+            {{ form.mensaje }}
+          </div>
+
+          <button class="btn btn-primary">Enviar</button>
+        </form>
+      </div>
+
+      <!-- Info y mapa -->
+      <div class="col-lg-6">
+        <div class="p-3 bg-light rounded-3 h-100">
+          <h2 class="h5">Datos de contacto</h2>
+          <ul class="list-unstyled small">
+            <li><strong>Dirección:</strong> El Lingue 8358</li>
+            <li><strong>Teléfonos:</strong> +56 9 9456 8206 · +56 9 9700 3496</li>
+            <li><strong>Email:</strong> h.rauque.alvarez@gmail.com</li>
+          </ul>
+
+          <div class="ratio ratio-16x9 mt-3">
+            <iframe
+              src="https://www.google.com/maps?q=El+Lingue+8358&output=embed"
+              loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
