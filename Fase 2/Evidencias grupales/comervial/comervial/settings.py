@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import environ
 
 load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,14 +76,22 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+# === Email (Gmail SMTP) ===
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
 EMAIL_PORT = int(os.getenv("EMAIL_PORT", "587"))
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "True") == "True"
-DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER)
-COTIZADOR_TO = os.getenv("COTIZADOR_TO", EMAIL_HOST_USER)
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "comervial.hr@gmail.com")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")  # contraseña de aplicación
+EMAIL_TIMEOUT = int(os.getenv("EMAIL_TIMEOUT", "20"))
+
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "Comervial <comervial.hr@gmail.com>")
+COTIZADOR_TO = os.getenv("COTIZADOR_TO", "comervial.hr@gmail.com")
+
+EMAIL_SUBJECT_PREFIX = "[Comervial] "
+SERVER_EMAIL = "Comervial <comervial.hr@gmail.com>"
+
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
