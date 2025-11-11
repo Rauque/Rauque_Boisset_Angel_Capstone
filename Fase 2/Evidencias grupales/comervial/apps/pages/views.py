@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.core.mail import send_mail
 from django import forms as dj_forms
+from django.core.mail import EmailMessage
 
 from apps.quotes.forms import ContactForm  # alias de QuoteRequestForm
 
@@ -47,30 +48,39 @@ def puertas_templado(request):
 def contacto(request):
     form = ContactForm(request.POST or None)
 
-    # Ocultar categoría y forzar valor “otros”
+    # Ocultar categoría y forzar valor “otros” (si existe en el form)
     if "categoria" in form.fields:
         form.fields["categoria"].initial = "otros"
         form.fields["categoria"].widget = dj_forms.HiddenInput()
 
     if request.method == "POST" and form.is_valid():
-        obj = form.save()
+        obj = form.save()  # guarda en QuoteRequest
 
-        # destinatario: CONTACT_TO -> COTIZADOR_TO -> DEFAULT_FROM_EMAIL
+        # Destinatario: CONTACT_TO -> COTIZADOR_TO -> DEFAULT_FROM_EMAIL
         to = getattr(settings, "CONTACT_TO",
              getattr(settings, "COTIZADOR_TO", getattr(settings, "DEFAULT_FROM_EMAIL", None)))
-        if to:
-            try:
-                send_mail(
-                    "Nuevo contacto (Comervial)",
-                    f"Nombre: {obj.nombre}\nEmail: {obj.email}\nTeléfono: {obj.telefono}\n\nMensaje:\n{obj.mensaje}",
-                    getattr(settings, "DEFAULT_FROM_EMAIL", obj.email),
-                    [to],
-                    fail_silently=True,
-                )
-            except Exception:
-                pass
 
-        messages.success(request, "¡Gracias! Te contactaremos pronto.")
-        return redirect("quotes:cotizador_ok")
+        if to:
+            # Email con Reply-To al correo del cliente
+            subject = "Nuevo contacto (Comervial)"
+            body = (
+                f"Nombre: {obj.nombre}\n"
+                f"Email: {obj.email}\n"
+                f"Teléfono: {obj.telefono}\n"
+                f"Categoría: {getattr(obj, 'categoria', '')}\n\n"
+                f"Mensaje:\n{obj.mensaje}"
+            )
+            email = EmailMessage(
+                subject=subject,
+                body=body,
+                from_email=getattr(settings, "DEFAULT_FROM_EMAIL", None),
+                to=[to],
+                reply_to=[obj.email] if obj.email else None,
+            )
+            # No silenciamos errores: si falla, lo sabrás
+            email.send(fail_silently=False)
+
+        messages.success(request, "¡Gracias! Tu mensaje fue enviado correctamente.")
+        return redirect("contacto")  # ← volvemos a /contacto mostrando el alert
 
     return render(request, "pages/contacto.html", {"form": form})
