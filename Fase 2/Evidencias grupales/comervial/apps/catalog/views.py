@@ -1,5 +1,9 @@
 # apps/catalog/views.py
-# apps/catalog/views.py
+import json
+from decimal import Decimal
+from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 from django.contrib import messages
 from .forms import ProductForm
 from django.shortcuts import render, get_object_or_404, redirect
@@ -46,7 +50,10 @@ def product_list(request):
 
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, is_active=True)
-    return render(request, "catalog/detail.html", {"product": product})
+    return render(request, "catalog/detail.html", {
+        "product": product,
+        "MP_PUBLIC_KEY": settings.MP_PUBLIC_KEY,
+        })
 # Funciones de administración (solo para superusuarios)
 
 
@@ -89,3 +96,92 @@ def product_delete(request, pk):
         messages.success(request, "Producto eliminado.")
         return redirect("catalog:catalog_manage")
     return render(request, "catalog/product_delete_confirm.html", {"product": obj})
+
+
+def _price_to_float(value):
+    # Asegura float seguro para Mercado Pago
+    if isinstance(value, Decimal):
+        return float(value)
+    try:
+        return float(value)
+    except Exception:
+        return 0.0
+
+def mp_pref(request, pk: int):
+    """
+    Crea una preferencia de MP para 1 unidad del producto (modo test).
+    Retorna { id: '<preference_id>' }.
+    """
+    try:
+        import mercadopago
+    except ImportError:
+        return JsonResponse({"error": "SDK no instalado"}, status=500)
+
+    product = Product.objects.filter(pk=pk, is_active=True).first()
+    if not product:
+        return JsonResponse({"error": "Producto no encontrado"}, status=404)
+
+    sdk = mercadopago.SDK(settings.MP_ACCESS_TOKEN)
+
+    preference_data = {
+        "items": [{
+            "title": product.name,
+            "quantity": 1,
+            "unit_price": _price_to_float(product.price),
+            "currency_id": "CLP",
+        }],
+        "back_urls": {
+            "success": settings.MP_SUCCESS_URL,
+            "failure": settings.MP_FAILURE_URL,
+            "pending": settings.MP_PENDING_URL,
+        },
+        "auto_return": "approved",
+        "binary_mode": True,  # en test simplifica el flujo "aprobado/rechazado"
+        "notification_url": settings.MP_WEBHOOK_URL,
+        # Opcional: referencia para correlacionar luego en el webhook
+        "external_reference": f"product:{product.pk}",
+    }
+
+    pref = sdk.preference().create(preference_data)
+    # Estructura esperada: {"response": {"id": "..."} , "status": 201, ...}
+    pref_id = pref.get("response", {}).get("id")
+    if not pref_id:
+        return JsonResponse({"error": "No se pudo crear preferencia", "raw": pref}, status=500)
+
+    return JsonResponse({"id": pref_id})
+
+def mp_success(request):
+    # Aquí podrías leer ?payment_id=&status=&external_reference=...
+    return render(request, "catalog/mp_result.html", {
+        "title": "Pago aprobado",
+        "lead": "Tu pago fue aprobado (TEST). Te enviaremos la confirmación por correo."
+    })
+
+def mp_failure(request):
+    return render(request, "catalog/mp_result.html", {
+        "title": "Pago rechazado",
+        "lead": "El pago no fue procesado. Puedes intentar nuevamente."
+    })
+
+def mp_pending(request):
+    return render(request, "catalog/mp_result.html", {
+        "title": "Pago pendiente",
+        "lead": "Tu pago quedó pendiente. Te avisaremos cuando se acredite."
+    })
+
+@csrf_exempt
+def mp_webhook(request):
+    """
+    Webhook para recibir notificaciones (TEST).
+    Por ahora solo responde 200; en real podrías consultar el pago y
+    marcar la orden como pagada.
+    """
+    try:
+        payload = json.loads(request.body or "{}")
+    except json.JSONDecodeError:
+        payload = {}
+
+    # *** Aquí podrías guardar el payload en DB para debugging ***
+    # print("MP webhook:", payload)
+
+    return HttpResponse("ok", status=200)
