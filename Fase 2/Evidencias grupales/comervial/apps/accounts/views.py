@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required   # ← importa esto
 from .forms import SignUpForm
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+from payments.models import FlowOrder
+
 
 def signup(request):
     if request.method == "POST":
@@ -18,9 +20,15 @@ def signup(request):
         form = SignUpForm()
     return render(request, "accounts/signup.html", {"form": form})
 
-@login_required                                           # ← y este decorador
+@login_required
 def profile(request):
-    return render(request, "accounts/profile.html")
+    orders = (
+        FlowOrder.objects
+        .filter(user=request.user)
+        .select_related("product")
+        .order_by("-created_at")
+    )
+    return render(request, "accounts/profile.html", {"orders": orders})
 
 def check_username(request):
     username = (request.GET.get("username") or "").strip()
