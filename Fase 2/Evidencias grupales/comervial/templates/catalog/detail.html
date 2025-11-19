@@ -25,6 +25,16 @@
           <h2 class="h6">Comprar ahora (modo prueba)</h2>
           <div id="wallet_container" class="mt-2"></div>
         </div>
+                <!-- Botón Flow (redirige a Flow) -->
+        <div class="card p-3 mt-3">
+          <h2 class="h6">Pagar con Flow</h2>
+          <form method="post" action="{% url 'payments:flow_pay_product' product.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-success w-100">
+              Pagar con Flow (sandbox)
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

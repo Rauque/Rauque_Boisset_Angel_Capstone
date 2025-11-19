@@ -125,8 +125,15 @@ MP_FAILURE_URL  = os.getenv("MP_FAILURE_URL",  "http://127.0.0.1:8000/catalogo/p
 MP_PENDING_URL  = os.getenv("MP_PENDING_URL",  "http://127.0.0.1:8000/catalogo/pago/pendiente/")
 MP_WEBHOOK_URL  = os.getenv("MP_WEBHOOK_URL",  "http://127.0.0.1:8000/catalogo/pago/webhook/")
 
-FLOW_API_KEY     = os.getenv("FLOW_API_KEY", "")
-FLOW_SECRET_KEY  = os.getenv("FLOW_SECRET_KEY", "")
+FLOW_API_KEY     = os.getenv("FLOW_API_KEY", "3ACF739C-C523-45AA-A5B5-5E7D6L3BFC29")
+FLOW_SECRET_KEY  = os.getenv("FLOW_SECRET_KEY", "386473ac583e7d7ed49363983c451996dea9869a")
 FLOW_API_URL     = os.getenv("FLOW_API_URL", "https://sandbox.flow.cl/api")
 FLOW_RETURN_URL  = os.getenv("FLOW_RETURN_URL", "http://127.0.0.1:8000/pagos/flow/return/")
 FLOW_CONFIRM_URL = os.getenv("FLOW_CONFIRM_URL", "http://127.0.0.1:8000/pagos/flow/confirm/")
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://sandbox.flow.cl",
+    "https://www.flow.cl",
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+]

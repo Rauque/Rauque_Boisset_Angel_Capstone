@@ -1,0 +1,26 @@
+{# templates/payments/flow_result.html #}
+{% extends "base.html" %}
+{% block title %}{{ title }} | Comervial{% endblock %}
+{% block content %}
+<main class="pt-5 mt-5">
+  <div class="container py-5" style="max-width:720px">
+    <h1 class="h3 mb-2">{{ title }}</h1>
+    {% if lead %}
+      <p class="text-secondary">{{ lead }}</p>
+    {% endif %}
+
+    {% if status %}
+      <p class="mb-1"><strong>Estado informado por Flow:</strong> {{ status }}</p>
+    {% endif %}
+
+    {% if raw %}
+      <h2 class="h6 mt-4">Detalle (JSON devuelto por Flow)</h2>
+      <pre class="small bg-light p-3 rounded mt-2">{{ raw }}</pre>
+    {% endif %}
+
+    <a class="btn btn-primary mt-4" href="{% url 'catalog:catalog_list' %}">
+      Volver al catálogo
+    </a>
+  </div>
+</main>
+{% endblock %}

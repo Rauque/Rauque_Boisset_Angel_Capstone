@@ -8,7 +8,10 @@ urlpatterns = [
     path("panel/", admin.site.urls),
     path("", include("apps.pages.urls")),
     path("cotizador/", include("apps.quotes.urls")),
-    path("catalogo/", include("apps.catalog.urls")),  # ← incluye las del app
+    path("catalogo/", include("apps.catalog.urls")),
+
+    # Flow / pagos
+    path("pagos/", include("payments.urls")),
 
     # Autenticación
     path("accounts/", include("django.contrib.auth.urls")),
