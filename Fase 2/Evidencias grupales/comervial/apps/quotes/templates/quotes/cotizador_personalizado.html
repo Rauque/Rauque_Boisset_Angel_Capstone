@@ -5,7 +5,7 @@
 <main class="pt-5 mt-5">
   <div class="container py-4">
     <h1 class="h3 mb-3">Cotizador de Ventanas y Cristales</h1>
-    <p class="text-muted mb-4">Crea cotizaciones profesionales en PDF</p>
+    <p class="text-muted mb-4">Aquí puedes crear tu cotización personalizada y posteriormente será enviada a tu correo.</p>
 
     <div class="row g-4">
       <!-- Columna izquierda -->
@@ -128,9 +128,15 @@
                 </li>
               </ul>
 
-              <button id="btn_pdf" class="btn btn-success w-100">
-                Generar PDF de Cotización
-              </button>
+              <!-- BOTONES ACCIÓN -->
+              <div class="d-grid gap-2">
+                <button id="btn_pdf" class="btn btn-success">
+                  Generar PDF de Cotización
+                </button>
+                <button id="btn_email" class="btn btn-primary">
+                  Enviar cotización por correo
+                </button>
+              </div>
             </div>
 
             <div id="summary_empty" class="text-muted text-center py-3">
@@ -141,10 +147,11 @@
       </div>
     </div>
 
-    {# form oculto que manda JSON al backend para generar el PDF #}
+    {# form oculto que manda JSON al backend para generar el PDF o enviar correo #}
     <form id="pdfForm" method="post" style="display:none;">
       {% csrf_token %}
       <input type="hidden" name="payload" id="payloadField">
+      <input type="hidden" name="mode" id="modeField" value="pdf">
     </form>
   </div>
 </main>
@@ -154,37 +161,37 @@
 <script>
 const PRODUCT_CATALOG = {
   "Ventanas PVC Europeo": {
-    "MT2 PVC CORREDERA TERMOPANEL": 180000,
-    "MT2 PVC PROYECTANTE TERMOPANEL": 215000,
-    "MT2 PVC PUERTA TERMOPANEL": 240000,
+    "CORREDERA TERMOPANEL": 180000,
+    "PROYECTANTE TERMOPANEL": 215000,
+    "PUERTA TERMOPANEL": 240000,
   },
   "Ventanas PVC Americano": {
-    "MT2 PVC CORREDERA CRISTAL MONOLITICO": 75000,
-    "MT2 PVC PROYECTANTE CRISTAL MONOLITICO": 89000,
+    "CORREDERA CRISTAL MONOLITICO": 75000,
+    "PROYECTANTE CRISTAL MONOLITICO": 89000,
   },
   "Ventanas Aluminio": {
-    "MT2 ALUMINIO SOLO CRISTAL": 80000,
-    "MT2 ALUMINIO PROYECTANTE TERMOPANEL": 135000,
-    "MT2 PUERTAS ALUMINIO": 130000,
+    "ALUMINIO SOLO CRISTAL": 80000,
+    "ALUMINIO PROYECTANTE TERMOPANEL": 135000,
+    "PUERTAS ALUMINIO": 130000,
   },
   "Cristales": {
-    "CRISTAL 3MM MT2": 15000,
-    "CRISTAL 4MM MT2": 19000,
-    "CRISTAL 5MM MT2": 22000,
-    "CRISTAL 6MM MT2": 24000,
-    "CRISTAL 8MM MT2": 45000,
-    "CRISTAL 10MM MT2": 48000,
-    "CRISTAL LAMINADO 6MM MT2": 35000,
-    "CRISTAL LAMINADO 8MM MT2": 42000,
-    "CRISTAL LAMINADO 10MM MT2": 68000,
-    "CRISTAL TEMPLADO 5MM MT2": 80000,
-    "CRISTAL TEMPLADO 8MM MT2": 95000,
-    "CRISTAL TEMPLADO 10MM MT2": 115000,
+    "CRISTAL 3MM": 15000,
+    "CRISTAL 4MM": 19000,
+    "CRISTAL 5MM": 22000,
+    "CRISTAL 6MM": 24000,
+    "CRISTAL 8MM": 45000,
+    "CRISTAL 10MM": 48000,
+    "CRISTAL LAMINADO 6MM": 35000,
+    "CRISTAL LAMINADO 8MM": 42000,
+    "CRISTAL LAMINADO 10MM": 68000,
+    "CRISTAL TEMPLADO 5MM": 80000,
+    "CRISTAL TEMPLADO 8MM": 95000,
+    "CRISTAL TEMPLADO 10MM": 115000,
   },
   "Espejos": {
-    "ESPEJO 3MM MT2": 50000,
-    "ESPEJO 4MM MT2": 60000,
-    "ESPEJO 5MM MT2": 65000,
+    "ESPEJO 3MM": 50000,
+    "ESPEJO 4MM": 60000,
+    "ESPEJO 5MM": 65000,
   },
 };
 
@@ -377,16 +384,24 @@ itemsContainer.addEventListener("click", function(e) {
   cantidadInput.addEventListener(evt, calcPreview);
 });
 
-document.getElementById("btn_pdf").addEventListener("click", function() {
+/* ====== NUEVA FUNCIÓN COMPARTIDA PARA ENVIAR AL BACKEND ====== */
+function submitQuote(mode) {
   if (quoteItems.length === 0) {
     alert("Agrega al menos un producto para generar la cotización.");
     return;
   }
+
   const cliente = {
     nombre: document.getElementById("client_name").value || "",
     email: document.getElementById("client_email").value || "",
     telefono: document.getElementById("client_phone").value || "",
   };
+
+  // si es envío por correo, exigimos email
+  if (mode === "email" && !cliente.email) {
+    alert("Ingresa un correo electrónico para enviar la cotización.");
+    return;
+  }
 
   const subtotal = quoteItems.reduce((acc, it) => acc + it.subtotal, 0);
   const iva = subtotal * 0.19;
@@ -399,7 +414,17 @@ document.getElementById("btn_pdf").addEventListener("click", function() {
   };
 
   document.getElementById("payloadField").value = JSON.stringify(payload);
+  document.getElementById("modeField").value = mode; // "pdf" o "email"
   document.getElementById("pdfForm").submit();
+}
+
+/* Botones */
+document.getElementById("btn_pdf").addEventListener("click", function() {
+  submitQuote("pdf");
+});
+
+document.getElementById("btn_email").addEventListener("click", function() {
+  submitQuote("email");
 });
 
 updateTipoOptions();

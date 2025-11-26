@@ -13,7 +13,9 @@
         {# Alerts de éxito/error #}
         {% if messages %}
           {% for m in messages %}
-            <div class="alert alert-{{ m.tags }} mb-3">{{ m }}</div>
+            {% if forloop.first %}
+              <div class="alert alert-{{ m.tags }} mb-3">{{ m }}</div>
+            {% endif %}
           {% endfor %}
         {% endif %}
 
