@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle cotización #{{ quote.id }} — Comervial{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <a href="{% url 'profile' %}" class="btn btn-link btn-sm mb-3">&larr; Volver al perfil</a>
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h4 mb-0">Cotización personalizada #{{ quote.id }}</h1>
+    <a href="{% url 'quotes:personalized_quote_pdf' quote.id %}"
+        class="btn btn-primary btn-sm"
+        target="_blank"
+        rel="noopener noreferrer">
+        Descargar PDF
+    </a>
+
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <p class="mb-1"><strong>Fecha:</strong> {{ quote.created_at|date:"d-m-Y H:i" }}</p>
+      <p class="mb-1"><strong>Cliente:</strong> {{ quote.client_name|default:"—" }}</p>
+      <p class="mb-1"><strong>Email:</strong> {{ quote.client_email|default:"—" }}</p>
+      <p class="mb-0"><strong>Teléfono:</strong> {{ quote.client_phone|default:"—" }}</p>
+    </div>
+  </div>
+
+  {% if items %}
+    <div class="table-responsive mb-3">
+      <table class="table table-sm align-middle">
+        <thead>
+          <tr>
+            <th>Descripción</th>
+            <th class="text-end">Ancho</th>
+            <th class="text-end">Alto</th>
+            <th class="text-end">Cantidad</th>
+            <th class="text-end">Precio unitario</th>
+            <th class="text-end">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+            <tr>
+                <td>
+                {{ item.categoria }} · {{ item.tipo }}
+                ({{ item.ancho_cm }} x {{ item.alto_cm }} cm, {{ item.m2|floatformat:2 }} m²)
+                </td>
+                <td class="text-end">{{ item.ancho_cm }}</td>
+                <td class="text-end">{{ item.alto_cm }}</td>
+                <td class="text-end">{{ item.cantidad }}</td>
+                <td class="text-end">${{ item.precioUnitario|floatformat:0 }}</td>
+                <td class="text-end">${{ item.subtotal|floatformat:0 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <table class="table table-sm w-auto mb-0">
+        <tbody>
+          <tr>
+            <th class="text-end">Subtotal</th>
+            <td class="text-end">${{ subtotal|floatformat:0 }}</td>
+          </tr>
+          <tr>
+            <th class="text-end">IVA</th>
+            <td class="text-end">${{ iva|floatformat:0 }}</td>
+          </tr>
+          <tr>
+            <th class="text-end">Total</th>
+            <td class="text-end fw-bold">${{ total|floatformat:0 }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="text-muted">
+      Esta cotización no tiene detalle disponible (no se guardó el payload completo).
+    </p>
+  {% endif %}
+</div>
+{% endblock %}

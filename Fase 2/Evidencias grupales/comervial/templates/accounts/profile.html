@@ -1,12 +1,85 @@
 {% extends "base.html" %}
 {% block title %}Mi cuenta | Comervial{% endblock %}
+
 {% block content %}
 <main class="pt-5 mt-5">
   <div class="container py-5">
     <h1 class="h4 mb-3">Mi cuenta</h1>
     <p>Hola {{ request.user.username }}.</p>
-    <p class="text-secondary">Aquí más adelante mostraremos tus datos, direcciones y pedidos.</p>
-        <hr class="my-4">
+
+    {# --- Mis datos de cliente --- #}
+    <hr class="my-4">
+    <h2 class="h5 mb-3">Mis datos de cliente</h2>
+
+    <form method="post" class="row g-3">
+      {% csrf_token %}
+      <div class="col-md-6">
+        <label class="form-label" for="{{ profile_form.full_name.id_for_label }}">Nombre completo</label>
+        {{ profile_form.full_name }}
+      </div>
+      <div class="col-md-3">
+        <label class="form-label" for="{{ profile_form.rut.id_for_label }}">RUT</label>
+
+        <div class="{% if profile_form.rut.errors %}has-error{% endif %}">
+          {{ profile_form.rut }}
+        </div>
+
+        {% if profile_form.rut.errors %}
+          <div class="text-danger small">
+            {{ profile_form.rut.errors.0 }}
+          </div>
+        {% else %}
+          <div class="form-text">Formato: 12.345.678-9</div>
+        {% endif %}
+      </div>
+
+
+
+      <div class="col-md-3">
+        <label class="form-label" for="{{ profile_form.phone.id_for_label }}">Teléfono</label>
+
+        <div class="{% if profile_form.phone.errors %}has-error{% endif %}">
+          {{ profile_form.phone }}
+        </div>
+
+        {% if profile_form.phone.errors %}
+          <div class="text-danger small">
+            {{ profile_form.phone.errors.0 }}
+          </div>
+        {% else %}
+          <div class="form-text">
+            Debe comenzar con +56 y tener 9 dígitos (ej: +56912345678).
+          </div>
+        {% endif %}
+      </div>
+
+
+
+      <div class="col-md-8">
+        <label class="form-label" for="{{ profile_form.address.id_for_label }}">Dirección</label>
+        {{ profile_form.address }}
+      </div>
+      <div class="col-md-4">
+        <label class="form-label" for="{{ profile_form.comuna.id_for_label }}">Comuna</label>
+        {{ profile_form.comuna }}
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label" for="{{ profile_form.region.id_for_label }}">Región</label>
+        {{ profile_form.region }}
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">País</label>
+        <input type="text" class="form-control" value="Chile" readonly>
+      </div>
+
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary btn-sm">Guardar datos</button>
+      </div>
+    </form>
+
+    {# --- Mis compras --- #}
+    <hr class="my-4">
     <h2 class="h5 mb-3">Mis compras</h2>
 
     {% if orders %}
@@ -16,19 +89,15 @@
             <tr>
               <th>Fecha</th>
               <th>Producto</th>
-              <th>Código orden</th>
-              <th>Monto</th>
-              <th>Estado</th>
+              <th>Total</th>
             </tr>
           </thead>
           <tbody>
-            {% for order in orders %}
+            {% for o in orders %}
               <tr>
-                <td>{{ order.created_at|date:"d-m-Y H:i" }}</td>
-                <td>{{ order.product.name }}</td>
-                <td>{{ order.commerce_order }}</td>
-                <td>${{ order.amount|floatformat:0 }}</td>
-                <td>{{ order.get_status_display }}</td>
+                <td>{{ o.created_at|date:"d-m-Y H:i" }}</td>
+                <td>{{ o.product }}</td>
+                <td>${{ o.amount|floatformat:0 }}</td>
               </tr>
             {% endfor %}
           </tbody>
@@ -38,7 +107,52 @@
       <p class="text-secondary">Aún no tienes compras registradas.</p>
     {% endif %}
 
-    {# --- Panel rápido solo para SUPERUSUARIO --- #}
+    {# --- Mis cotizaciones personalizadas --- #}
+    <hr class="my-4">
+    <h2 class="h5 mb-3">Mis cotizaciones personalizadas</h2>
+
+    {% if personalized_quotes %}
+      <div class="table-responsive">
+        <table class="table table-sm align-middle">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>N° ítems</th>
+              <th>Total</th>
+              <th>Envío</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for q in personalized_quotes %}
+              <tr>
+                <td>{{ q.created_at|date:"d-m-Y H:i" }}</td>
+                <td>{{ q.items_count }}</td>
+                <td>${{ q.total|floatformat:0 }}</td>
+                <td>
+                  {% if q.sent_by_email %}
+                    Enviada por correo
+                  {% else %}
+                    Solo descargada en PDF
+                  {% endif %}
+                </td>
+                <td class="text-end">
+                  <a href="{% url 'quotes:personalized_quote_detail' q.id %}" class="btn btn-outline-secondary btn-sm">
+                    Ver detalle
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="text-secondary">
+        Aún no has generado cotizaciones personalizadas desde tu cuenta.
+      </p>
+    {% endif %}
+
+    {# --- Panel rápido superusuario (lo de antes) --- #}
     {% if request.user.is_superuser %}
       <hr class="my-4">
       <h2 class="h5 mb-3">Panel de administración rápido</h2>
