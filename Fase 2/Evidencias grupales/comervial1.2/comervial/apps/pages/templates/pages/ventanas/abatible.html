@@ -1,0 +1,38 @@
+{% extends "base.html" %}{% load static %}
+{% block title %}Ventana Abatible | Comervial{% endblock %}
+{% block content %}
+<main class="pt-5 mt-5">
+  <section class="container py-5">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6">
+        <h1 class="h3 mb-3">Ventana abatible</h1>
+        <p>
+          Apertura por giro sobre bisagras laterales (tipo puerta). Destaca por su
+          hermeticidad al viento/agua y elevada aislación acústica y térmica.
+        </p>
+        <ul class="mb-3">
+          <li>Cierre perimetral y compresión de sellos para máxima estanqueidad.</li>
+          <li>Apta para dormitorios, salas de estar y fachadas expuestas.</li>
+          <li>Posibilidad de microventilación con herrajes específicos.</li>
+        </ul>
+
+        <h2 class="h6 mt-4">Especificaciones</h2>
+        <ul>
+          <li><strong>Perfilería:</strong> Aluminio RPT o PVC (líneas batientes).</li>
+          <li><strong>Vidrios:</strong> Laminado acústico / templado; Termopanel recomendado.</li>
+          <li><strong>Espesores:</strong> 4–10 mm simples; Termopanel 18–28 mm según perfil.</li>
+          <li><strong>Herrajes:</strong> bisagras de alta carga, cremona multipunto.</li>
+          <li><strong>Sellos:</strong> burletes EPDM continuos, alta hermeticidad.</li>
+        </ul>
+
+        <a class="btn btn-primary mt-3" href="{% url 'quotes:cotizador_personalizado' %}">Quiero cotizar</a>
+      </div>
+      <div class="col-lg-6">
+        <img class="img-fluid rounded-3 shadow-sm"
+             src="{% static 'img/abatible.jpeg' %}"
+             alt="Ventana abatible Comervial">
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

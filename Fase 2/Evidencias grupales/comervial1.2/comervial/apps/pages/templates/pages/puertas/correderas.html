@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Puertas Correderas | Comervial{% endblock %}
+{% block extra_head %}
+<meta name="description" content="Puertas correderas de alto desempeño, rodamientos suaves, cierres eficientes y grandes luces. Fabricación a medida en PVC y aluminio.">
+{% endblock %}
+
+{% block content %}
+<main class="pt-5 mt-5">
+  <section class="section">
+    <div class="container">
+      <h1 class="h3 mb-3">Puertas Correderas</h1>
+      <p class="text-secondary">Aprovecha al máximo el espacio útil con deslizamiento suave y perfiles optimizados para grandes paños de vidrio.</p>
+
+      <div class="row g-4 mt-2">
+        <div class="col-lg-6">
+          <img class="img-fluid rounded shadow-sm" src="{% static 'img/puerta-corredera.jpeg' %}" alt="Puerta corredera Comervial" onerror="this.src='{% static 'img/placeholder-16x9.png' %}'">
+        </div>
+        <div class="col-lg-6">
+          <h2 class="h5">Ventajas principales</h2>
+          <ul class="mb-3">
+            <li><strong>Ahorro de espacio:</strong> hojas deslizantes sin barrer radios de apertura.</li>
+            <li>Rodamientos y guías de alta durabilidad; cierre preciso.</li>
+            <li>Posibilidad de 2, 3 o más hojas, con fijos laterales.</li>
+          </ul>
+
+          <h3 class="h6">Especificaciones rápidas</h3>
+          <div class="row">
+            <div class="col-sm-6">
+              <ul class="small">
+                <li><strong>Material:</strong> PVC / Aluminio</li>
+                <li><strong>Vidrio:</strong> Templado/Laminado o Termopanel</li>
+                <li><strong>Configuraciones:</strong> 2, 3 y 4 hojas</li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <ul class="small">
+                <li><strong>Seguridad:</strong> Cierre embutido, opción multipunto</li>
+                <li><strong>Sellos:</strong> felpas y burletes de alto rendimiento</li>
+                <li><strong>Umbral:</strong> estándar o bajo (accesibilidad)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="d-flex gap-2 mt-2">
+            <a class="btn btn-primary" href="{% url 'quotes:cotizador_personalizado' %}">Cotizar a medida</a>
+            <a class="btn btn-outline-secondary" href="{% url 'quotes:cotizador' %}">Consulta rápida</a>
+
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-5">
+
+      <h2 class="h5">Dónde conviene</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="p-3 border rounded h-100">
+            <h3 class="h6">Terrazas y patios</h3>
+            <p class="small text-secondary mb-0">Grandes aperturas sin perder superficie interior.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 border rounded h-100">
+            <h3 class="h6">Departamentos</h3>
+            <p class="small text-secondary mb-0">Optimiza espacios reducidos con excelente iluminación natural.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 border rounded h-100">
+            <h3 class="h6">Locales comerciales</h3>
+            <p class="small text-secondary mb-0">Accesos anchos y cómodos para alto flujo peatonal.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-4">
+        <strong>Tip técnico:</strong> Para grandes luces, combina termopanel con perfilería reforzada y rodamientos de alta carga.
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

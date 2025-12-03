@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Mi cuenta | Comervial{% endblock %}
+{% block content %}
+<main class="pt-5 mt-5">
+  <div class="container py-5">
+    <h1 class="h4 mb-3">Mi cuenta</h1>
+    <p>Hola {{ request.user.username }}.</p>
+    <p class="text-secondary">Aquí más adelante mostraremos tus datos, direcciones y pedidos.</p>
+        <hr class="my-4">
+    <h2 class="h5 mb-3">Mis compras</h2>
+
+    {% if orders %}
+      <div class="table-responsive">
+        <table class="table table-sm align-middle">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Producto</th>
+              <th>Código orden</th>
+              <th>Monto</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in orders %}
+              <tr>
+                <td>{{ order.created_at|date:"d-m-Y H:i" }}</td>
+                <td>{{ order.product.name }}</td>
+                <td>{{ order.commerce_order }}</td>
+                <td>${{ order.amount|floatformat:0 }}</td>
+                <td>{{ order.get_status_display }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="text-secondary">Aún no tienes compras registradas.</p>
+    {% endif %}
+
+    {# --- Panel rápido solo para SUPERUSUARIO --- #}
+    {% if request.user.is_superuser %}
+      <hr class="my-4">
+      <h2 class="h5 mb-3">Panel de administración rápido</h2>
+      <div class="d-flex gap-2 flex-wrap">
+        <a class="btn btn-outline-primary" href="{% url 'catalog:catalog_manage' %}">Gestionar catálogo</a>
+        <a class="btn btn-outline-primary" href="{% url 'catalog:product_create' %}">Crear producto</a>
+        <a class="btn btn-outline-secondary" href="/panel/">Ir a Django Admin</a>
+      </div>
+    {% endif %}
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Contacto | Comervial{% endblock %}
+
+{% block content %}
+<main class="pt-5 mt-5">
+  <section class="container py-5">
+    <div class="row g-4">
+
+      <div class="col-lg-6">
+        <h1 class="h3 mb-3">Contáctanos</h1>
+        <p class="text-secondary">Completa el formulario y te responderemos a la brevedad.</p>
+
+        {# Alerts de éxito/error #}
+        {% if messages %}
+          {% for m in messages %}
+            {% if forloop.first %}
+              <div class="alert alert-{{ m.tags }} mb-3">{{ m }}</div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            {{ form.nombre }}
+            {% for e in form.nombre.errors %}
+              <div class="invalid-feedback d-block">{{ e }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            {{ form.email }}
+            {% for e in form.email.errors %}
+              <div class="invalid-feedback d-block">{{ e }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Teléfono</label>
+            {{ form.telefono }}
+            {% for e in form.telefono.errors %}
+              <div class="invalid-feedback d-block">{{ e }}</div>
+            {% endfor %}
+          </div>
+
+          {# Campo categoria va oculto desde la vista si existe #}
+          {% if form.categoria %}{{ form.categoria }}{% endif %}
+
+          <div class="mb-3">
+            <label class="form-label">Mensaje</label>
+            {{ form.mensaje }}
+            {% for e in form.mensaje.errors %}
+              <div class="invalid-feedback d-block">{{ e }}</div>
+            {% endfor %}
+          </div>
+
+          <button class="btn btn-primary">Enviar</button>
+        </form>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="p-3 bg-light rounded-3 h-100">
+          <h2 class="h5">Datos de contacto</h2>
+          <ul class="list-unstyled small">
+            <li><strong>Dirección:</strong> El Lingue 8358</li>
+            <li><strong>Teléfonos:</strong> +56 9 9456 8206 · +56 9 9700 3496</li>
+            <li><strong>Email:</strong> h.rauque.alvarez@gmail.com</li>
+          </ul>
+
+          <div class="ratio ratio-16x9 mt-3">
+            <iframe src="https://www.google.com/maps?q=El+Lingue+8358&output=embed"
+                    loading="lazy" allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+{% endblock %}
