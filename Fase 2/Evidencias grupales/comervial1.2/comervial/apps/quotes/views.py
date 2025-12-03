@@ -1,26 +1,24 @@
 # apps/quotes/views.py
-import io
 import json
-from decimal import Decimal
 from datetime import date
+from decimal import Decimal
 
-from django.core.mail import EmailMessage, send_mail
+from io import BytesIO
+
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.mail import EmailMessage, send_mail
 from django.http import (
     HttpResponse,
     FileResponse,
     HttpResponseBadRequest,
     HttpResponseForbidden,
 )
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
 from django.views.decorators.http import require_http_methods
-from django.contrib import messages
-from django.contrib.auth.decorators import user_passes_test
 
-from .forms import QuoteRequestForm, CustomQuoteRequestForm
-from .pricing import PRODUCT_CATALOG, calcular_item_catalogo
-from io import BytesIO
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
@@ -33,6 +31,10 @@ from reportlab.platypus import (
     Spacer,
 )
 from reportlab.lib.styles import getSampleStyleSheet
+
+from .forms import QuoteRequestForm, CustomQuoteRequestForm
+from .pricing import PRODUCT_CATALOG, calcular_item_catalogo
+from .models import PersonalizedQuote
 
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -114,6 +116,28 @@ def cotizador_personalizado(request):
     email_cliente = cliente.get("email") or ""
     telefono = cliente.get("telefono") or cliente.get("phone") or ""
 
+    from decimal import Decimal as _D
+
+    # Conversión a Decimal para guardar en BD
+    subtotal_dec = _D(str(subtotal))
+    iva_dec = _D(str(iva))
+    total_dec = _D(str(total))
+
+    # Solo asociamos al usuario si está logueado
+    quote_user = request.user if request.user.is_authenticated else None
+
+    PersonalizedQuote.objects.create(
+        user=quote_user,
+        client_name=nombre_cliente,
+        client_email=email_cliente,
+        client_phone=telefono,
+        items_count=len(items),
+        subtotal=subtotal_dec,
+        iva=iva_dec,
+        total=total_dec,
+        sent_by_email=(mode == "email"),
+        payload=data,
+    )
     # ===== Si el modo es EMAIL: enviar correo y mostrar mensaje =====
     if mode == "email":
         subject = "Cotización personalizada Comervial"
@@ -294,3 +318,65 @@ def _generate_catalog_pdf(cliente, items, subtotal, iva, total):
 
 def cotizador_ok(request):
     return render(request, "quotes/gracias.html")
+
+
+@login_required
+def personalized_quote_detail(request, pk):
+    quote = get_object_or_404(PersonalizedQuote, pk=pk, user=request.user)
+
+    data = quote.payload or {}
+    cliente = data.get("cliente", {})
+    raw_items = data.get("items", [])
+
+    # Si no hay payload, no hay detalle que mostrar
+    items = []
+    subtotal_calc = 0
+
+    for raw in raw_items:
+        # Usa exactamente la misma función que en cotizador_personalizado
+        item = calcular_item_catalogo(raw)
+        items.append(item)
+        subtotal_calc += item["subtotal"]
+
+    # Puedes usar los valores guardados como “verdad oficial”
+    subtotal = quote.subtotal
+    iva = quote.iva
+    total = quote.total
+
+    context = {
+        "quote": quote,
+        "cliente": cliente,
+        "items": items,
+        "subtotal": subtotal,
+        "iva": iva,
+        "total": total,
+        "subtotal_calc": subtotal_calc,  # por si quieres comparar
+    }
+    return render(request, "quotes/personalized_quote_detail.html", context)
+
+
+@login_required
+def personalized_quote_pdf(request, pk):
+    quote = get_object_or_404(PersonalizedQuote, pk=pk, user=request.user)
+
+    data = quote.payload or {}
+    cliente = data.get("cliente", {})
+    raw_items = data.get("items", [])
+
+    items = []
+    for raw in raw_items:
+        item = calcular_item_catalogo(raw)
+        items.append(item)
+
+    # Usamos los valores guardados para que el PDF coincida con la cotización
+    subtotal = float(quote.subtotal)
+    iva = float(quote.iva)
+    total = float(quote.total)
+
+    buffer = _generate_catalog_pdf(cliente, items, subtotal, iva, total)
+    pdf_bytes = buffer.getvalue()
+
+    response = HttpResponse(pdf_bytes, content_type="application/pdf")
+    response["Content-Disposition"] = f'inline; filename="cotizacion_{quote.pk}.pdf"'
+    return response
+

@@ -1,5 +1,6 @@
 from django.db import models
 from decimal import Decimal
+from django.conf import settings
 
 class QuoteRequest(models.Model):
     nombre = models.CharField(max_length=120)
@@ -12,19 +13,38 @@ class QuoteRequest(models.Model):
     def __str__(self):
         return f"{self.nombre} - {self.email}"
 
-'''class CustomQuoteRequest(models.Model):
-    nombre = models.CharField(max_length=120)
-    email = models.EmailField()
-    telefono = models.CharField(max_length=50, blank=True)
-    tipo = models.CharField(max_length=120)
-    ancho_mm = models.PositiveIntegerField()
-    alto_mm = models.PositiveIntegerField()
-    ubicacion = models.CharField(max_length=160, blank=True)
-    detalles = models.TextField(blank=True)
+class PersonalizedQuote(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="personalized_quotes",
+    )
+
+    # Datos básicos del cliente al momento de cotizar
+    client_name = models.CharField(max_length=120, blank=True)
+    client_email = models.EmailField(blank=True)
+    client_phone = models.CharField(max_length=40, blank=True)
+
+    # Resumen numérico
+    items_count = models.PositiveIntegerField(default=0)
+    subtotal = models.DecimalField(max_digits=12, decimal_places=2)
+    iva = models.DecimalField(max_digits=12, decimal_places=2)
+    total = models.DecimalField(max_digits=12, decimal_places=2)
+    sent_by_email = models.BooleanField(default=False)
+
+    # Payload completo para futuro detalle (opcional, pero muy útil)
+    payload = models.JSONField(blank=True, null=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
-    aprobado = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ("-created_at",)
+
     def __str__(self):
-        return f"{self.nombre} - {self.tipo}"'''
+        quien = self.client_name or (self.user.username if self.user else "Anónimo")
+        return f"Cotización {self.pk} - {quien} - {self.total}"
 
 
 PRODUCT_TYPES = (

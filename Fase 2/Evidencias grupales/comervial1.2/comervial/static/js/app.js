@@ -33,3 +33,46 @@
     setScrolled();
   }
 })();
+
+document.addEventListener("DOMContentLoaded", function () {
+  const rutInput = document.getElementById("id_customer_rut");
+  if (!rutInput) return; // si no estamos en la página de perfil, no hace nada
+
+  function formatRut(value) {
+    // limpiar puntos y guiones
+    let clean = value.replace(/\./g, "").replace(/-/g, "").toUpperCase();
+
+    // muy corto -> no formateamos
+    if (clean.length < 2) {
+      return value;
+    }
+
+    const cuerpo = clean.slice(0, -1);
+    const dv = clean.slice(-1);
+
+    // insertar puntos cada 3 dígitos desde la derecha
+    let cuerpoRev = cuerpo.split("").reverse().join("");
+    let partes = [];
+    for (let i = 0; i < cuerpoRev.length; i += 3) {
+      partes.push(cuerpoRev.slice(i, i + 3));
+    }
+
+    let cuerpoFormateado = partes
+      .map((p) => p.split("").reverse().join(""))
+      .reverse()
+      .join(".");
+
+    return cuerpoFormateado + "-" + dv;
+  }
+
+  rutInput.addEventListener("blur", function () {
+    const v = rutInput.value.trim();
+    if (!v) return;
+
+    // si no hay suficientes dígitos, no tocamos nada
+    const soloNumeros = v.replace(/\D/g, "");
+    if (soloNumeros.length < 7) return;
+
+    rutInput.value = formatRut(v);
+  });
+});

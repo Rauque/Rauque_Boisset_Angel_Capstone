@@ -9,3 +9,4 @@ urlpatterns = [
     path("flow/return/", views.flow_return, name="flow_return"),
     path("flow/confirm/", views.flow_confirm, name="flow_confirm"),
 ]
+

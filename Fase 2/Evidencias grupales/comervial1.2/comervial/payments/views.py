@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
+
 from apps.catalog.models import Product
 from .flow_client import flow_post, flow_get, FlowError
 from .models import FlowOrder
@@ -44,7 +45,9 @@ def flow_pay_product(request, pk: int):
     subject = f"Compra {product.name}"
     amount = str(product.price)
 
-    email = request.user.email or getattr(settings, "COTIZADOR_TO", "comervial.hr@gmail.com")
+    email = request.user.email or getattr(
+        settings, "COTIZADOR_TO", "comervial.hr@gmail.com"
+    )
 
     params = {
         "commerceOrder": commerce_order,
@@ -173,11 +176,11 @@ def flow_return(request):
         try:
             order = FlowOrder.objects.get(commerce_order=commerce_order)
 
-            # 🔥 RE-LOGIN: si la orden tiene usuario y este request viene anónimo,
+            # RE-LOGIN: si la orden tiene usuario y este request viene anónimo,
             # volvemos a autenticar al usuario de la compra.
             if order.user and not request.user.is_authenticated:
                 login(request, order.user)
-                request.user = order.user  # por si el template usa request.user
+                request.user = order.user
 
             # Actualizamos datos de Flow
             order.flow_order = flow_order_id
@@ -193,7 +196,9 @@ def flow_return(request):
 
             order.save()
         except FlowOrder.DoesNotExist:
-            logger.error("No existe FlowOrder con commerce_order=%s (return)", commerce_order)
+            logger.error(
+                "No existe FlowOrder con commerce_order=%s (return)", commerce_order
+            )
 
     except FlowError as e:
         return render(
