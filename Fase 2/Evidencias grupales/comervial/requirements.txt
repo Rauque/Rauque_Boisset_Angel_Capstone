@@ -1,7 +1,6 @@
 Django==4.2.14
 PyMySQL==1.1.1
 python-dotenv==1.0.1
-mercadopago==2.2.3
 djangorestframework==3.14.0
 Pillow==10.4.0              
 reportlab==4.2.0   # o versión similar

@@ -5,7 +5,6 @@ from django.core.mail import send_mail
 from django import forms as dj_forms
 from django.core.mail import EmailMessage
 import os
-import mercadopago
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
