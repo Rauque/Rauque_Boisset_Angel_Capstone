@@ -118,12 +118,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-MP_PUBLIC_KEY   = os.getenv("MP_PUBLIC_KEY", "TEST-APP_USR-269590d6-df27-4103-88c3-3166bb3fa41f")
-MP_ACCESS_TOKEN = os.getenv("MP_ACCESS_TOKEN", "TEST-APP_USR-7566504184875425-111114-5ff12051d688884be48e83cb9a0260e7-2982510326")
-MP_SUCCESS_URL  = os.getenv("MP_SUCCESS_URL",  "http://127.0.0.1:8000/catalogo/pago/exito/")
-MP_FAILURE_URL  = os.getenv("MP_FAILURE_URL",  "http://127.0.0.1:8000/catalogo/pago/error/")
-MP_PENDING_URL  = os.getenv("MP_PENDING_URL",  "http://127.0.0.1:8000/catalogo/pago/pendiente/")
-MP_WEBHOOK_URL  = os.getenv("MP_WEBHOOK_URL",  "http://127.0.0.1:8000/catalogo/pago/webhook/")
 
 FLOW_API_KEY     = os.getenv("FLOW_API_KEY", "3ACF739C-C523-45AA-A5B5-5E7D6L3BFC29")
 FLOW_SECRET_KEY  = os.getenv("FLOW_SECRET_KEY", "386473ac583e7d7ed49363983c451996dea9869a")

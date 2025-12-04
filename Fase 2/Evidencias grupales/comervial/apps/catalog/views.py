@@ -48,14 +48,6 @@ def product_list(request):
     }
     return render(request, "catalog/list.html", ctx)
 
-def product_detail(request, slug):
-    product = get_object_or_404(Product, slug=slug, is_active=True)
-    return render(request, "catalog/detail.html", {
-        "product": product,
-        "MP_PUBLIC_KEY": settings.MP_PUBLIC_KEY,
-        })
-# Funciones de administración (solo para superusuarios)
-
 
 def is_superuser(user):
     return user.is_authenticated and user.is_superuser
@@ -106,3 +98,7 @@ def _price_to_float(value):
         return float(value)
     except Exception:
         return 0.0
+def product_detail(request, slug):
+    product = get_object_or_404(Product, slug=slug, is_active=True)
+    return render(request, "catalog/detail.html", {"product": product})
+
