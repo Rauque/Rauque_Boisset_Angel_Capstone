@@ -24,6 +24,7 @@ class Category(models.Model):
 MATERIAL_CHOICES = [
     ("PVC", "PVC"),
     ("ALU", "Aluminio"),
+    ("CRI", "Cristal"),
 ]
 GLASS_CHOICES = [
     ("LAM", "Laminado"),
@@ -55,10 +56,13 @@ class Product(models.Model):
     thickness = models.CharField(max_length=2, choices=THICKNESS_CHOICES)
     color = models.CharField(max_length=5, choices=COLOR_CHOICES)
 
+    description = models.TextField("Descripción", blank=True)
+
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     image = models.ImageField(upload_to="products/", blank=True, null=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
 
     class Meta:
         ordering = ("-created_at",)

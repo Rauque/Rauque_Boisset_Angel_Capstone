@@ -41,6 +41,13 @@
 
           <dt class="col-5">Color</dt>
           <dd class="col-7">{{ product.get_color_display }}</dd>
+          {% if product.description %}
+          <dt class="col-5">Descripción</dt>
+            <p class="mb-3">
+              {{ product.description|linebreaksbr }}
+            </p>
+          {% endif %}
+
         </dl>
 
         <p class="h3 fw-semibold mb-3">
@@ -49,18 +56,14 @@
 
         <!-- Botón Flow -->
         <div class="card p-3 mb-3">
-          <h2 class="h6 mb-2">Pagar con Flow</h2>
-          <p class="small text-secondary mb-3">
-            Pago en línea seguro a través de Flow (modo sandbox/configuración según tu backend).
-          </p>
           <form method="post" action="{% url 'payments:flow_pay_product' product.id %}">
             {% csrf_token %}
-            <button type="submit" class="btn btn-outline-success w-100">
-              Pagar con Flow
+            <button type="submit" class="btn btn-success btn-sm">
+              Comprar
             </button>
+
           </form>
         </div>
-
         <a href="{% url 'catalog:catalog_list' %}" class="btn btn-outline-secondary">
           Volver al catálogo
         </a>
