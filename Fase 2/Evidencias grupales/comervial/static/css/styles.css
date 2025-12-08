@@ -227,3 +227,21 @@
 .has-error textarea:focus {
   box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
 }
+
+/* Transición suave para que el cambio de tamaño no sea brusco */
+#brandLogo {
+    transition: height 0.3s ease;
+    width: auto; /* Mantiene la proporción siempre */
+}
+
+/* ESTADO 1: En la portada (Home) cuando estás hasta arriba */
+/* Aquí permitimos que sea grande e impactante */
+.navbar-initial #brandLogo {
+    height: 105px; 
+}
+
+/* ESTADO 2: Al bajar (scroll) O en páginas interiores (Cotizador, Contacto, etc) */
+/* Aquí lo reducimos para que la barra no estorbe */
+.navbar-scrolled #brandLogo {
+    height: 60px; /* Un tamaño estándar y elegante para navegación */
+}

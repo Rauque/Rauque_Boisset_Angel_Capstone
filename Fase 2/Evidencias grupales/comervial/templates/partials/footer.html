@@ -1,8 +1,9 @@
 {# templates/partials/footer.html #}
+{% load static %}
+{% load static %}
 <footer class="site-footer mt-5">
   <div class="container py-5">
     <div class="row g-4">
-      <!-- Columna: Ventanas -->
       <div class="col-6 col-lg-3">
         <h6 class="text-uppercase text-secondary fw-bold mb-3">Ventanas</h6>
         <ul class="list-unstyled footer-links">
@@ -14,27 +15,24 @@
         </ul>
       </div>
 
-      <!-- Columna: Cristales -->
       <div class="col-6 col-lg-3">
         <h6 class="text-uppercase text-secondary fw-bold mb-3">Cristales</h6>
         <ul class="list-unstyled footer-links">
           <li><a href="{% url 'barandas' %}">Barandas</a></li>
-          <li><a class="dropdown-item" href="{% url 'muebles' %}">Muebles</a></li>
-          <li><a class="dropdown-item" href="{% url 'shower_door' %}">Shower Door</a></li>
-          <li><a class="dropdown-item" href="{% url 'mamparas' %}">Mamparas</a></li>
-          <li><a class="dropdown-item" href="{% url 'reposicion_cristales' %}">Reposición de Cristales</a></li>
-
+          <li><a href="{% url 'muebles' %}">Muebles</a></li>
+          <li><a href="{% url 'shower_door' %}">Shower Door</a></li>
+          <li><a href="{% url 'mamparas' %}">Mamparas</a></li>
+          <li><a href="{% url 'reposicion_cristales' %}">Reposición de Cristales</a></li>
         </ul>
       </div>
 
-      <!-- Columna: Contacto -->
       <div class="col-12 col-lg-4">
         <h6 class="text-uppercase text-secondary fw-bold mb-3">Sala de venta</h6>
         <ul class="list-unstyled mb-3 footer-contacts">
           <li class="mb-2">
             <svg class="fi me-2" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5S13.4 11.5 12 11.5z"/></svg>
             <a class="link-light-subtle" target="_blank" rel="noopener"
-               href="https://maps.google.com/?q=El+Lingue+8358">El Lingue 8358</a>
+              href="https://maps.google.com/?q=El+Lingue+8358">El Lingue 8358</a>
           </li>
           <li class="mb-2">
             <svg class="fi me-2" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.2 2.3 3.2 4.3 5.5 5.5l1.9-1.9c.3-.3.7-.4 1.1-.3 1.2.4 2.6.6 3.9.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.8 21 3 13.2 3 3c0-.6.4-1 1-1h3.3c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.9.1.4 0 .8-.3 1.1l-1.9 1.8z"/></svg>
@@ -53,14 +51,10 @@
         </div>
       </div>
 
-      <!-- Columna: Medios de pago / Social -->
       <div class="col-12 col-lg-2">
         <h6 class="text-uppercase text-secondary fw-bold mb-3">Pagos</h6>
         <div class="d-flex flex-wrap gap-2 mb-3">
-          <span class="pay-badge">Visa</span>
-          <span class="pay-badge">Mastercard</span>
-          <span class="pay-badge">Redcompra</span>
-          <span class="pay-badge">Webpay</span>
+          <img src="{% static 'img/webpay.png' %}" alt="Medios de Pago" style="width:230px;height:100px;">
         </div>
 
         <div class="d-flex align-items-center gap-3">
