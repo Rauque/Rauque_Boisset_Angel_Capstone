@@ -5,3 +5,4 @@ djangorestframework==3.14.0
 Pillow==10.4.0              
 reportlab==4.2.0   # o versión similar
 django-environ==0.11.2
+requests==2.31.0
