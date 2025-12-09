@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Puertas de Cristal Templado | Comervial{% endblock %}
+
+{% block content %}
+<main class="pt-5 mt-5">
+  <section class="container py-5">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6">
+        <h1 class="h3 mb-3">Puertas de Cristal Templado</h1>
+        <p class="text-secondary">
+          Soluciones en vidrio templado para acceso peatonal interior/exterior:
+          estética limpia, alta durabilidad y operación suave. Disponibles en
+          formatos abatibles, pivotantes y correderas, con herrajes de primera línea.
+        </p>
+
+        <ul class="mb-3">
+          <li><strong>Vidrio:</strong> templado monolítico 8, 10 o 12&nbsp;mm según uso y luz.</li>
+          <li><strong>Seguridad:</strong> opción laminado templado 5+5, 6+6, 8+8 con PVB o Sentry para mayor retención de fragmentos.</li>
+          <li><strong>Herrajes:</strong> bisagras de muro, pivotes de piso, cerraduras tipo patch, tiradores, cierrapuertas hidráulicos.</li>
+          <li><strong>Sellos:</strong> burletes perimetrales, topes y zócalos para mejor hermeticidad (aire/polvo/ruido).</li>
+          <li><strong>Terminaciones:</strong> claro, extraclaro, arenado/serigrafiado, cantos pulidos, biselados, folios de privacidad.</li>
+          <li><strong>Normativa:</strong> producción con estándares EN&nbsp;12150 / NCh de vidrio templado de seguridad.</li>
+        </ul>
+
+        <div class="small text-secondary mb-3">
+          Recomendación rápida: 10–12&nbsp;mm para puertas de alto tránsito o paños grandes.
+          Usa <em>laminado templado</em> cuando requieras máxima seguridad/retención.
+        </div>
+
+        <div class="d-flex gap-2">
+          <a class="btn btn-primary" href="{% url 'quotes:cotizador_personalizado' %}">Cotizar a medida</a>
+            <a class="btn btn-outline-secondary" href="{% url 'quotes:cotizador' %}">Consulta rápida</a>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <img class="img-fluid rounded-3 shadow-sm"
+             src="{% static 'img/puertatemplada.jpg' %}"
+             alt="Puerta de vidrio templado Comervial">
+        <div class="small text-secondary mt-2">
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-5">
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <h2 class="h5">¿Por qué vidrio templado para puertas?</h2>
+        <ul>
+          <li><strong>Resistencia 4–5×</strong> respecto al vidrio común (mismo espesor).</li>
+          <li><strong>Seguridad:</strong> en rotura se fragmenta en partículas pequeñas.</li>
+          <li><strong>Confort:</strong> cierre suave con herrajes hidráulicos y burletes.</li>
+          <li><strong>Diseño:</strong> posibilidad de puertas “full glass” sin marco visible.</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h2 class="h5">Opciones</h2>
+        <ul>
+          <li>Abatible, pivotante de piso/techo, corredera con guía superior.</li>
+          <li>Manillones rectos/curvos, cerraduras patch o embutidas, topes magnéticos.</li>
+          <li>Perfil perimetral (aluminio/acero) o sin marco, según proyecto.</li>
+          <li>Vidrios especiales: <em>Low-Iron</em>, serigrafía, arenado decorativo, logos.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

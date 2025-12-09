@@ -1,0 +1,39 @@
+{% extends "base.html" %}{% load static %}
+{% block title %}Ventana Corredera | Comervial{% endblock %}
+{% block content %}
+<main class="pt-5 mt-5">
+  <section class="container py-5">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6">
+        <h1 class="h3 mb-3">Ventana corredera</h1>
+        <p>
+          Sistema de hojas que deslizan sobre riel. Ideal para ambientes con poco
+          espacio de apertura, tránsito frecuente y terrazas. Mantiene línea limpia
+          y excelente iluminación natural.
+        </p>
+        <ul class="mb-3">
+          <li>Ahorro de espacio: apertura por deslizamiento, sin barrer hacia dentro/afuera.</li>
+          <li>Opciones 2, 3 o 4 hojas; fijos laterales o superiores.</li>
+          <li>Óptimo para vanos anchos y/o accesos a balcones.</li>
+        </ul>
+
+        <h2 class="h6 mt-4">Especificaciones</h2>
+        <ul>
+          <li><strong>Perfilería:</strong> Aluminio o PVC según proyecto (líneas corredizas).</li>
+          <li><strong>Vidrios:</strong> Templado o laminado; Termopanel (termopanel) opcional.</li>
+          <li><strong>Espesores típicos:</strong> 4, 5, 6, 8 mm (monolítico/laminado). Termopanel 18–24 mm.</li>
+          <li><strong>Herrajes:</strong> carros de alto desempeño, cerraduras multipunto, felpas y sellos.</li>
+          <li><strong>Sellos/aislación:</strong> burletes y felpas de alta densidad; opción ruptura de puente térmico.</li>
+        </ul>
+
+        <a class="btn btn-primary mt-3" href="{% url 'quotes:cotizador_personalizado' %}">Quiero cotizar</a>
+      </div>
+      <div class="col-lg-6">
+        <img class="img-fluid rounded-3 shadow-sm"
+             src="{% static 'img/corredera.jpg' %}"
+             alt="Ventana corredera Comervial">
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

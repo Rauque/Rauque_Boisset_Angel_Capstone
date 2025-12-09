@@ -1,0 +1,433 @@
+{% extends "base.html" %}
+{% block title %}Cotizador de Ventanas y Cristales | Comervial{% endblock %}
+
+{% block content %}
+<main class="pt-5 mt-5">
+  <div class="container py-4">
+    <h1 class="h3 mb-3">Cotizador de Ventanas y Cristales</h1>
+    <p class="text-muted mb-4">Aquí puedes crear tu cotización personalizada y posteriormente será enviada a tu correo.</p>
+
+    <div class="row g-4">
+      <!-- Columna izquierda -->
+      <div class="col-lg-5">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Datos del Cliente</h5>
+            <div class="mb-3">
+              <label class="form-label">Nombre</label>
+              <input id="client_name" class="form-control" type="text" placeholder="Nombre del cliente">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input id="client_email" class="form-control" type="email" placeholder="correo@ejemplo.com">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Teléfono</label>
+              <input id="client_phone" class="form-control" type="text" placeholder="+56 9 1234 5678">
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Agregar Producto</h5>
+
+            <form id="productForm" class="row g-3">
+              <div class="col-12">
+                <label class="form-label">Categoría</label>
+                <select id="categoria" class="form-select" required>
+                  <option value="">Seleccione categoría</option>
+                  <option>Ventanas PVC Europeo</option>
+                  <option>Ventanas PVC Americano</option>
+                  <option>Ventanas Aluminio</option>
+                  <option>Cristales</option>
+                  <option>Espejos</option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Tipo</label>
+                <select id="tipo" class="form-select" required>
+                  <option value="">Seleccione tipo</option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <div class="alert alert-light mb-0" id="precio_m2_box" style="display:none;">
+                  <small class="text-muted d-block">Precio por m²</small>
+                  <strong id="precio_m2_text">$0</strong>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <label class="form-label">Ancho (cm)</label>
+                <input id="ancho_cm" type="number" class="form-control" min="1" step="0.1" required>
+              </div>
+              <div class="col-6">
+                <label class="form-label">Alto (cm)</label>
+                <input id="alto_cm" type="number" class="form-control" min="1" step="0.1" required>
+              </div>
+
+              <div class="col-12">
+                <div class="alert alert-secondary mb-0" id="area_box" style="display:none;">
+                  <small class="text-muted d-block">Área total</small>
+                  <strong id="area_text">0,00 m²</strong>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <label class="form-label">Cantidad</label>
+                <input id="cantidad" type="number" class="form-control" min="1" step="1" value="1" required>
+              </div>
+
+              <div class="col-6 d-flex align-items-end">
+                <div class="w-100 alert alert-success mb-0" id="subtotal_box" style="display:none;">
+                  <small class="text-muted d-block">Subtotal estimado</small>
+                  <strong id="subtotal_text">$0</strong>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <button class="btn btn-primary w-100" type="submit">
+                  + Agregar a Cotización
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna derecha -->
+      <div class="col-lg-7">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">Productos</h5>
+            <div id="items_empty" class="text-muted text-center py-4">
+              No hay productos agregados aún.
+            </div>
+            <div id="items_container" style="display:none;"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <div id="summary_container" style="display:none;">
+              <h5 class="card-title">Resumen</h5>
+              <ul class="list-unstyled mb-4">
+                <li class="d-flex justify-content-between">
+                  <span>Subtotal (Neto)</span>
+                  <strong id="summary_subtotal">$0</strong>
+                </li>
+                <li class="d-flex justify-content-between">
+                  <span>IVA (19%)</span>
+                  <strong id="summary_iva">$0</strong>
+                </li>
+                <li class="d-flex justify-content-between border-top pt-2 mt-2">
+                  <span>Total</span>
+                  <strong id="summary_total">$0</strong>
+                </li>
+              </ul>
+
+              <!-- BOTONES ACCIÓN -->
+              <div class="d-grid gap-2">
+                <button id="btn_pdf" class="btn btn-success">
+                  Generar PDF de Cotización
+                </button>
+                <button id="btn_email" class="btn btn-primary">
+                  Enviar cotización por correo
+                </button>
+              </div>
+            </div>
+
+            <div id="summary_empty" class="text-muted text-center py-3">
+              Agrega productos para ver el resumen.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# form oculto que manda JSON al backend para generar el PDF o enviar correo #}
+    <form id="pdfForm" method="post" style="display:none;">
+      {% csrf_token %}
+      <input type="hidden" name="payload" id="payloadField">
+      <input type="hidden" name="mode" id="modeField" value="pdf">
+    </form>
+  </div>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const PRODUCT_CATALOG = {
+  "Ventanas PVC Europeo": {
+    "CORREDERA TERMOPANEL": 180000,
+    "PROYECTANTE TERMOPANEL": 215000,
+    "PUERTA TERMOPANEL": 240000,
+  },
+  "Ventanas PVC Americano": {
+    "CORREDERA CRISTAL MONOLITICO": 75000,
+    "PROYECTANTE CRISTAL MONOLITICO": 89000,
+  },
+  "Ventanas Aluminio": {
+    "ALUMINIO SOLO CRISTAL": 80000,
+    "ALUMINIO PROYECTANTE TERMOPANEL": 135000,
+    "PUERTAS ALUMINIO": 130000,
+  },
+  "Cristales": {
+    "CRISTAL 3MM": 15000,
+    "CRISTAL 4MM": 19000,
+    "CRISTAL 5MM": 22000,
+    "CRISTAL 6MM": 24000,
+    "CRISTAL 8MM": 45000,
+    "CRISTAL 10MM": 48000,
+    "CRISTAL LAMINADO 6MM": 35000,
+    "CRISTAL LAMINADO 8MM": 42000,
+    "CRISTAL LAMINADO 10MM": 68000,
+    "CRISTAL TEMPLADO 5MM": 80000,
+    "CRISTAL TEMPLADO 8MM": 95000,
+    "CRISTAL TEMPLADO 10MM": 115000,
+  },
+  "Espejos": {
+    "ESPEJO 3MM": 50000,
+    "ESPEJO 4MM": 60000,
+    "ESPEJO 5MM": 65000,
+  },
+};
+
+let quoteItems = [];
+let nextId = 1;
+
+const categoriaSelect = document.getElementById("categoria");
+const tipoSelect = document.getElementById("tipo");
+const anchoInput = document.getElementById("ancho_cm");
+const altoInput = document.getElementById("alto_cm");
+const cantidadInput = document.getElementById("cantidad");
+const precioBox = document.getElementById("precio_m2_box");
+const precioText = document.getElementById("precio_m2_text");
+const areaBox = document.getElementById("area_box");
+const areaText = document.getElementById("area_text");
+const subtotalBox = document.getElementById("subtotal_box");
+const subtotalText = document.getElementById("subtotal_text");
+
+const itemsEmpty = document.getElementById("items_empty");
+const itemsContainer = document.getElementById("items_container");
+const summaryContainer = document.getElementById("summary_container");
+const summaryEmpty = document.getElementById("summary_empty");
+
+function formatCLP(value) {
+  return "$" + Math.round(value).toLocaleString("es-CL");
+}
+
+function updateTipoOptions() {
+  const categoria = categoriaSelect.value;
+  tipoSelect.innerHTML = '<option value="">Seleccione tipo</option>';
+  if (!categoria || !PRODUCT_CATALOG[categoria]) {
+    precioBox.style.display = "none";
+    return;
+  }
+  Object.keys(PRODUCT_CATALOG[categoria]).forEach(tipo => {
+    const opt = document.createElement("option");
+    opt.value = tipo;
+    opt.textContent = tipo;
+    tipoSelect.appendChild(opt);
+  });
+}
+
+function calcPreview() {
+  const categoria = categoriaSelect.value;
+  const tipo = tipoSelect.value;
+  const ancho = parseFloat(anchoInput.value) || 0;
+  const alto = parseFloat(altoInput.value) || 0;
+  const cantidad = parseInt(cantidadInput.value) || 1;
+
+  const precioUnit = categoria && tipo ? PRODUCT_CATALOG[categoria]?.[tipo] : null;
+
+  if (precioUnit) {
+    precioBox.style.display = "";
+    precioText.textContent = formatCLP(precioUnit) + " / m²";
+  } else {
+    precioBox.style.display = "none";
+  }
+
+  if (ancho > 0 && alto > 0) {
+    const m2 = (ancho * alto) / 10000;
+    areaBox.style.display = "";
+    areaText.textContent = m2.toFixed(2) + " m²";
+
+    if (precioUnit) {
+      const subtotal = m2 * precioUnit * cantidad;
+      subtotalBox.style.display = "";
+      subtotalText.textContent = formatCLP(subtotal);
+    } else {
+      subtotalBox.style.display = "none";
+    }
+  } else {
+    areaBox.style.display = "none";
+    subtotalBox.style.display = "none";
+  }
+}
+
+function renderItems() {
+  if (quoteItems.length === 0) {
+    itemsEmpty.style.display = "";
+    itemsContainer.style.display = "none";
+    summaryContainer.style.display = "none";
+    summaryEmpty.style.display = "";
+    return;
+  }
+
+  itemsEmpty.style.display = "none";
+  itemsContainer.style.display = "";
+  summaryContainer.style.display = "";
+  summaryEmpty.style.display = "none";
+
+  let html = "";
+  quoteItems.forEach(item => {
+    html += `
+      <div class="border rounded p-3 mb-2">
+        <div class="d-flex justify-content-between">
+          <div>
+            <strong>${item.categoria}</strong><br>
+            <small>${item.tipo}</small><br>
+            <small>Medidas: ${item.ancho_cm} x ${item.alto_cm} cm · Área: ${item.m2.toFixed(2)} m²</small>
+          </div>
+          <div class="text-end">
+            <div><small>Precio/m²</small><br><strong>${formatCLP(item.precioUnitario)}</strong></div>
+            <div class="mt-2">
+              <button class="btn btn-sm btn-outline-secondary me-1" data-action="dec" data-id="${item.id}">-</button>
+              <span>${item.cantidad}</span>
+              <button class="btn btn-sm btn-outline-secondary ms-1" data-action="inc" data-id="${item.id}">+</button>
+            </div>
+            <button class="btn btn-sm btn-link text-danger mt-1" data-action="del" data-id="${item.id}">Eliminar</button>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between border-top pt-2 mt-2">
+          <span>Subtotal</span>
+          <strong>${formatCLP(item.subtotal)}</strong>
+        </div>
+      </div>
+    `;
+  });
+  itemsContainer.innerHTML = html;
+
+  const subtotal = quoteItems.reduce((acc, it) => acc + it.subtotal, 0);
+  const iva = subtotal * 0.19;
+  const total = subtotal + iva;
+
+  document.getElementById("summary_subtotal").textContent = formatCLP(subtotal);
+  document.getElementById("summary_iva").textContent = formatCLP(iva);
+  document.getElementById("summary_total").textContent = formatCLP(total);
+}
+
+document.getElementById("productForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const categoria = categoriaSelect.value;
+  const tipo = tipoSelect.value;
+  const ancho = parseFloat(anchoInput.value) || 0;
+  const alto = parseFloat(altoInput.value) || 0;
+  const cantidad = parseInt(cantidadInput.value) || 1;
+
+  if (!categoria || !tipo || ancho <= 0 || alto <= 0 || cantidad <= 0) {
+    alert("Completa todos los campos del producto.");
+    return;
+  }
+
+  const m2 = (ancho * alto) / 10000;
+  const precioUnit = PRODUCT_CATALOG[categoria][tipo];
+  const subtotal = m2 * precioUnit * cantidad;
+
+  quoteItems.push({
+    id: nextId++,
+    categoria,
+    tipo,
+    ancho_cm: ancho,
+    alto_cm: alto,
+    m2,
+    precioUnitario: precioUnit,
+    cantidad,
+    subtotal,
+  });
+
+  renderItems();
+  this.reset();
+  precioBox.style.display = "none";
+  areaBox.style.display = "none";
+  subtotalBox.style.display = "none";
+});
+
+itemsContainer.addEventListener("click", function(e) {
+  const btn = e.target.closest("button[data-action]");
+  if (!btn) return;
+  const id = parseInt(btn.dataset.id, 10);
+  const action = btn.dataset.action;
+  const item = quoteItems.find(it => it.id === id);
+  if (!item) return;
+
+  if (action === "del") {
+    quoteItems = quoteItems.filter(it => it.id !== id);
+  } else if (action === "inc") {
+    item.cantidad += 1;
+    item.subtotal = item.m2 * item.precioUnitario * item.cantidad;
+  } else if (action === "dec" && item.cantidad > 1) {
+    item.cantidad -= 1;
+    item.subtotal = item.m2 * item.precioUnitario * item.cantidad;
+  }
+  renderItems();
+});
+
+["change", "input"].forEach(evt => {
+  categoriaSelect.addEventListener(evt, () => { updateTipoOptions(); calcPreview(); });
+  tipoSelect.addEventListener(evt, calcPreview);
+  anchoInput.addEventListener(evt, calcPreview);
+  altoInput.addEventListener(evt, calcPreview);
+  cantidadInput.addEventListener(evt, calcPreview);
+});
+
+/* ====== NUEVA FUNCIÓN COMPARTIDA PARA ENVIAR AL BACKEND ====== */
+function submitQuote(mode) {
+  if (quoteItems.length === 0) {
+    alert("Agrega al menos un producto para generar la cotización.");
+    return;
+  }
+
+  const cliente = {
+    nombre: document.getElementById("client_name").value || "",
+    email: document.getElementById("client_email").value || "",
+    telefono: document.getElementById("client_phone").value || "",
+  };
+
+  // si es envío por correo, exigimos email
+  if (mode === "email" && !cliente.email) {
+    alert("Ingresa un correo electrónico para enviar la cotización.");
+    return;
+  }
+
+  const subtotal = quoteItems.reduce((acc, it) => acc + it.subtotal, 0);
+  const iva = subtotal * 0.19;
+  const total = subtotal + iva;
+
+  const payload = {
+    cliente,
+    items: quoteItems,
+    summary: { subtotal, iva, total },
+  };
+
+  document.getElementById("payloadField").value = JSON.stringify(payload);
+  document.getElementById("modeField").value = mode; // "pdf" o "email"
+  document.getElementById("pdfForm").submit();
+}
+
+/* Botones */
+document.getElementById("btn_pdf").addEventListener("click", function() {
+  submitQuote("pdf");
+});
+
+document.getElementById("btn_email").addEventListener("click", function() {
+  submitQuote("email");
+});
+
+updateTipoOptions();
+renderItems();
+</script>
+{% endblock %}

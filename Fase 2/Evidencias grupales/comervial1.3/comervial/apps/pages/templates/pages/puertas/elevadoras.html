@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Puertas Elevadoras (Lift & Slide) | Comervial{% endblock %}
+{% block extra_head %}
+<meta name="description" content="Puertas elevadoras para grandes vanos con apertura suave y alto desempeño térmico-acústico. Ideales para terrazas premium.">
+{% endblock %}
+
+{% block content %}
+<main class="pt-5 mt-5">
+  <section class="section">
+    <div class="container">
+      <h1 class="h3 mb-3">Puertas Elevadoras (Lift & Slide)</h1>
+      <p class="text-secondary">La solución premium para vanos de gran tamaño: el sistema eleva la hoja antes de deslizar, reduciendo fricción y manteniendo una estanqueidad superior al cerrar.</p>
+
+      <div class="row g-4 mt-2">
+        <div class="col-lg-6">
+          <img class="img-fluid rounded shadow-sm" src="{% static 'img/corredera-elevadora.jpg' %}" alt="Puerta elevadora Comervial" onerror="this.src='{% static 'img/placeholder-16x9.png' %}'">
+        </div>
+        <div class="col-lg-6">
+          <h2 class="h5">Características clave</h2>
+          <ul class="mb-3">
+            <li>Manejo suave de hojas muy pesadas gracias al mecanismo <strong>lift & slide</strong>.</li>
+            <li>Excelente aislación con perfilería de alto desempeño y Termopanel.</li>
+            <li>Ideal para vistas panorámicas y proyectos residenciales de alto estándar.</li>
+          </ul>
+
+          <h3 class="h6">Especificaciones rápidas</h3>
+          <div class="row">
+            <div class="col-sm-6">
+              <ul class="small">
+                <li><strong>Material:</strong> PVC / Aluminio (opción RPT)</li>
+                <li><strong>Vidrio:</strong> Termopanel templado/laminado</li>
+                <li><strong>Configuraciones:</strong> 2–4 hojas, con/sin fijos</li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <ul class="small">
+                <li><strong>Herrajes:</strong> sistema elevador, cierre hermético</li>
+                <li><strong>Umbral:</strong> bajo / oculto para transición continua</li>
+                <li><strong>Accesorios:</strong> mosquitero, seguros adicionales</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="d-flex gap-2 mt-2">
+            <a class="btn btn-primary" href="{% url 'quotes:cotizador_personalizado' %}">Cotizar a medida</a>
+            <a class="btn btn-outline-secondary" href="{% url 'quotes:cotizador' %}">Consulta rápida</a>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-5">
+
+      <h2 class="h5">Aplicaciones recomendadas</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="p-3 border rounded h-100">
+            <h3 class="h6">Terraza premium</h3>
+            <p class="small text-secondary mb-0">Aperturas amplias con operación suave y segura.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 border rounded h-100">
+            <h3 class="h6">Vistas panorámicas</h3>
+            <p class="small text-secondary mb-0">Perfiles optimizados para máxima superficie vidriada.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 border rounded h-100">
+            <h3 class="h6">Proyectos de alto estándar</h3>
+            <p class="small text-secondary mb-0">Excelente performance térmica-acústica.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-4">
+        <strong>Tip técnico:</strong> Combina termopanel con vidrios laminados de seguridad para mayor confort y protección UV.
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

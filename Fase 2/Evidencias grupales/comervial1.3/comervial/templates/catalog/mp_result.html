@@ -1,0 +1,12 @@
+{# templates/catalog/mp_result.html #}
+{% extends "base.html" %}
+{% block title %}{{ title }} | Comervial{% endblock %}
+{% block content %}
+<main class="pt-5 mt-5">
+  <div class="container py-5" style="max-width:720px">
+    <h1 class="h3 mb-2">{{ title }}</h1>
+    <p class="text-secondary">{{ lead }}</p>
+    <a class="btn btn-primary mt-3" href="{% url 'catalog:catalog_list' %}">Volver al catálogo</a>
+  </div>
+</main>
+{% endblock %}

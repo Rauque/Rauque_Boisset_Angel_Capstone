@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Ingresar | Comervial{% endblock %}
+{% block content %}
+<main class="pt-5 mt-5">
+  <div class="container py-5" style="max-width:520px">
+    <h1 class="h3 mb-3">Iniciar sesión</h1>
+
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+    {% endif %}
+
+    <form method="post" novalidate class="vstack gap-3">
+      {% csrf_token %}
+      <div>
+        <label class="form-label">Usuario</label>
+        <input type="text" name="username" value="{{ form.username.value|default:'' }}"
+               class="form-control{% if form.username.errors %} is-invalid{% endif %}" required>
+        {% for e in form.username.errors %}<div class="invalid-feedback">{{ e }}</div>{% endfor %}
+      </div>
+      <div>
+        <label class="form-label">Contraseña</label>
+        <input type="password" name="password"
+               class="form-control{% if form.password.errors %} is-invalid{% endif %}" required>
+        {% for e in form.password.errors %}<div class="invalid-feedback">{{ e }}</div>{% endfor %}
+      </div>
+      <button class="btn btn-primary">Ingresar</button>
+      <p class="small mt-3 mb-0">
+  ¿No tienes cuenta? <a href="{% url 'signup' %}">Crear cuenta</a>
+</p>
+<p class="small mt-2">
+  <a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
+</p>
+    </form>
+  </div>
+</main>
+{% endblock %}

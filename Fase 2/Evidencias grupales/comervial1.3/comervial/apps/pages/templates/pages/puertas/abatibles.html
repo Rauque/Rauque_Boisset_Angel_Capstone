@@ -1,0 +1,356 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Puertas abatibles y correderas | Comervial{% endblock %}
+
+{% block extra_head %}
+<meta name="description"
+      content="Puertas abatibles y correderas en PVC y aluminio, con cierre hermético, herraje multipunto y termopanel. Fabricación a medida e instalación profesional.">
+{% endblock %}
+
+{% block content %}
+<main class="pt-5 mt-5">
+  <section class="section py-4">
+    <div class="container">
+
+      {# CSS para que la galería tenga todas las imágenes del mismo tamaño #}
+      <style>
+        .puertas-gallery-img {
+          width: 100%;
+          height: 180px;     
+          object-fit: cover;
+          border-radius: 0.75rem;
+          box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+        }
+      </style>
+
+      {# HERO GENERAL #}
+      <header class="mb-5 text-center">
+        <h1 class="h3 mb-3">Puertas abatibles y correderas</h1>
+        <p class="text-secondary mb-4">
+          Soluciones en PVC y aluminio para accesos principales, interiores y salidas a terrazas,
+          combinando diseño, seguridad y buen desempeño térmico.
+        </p>
+      </header>
+
+      {# BLOQUE 1: PUERTAS ABATIBLES #}
+      <div class="row g-4 align-items-center mb-5">
+        <div class="col-lg-6">
+          <img class="img-fluid rounded shadow-sm"
+               src="{% static 'img/abatible.webp' %}"
+               alt="Puerta abatible Comervial"
+               onerror="this.src='{% static 'img/placeholder-4x3.png'%}'">
+        </div>
+        <div class="col-lg-6">
+          <h2 class="h4 mb-2">Puertas abatibles</h2>
+          <p class="text-secondary">
+            Solución clásica y versátil para accesos principales e interiores. Destacan por su excelente
+            hermeticidad, seguridad y facilidad de mantención.
+          </p>
+
+          <h3 class="h6 mt-3">¿Por qué elegirla?</h3>
+          <ul class="mb-3">
+            <li>Cierre perimetral y opción de <strong>herraje multipunto</strong> para mayor seguridad.</li>
+            <li>Gran rendimiento térmico y acústico (PVC o aluminio con/sin RPT).</li>
+            <li>Apertura interior o exterior, con o sin umbral.</li>
+          </ul>
+
+          <h4 class="h6 mt-3">Especificaciones rápidas</h4>
+          <div class="row">
+            <div class="col-sm-6">
+              <ul class="small mb-2">
+                <li><strong>Material:</strong> PVC / Aluminio</li>
+                <li><strong>Vidrio:</strong> Templado o Laminado</li>
+                <li><strong>Espesores típicos:</strong> 4–10 mm (simple) o termopanel*</li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <ul class="small mb-2">
+                <li><strong>Herrajes:</strong> bisagras reforzadas, cierre multipunto</li>
+                <li><strong>Sellos:</strong> doble felpa / EPDM</li>
+                <li><strong>Opciones:</strong> hoja simple o doble, fijo lateral/superior</li>
+              </ul>
+            </div>
+          </div>
+          <p class="small text-secondary mb-3">
+            *Termopanel: Doble Vidriado Hermético para mayor aislación.
+          </p>
+
+          <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-primary"
+               href="{% url 'quotes:cotizador_personalizado' %}?categoria=puerta-abatible">
+              Cotizar puerta abatible
+            </a>
+            <a class="btn btn-outline-secondary"
+               href="{% url 'quotes:cotizador' %}">
+              Consulta rápida
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-5">
+
+      {# BLOQUE 2: PUERTAS CORREDERAS #}
+      <div class="row g-4 align-items-center mb-5">
+        <div class="col-lg-6 order-lg-2">
+          <img class="img-fluid rounded shadow-sm"
+               src="{% static 'img/puerta-corredera.jpeg' %}"
+               alt="Puerta corredera Comervial"
+               onerror="this.src='{% static 'img/placeholder-16x9.png' %}'">
+        </div>
+        <div class="col-lg-6 order-lg-1">
+          <h2 class="h4 mb-2">Puertas correderas</h2>
+          <p class="text-secondary">
+            Aprovecha al máximo el espacio útil con deslizamiento suave y perfiles optimizados
+            para grandes paños de vidrio.
+          </p>
+
+          <h3 class="h6 mt-3">Ventajas principales</h3>
+          <ul class="mb-3">
+            <li><strong>Ahorro de espacio:</strong> hojas deslizantes sin barrer radios de apertura.</li>
+            <li>Rodamientos y guías de alta durabilidad; cierre preciso.</li>
+            <li>Posibilidad de 2, 3 o más hojas, con fijos laterales.</li>
+          </ul>
+
+          <h4 class="h6 mt-3">Especificaciones rápidas</h4>
+          <div class="row">
+            <div class="col-sm-6">
+              <ul class="small mb-2">
+                <li><strong>Material:</strong> PVC / Aluminio</li>
+                <li><strong>Vidrio:</strong> Templado/Laminado o Termopanel</li>
+                <li><strong>Configuraciones:</strong> 2, 3 y 4 hojas</li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <ul class="small mb-2">
+                <li><strong>Seguridad:</strong> cierre embutido, opción multipunto</li>
+                <li><strong>Sellos:</strong> felpas y burletes de alto rendimiento</li>
+                <li><strong>Umbral:</strong> estándar o bajo (accesibilidad)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap gap-2 mt-2">
+            <a class="btn btn-primary"
+               href="{% url 'quotes:cotizador_personalizado' %}?categoria=puerta-corredera">
+              Cotizar puerta corredera
+            </a>
+            <a class="btn btn-outline-secondary"
+               href="{% url 'quotes:cotizador' %}">
+              Consulta rápida
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {# APLICACIONES / DÓNDE CONVIENE #}
+      <section class="mb-5">
+        <h2 class="h5 mb-3">Aplicaciones recomendadas</h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="p-3 border rounded h-100">
+              <h3 class="h6">Accesos principales</h3>
+              <p class="small text-secondary mb-0">
+                Puertas abatibles con excelente estanqueidad y seguridad para casas, oficinas o locales.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="p-3 border rounded h-100">
+              <h3 class="h6">Interiores</h3>
+              <p class="small text-secondary mb-0">
+                Puertas abatibles o correderas para habitaciones, oficinas internas o divisiones con tránsito controlado.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="p-3 border rounded h-100">
+              <h3 class="h6">Terrazas y patios</h3>
+              <p class="small text-secondary mb-0">
+                Puertas correderas de grandes luces, con fijos laterales o superiores para aumentar luminosidad.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="alert alert-info mt-4 mb-0">
+          <strong>Tip técnico:</strong>
+          Para climas fríos o zonas de ruido, recomendamos termopanel (doble vidrio) +
+          perfilería con Ruptura de Puente Térmico (RPT) y herraje de buena calidad.
+        </div>
+      </section>
+
+      {# GALERÍA / PROYECTOS REALIZADOS #}
+      <section class="mb-5">
+        <h2 class="h5 mb-3">Ejemplos de puertas</h2>
+        <p class="text-muted small mb-3">
+          Algunas instalaciones de puertas abatibles y correderas en casas, departamentos y locales comerciales.
+        </p>
+        <div class="row g-3">
+          <div class="col-6 col-md-3">
+            <img src="{% static 'img/pabatible.jpg' %}"
+                 class="puertas-gallery-img"
+                 alt="Proyecto puertas 1">
+          </div>
+          <div class="col-6 col-md-3">
+            <img src="{% static 'img/pabatible2.jpg' %}"
+                 class="puertas-gallery-img"
+                 alt="Proyecto puertas 2">
+          </div>
+          <div class="col-6 col-md-3">
+            <img src="{% static 'img/pabatible3.jpg' %}"
+                 class="puertas-gallery-img"
+                 alt="Proyecto puertas 3">
+          </div>
+          <div class="col-6 col-md-3">
+            <img src="{% static 'img/pabatible4.jpg' %}"
+                 class="puertas-gallery-img"
+                 alt="Proyecto puertas 4">
+          </div>
+        </div>
+      </section>
+
+      {# PROCESO DE TRABAJO #}
+      <section class="mb-5">
+        <h2 class="h5 mb-3">Cómo trabajamos tus puertas</h2>
+        <div class="row g-4">
+          <div class="col-md-3">
+            <div class="h-100 p-3 border rounded-3">
+              <span class="badge bg-primary mb-2">1</span>
+              <h3 class="h6">Levantamiento</h3>
+              <p class="small mb-0">
+                Revisamos medidas, tipo de muro, uso de la puerta y nivel de seguridad requerido.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="h-100 p-3 border rounded-3">
+              <span class="badge bg-primary mb-2">2</span>
+              <h3 class="h6">Propuesta</h3>
+              <p class="small mb-0">
+                Definimos si conviene puerta abatible o corredera, tipo de vidrio, perfilería y herrajes.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="h-100 p-3 border rounded-3">
+              <span class="badge bg-primary mb-2">3</span>
+              <h3 class="h6">Fabricación</h3>
+              <p class="small mb-0">
+                Fabricamos hoja(s), marcos y vidrios a medida. Plazos típicos:
+                <strong>15–25 días hábiles</strong>, según complejidad.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="h-100 p-3 border rounded-3">
+              <span class="badge bg-primary mb-2">4</span>
+              <h3 class="h6">Instalación</h3>
+              <p class="small mb-0">
+                Instalamos, regulamos herrajes y revisamos cierre, nivel y terminaciones junto al cliente.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {# PREGUNTAS FRECUENTES #}
+      <section class="mb-5">
+        <h2 class="h5 mb-3">Preguntas frecuentes</h2>
+        <div class="accordion" id="faqPuertas">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqp1-heading">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqp1"
+                      aria-expanded="false" aria-controls="faqp1">
+                ¿Qué conviene para acceso principal: abatible o corredera?
+              </button>
+            </h2>
+            <div id="faqp1" class="accordion-collapse collapse"
+                 aria-labelledby="faqp1-heading" data-bs-parent="#faqPuertas">
+              <div class="accordion-body">
+                Para accesos principales normalmente se usa puerta abatible por su mejor cierre perimetral
+                y opciones de herraje multipunto. La corredera suele ser mejor para terrazas y patios.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqp2-heading">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqp2"
+                      aria-expanded="false" aria-controls="faqp2">
+                ¿Todas las puertas pueden llevar termopanel?
+              </button>
+            </h2>
+            <div id="faqp2" class="accordion-collapse collapse"
+                 aria-labelledby="faqp2-heading" data-bs-parent="#faqPuertas">
+              <div class="accordion-body">
+                Sí, trabajamos con líneas de PVC y aluminio compatibles con termopanel, lo que mejora
+                la aislación térmica y acústica, especialmente en puertas que dan al exterior.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqp3-heading">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqp3"
+                      aria-expanded="false" aria-controls="faqp3">
+                ¿Qué opciones de seguridad se pueden agregar?
+              </button>
+            </h2>
+            <div id="faqp3" class="accordion-collapse collapse"
+                 aria-labelledby="faqp3-heading" data-bs-parent="#faqPuertas">
+              <div class="accordion-body">
+                Podemos incorporar herrajes multipunto, cilindros de seguridad, vidrios laminados
+                o templados y refuerzos adicionales según el nivel de riesgo del acceso.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqp4-heading">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqp4"
+                      aria-expanded="false" aria-controls="faqp4">
+                ¿Se pueden reemplazar puertas existentes sin romper demasiado?
+              </button>
+            </h2>
+            <div id="faqp4" class="accordion-collapse collapse"
+                 aria-labelledby="faqp4-heading" data-bs-parent="#faqPuertas">
+              <div class="accordion-body">
+                En muchos casos se puede aprovechar el vano existente y adaptar el nuevo marco. Durante
+                el levantamiento definimos si es viable o si se requiere alguna modificación en la obra civil.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {# CTA FINAL #}
+      <section class="py-4 text-center border-top">
+        <h2 class="h5 mb-2">¿Listo para renovar tus puertas?</h2>
+        <p class="text-muted mb-3">
+          Envíanos medidas o fotos del acceso y te ayudamos a definir si conviene puerta abatible
+          o corredera según tu espacio y nivel de seguridad requerido.
+        </p>
+        <div class="d-flex flex-wrap justify-content-center gap-2">
+          <a class="btn btn-primary"
+             href="{% url 'quotes:cotizador_personalizado' %}?categoria=puertas">
+            Solicitar cotización
+          </a>
+          <a class="btn btn-outline-secondary"
+             href="{% url 'quotes:cotizador' %}">
+            Consulta rápida
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </section>
+</main>
+{% endblock %}

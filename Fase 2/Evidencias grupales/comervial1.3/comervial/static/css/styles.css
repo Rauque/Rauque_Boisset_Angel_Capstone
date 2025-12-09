@@ -1,0 +1,376 @@
+:root{
+  --c-dark:#0b2239;
+  --c-accent:#11b8e4;
+}
+
+/* NAVBAR */
+.navbar-custom{
+  transition: background-color .28s ease, box-shadow .28s ease, padding .18s ease;
+  padding-top:.85rem; padding-bottom:.85rem;
+  background-color: transparent;
+}
+.navbar-custom .nav-link{
+  font-weight:500; letter-spacing:.2px;
+  transition: color .2s ease, opacity .2s ease;
+}
+
+.navbar-initial .nav-link{ color:#ffffff; }
+.navbar-initial .navbar-brand{ color:#ffffff; }
+.navbar-initial .navbar-toggler{ border-color: rgba(255,255,255,.35); }
+.navbar-initial .navbar-toggler-icon{
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar-scrolled{
+  background:#fff !important;
+  box-shadow:0 10px 24px rgba(10,25,41,.08), 0 1px 0 rgba(16,24,40,.06);
+  padding-top:.55rem; padding-bottom:.55rem;
+}
+.navbar-scrolled .nav-link,
+.navbar-scrolled .navbar-brand{ color: var(--c-dark); }
+.navbar-scrolled .navbar-toggler{ border-color: rgba(0,0,0,.25); }
+.navbar-scrolled .navbar-toggler-icon{
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0,0,0,0.72)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Dropdown */
+.navbar-custom .dropdown-menu{
+  border:0; padding:.6rem;
+  box-shadow:0 18px 40px rgba(16,24,40,.12);
+}
+.navbar-custom .dropdown-item{
+  border-radius:.4rem; padding:.55rem .8rem;
+  color:var(--c-dark); font-weight:500;
+}
+.navbar-custom .dropdown-item:hover{ background:#f3f6fb; }
+
+/* Menú móvil abierto sobre hero */
+@media (max-width: 991.98px){
+  .navbar-initial .navbar-collapse{
+    background: rgba(5,13,24,.72);
+    backdrop-filter: blur(4px);
+    border-radius:.8rem; margin-top:.6rem; padding:.6rem;
+  }
+  .navbar-initial .navbar-collapse .nav-link{ color:#fff; }
+  .navbar-initial .dropdown-menu{ background: rgba(255,255,255,.98); }
+}
+
+/* HERO */
+.hero{
+  position: relative;
+  min-height: 88vh;
+  background: center/cover no-repeat;
+}
+.hero::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25));
+}
+.hero .hero-content{
+  position: relative; z-index:2;
+  padding-top: 32vh;
+}
+.hero .btn-ghost{
+  border:1.6px solid rgba(255,255,255,.8);
+  color:#fff; padding:.55rem 1rem; border-radius:.6rem;
+}
+.hero .btn-ghost:hover{ border-color:#fff; color:#fff; opacity:.9;}
+
+/* Secciones */
+.section{ padding: 84px 0; }
+.section:nth-child(even){ background:#f8fafc; }
+
+/* HERO / CARRUSEL a pantalla completa */
+.hero { 
+  min-height: 86vh; 
+  position: relative; 
+}
+.hero .carousel-item{
+  min-height: 86vh;
+  background-position: center; 
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.hero-overlay{
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25));
+}
+.hero .hero-content{ 
+  position:relative; 
+  z-index:2; 
+  padding-top: 30vh;
+}
+
+/* === Botón Cotizador (dropdown) — versión final y compacta === */
+
+/* Siempre en negrita */
+.btn-cta{
+  font-weight: 700;
+}
+.btn-cta:hover,
+.btn-cta:focus,
+.btn-cta:active,
+.show > .btn-cta.dropdown-toggle{
+  font-weight: 700;
+}
+
+/* Navbar oscuro (inicio/transparente) */
+.navbar-dark .btn-cta{
+  color:#fff;
+  border:1px solid #fff;
+  background:transparent;
+}
+.navbar-dark .btn-cta:hover{
+  color:#111;
+  background:#fff;
+  border-color:#fff;
+}
+/* Caret blanco (con bordes) */
+.navbar-dark .btn-cta.dropdown-toggle::after{
+  content:"";
+  margin-left:.255em;
+  vertical-align:.255em;
+  border-top:.3em solid #fff;
+  border-right:.3em solid transparent;
+  border-left:.3em solid transparent;
+  border-bottom:0;
+}
+
+/* Navbar claro (scroll/fondo blanco) */
+.navbar-light .btn-cta{
+  color:#111;
+  border:1px solid #111;
+  background:transparent;
+}
+.navbar-light .btn-cta:hover{
+  color:#fff;
+  background:#111;
+  border-color:#111;
+}
+/* Caret oscuro (con bordes) */
+.navbar-light .btn-cta.dropdown-toggle::after{
+  content:"";
+  margin-left:.255em;
+  vertical-align:.255em;
+  border-top:.3em solid #111;
+  border-right:.3em solid transparent;
+  border-left:.3em solid transparent;
+  border-bottom:0;
+}
+
+/* ==== Footer theme ==== */
+:root{
+  /* elige tus colores aquí */
+  --footer-bg: #0b2239;      /* fondo del footer */
+  --footer-text: #cfd8e3;    /* texto principal */
+  --footer-link: #e2e8f0;    /* links */
+  --footer-link-hover: #11b8e4; /* hover */
+  --footer-border: rgba(255,255,255,.12); /* líneas sutiles si usas separadores */
+}
+
+/* bloque principal del footer */
+.site-footer{
+  background: var(--footer-bg) !important;
+  color: var(--footer-text);
+  padding: 48px 0 28px;
+}
+
+/* títulos/strong */
+.site-footer h5,
+.site-footer .h5,
+.site-footer .fw-bold{
+  color: #fff;
+}
+
+/* links */
+.site-footer a{
+  color: var(--footer-link);
+  text-decoration: none;
+}
+.site-footer a:hover{
+  color: var(--footer-link-hover);
+}
+
+/* líneas finas opcionales (si las usas) */
+.site-footer hr{
+  border-color: var(--footer-border);
+  opacity: 1;
+}
+
+/* íconos sociales si los tienes en el footer */
+.site-footer .social a{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:36px; height:36px; border-radius:999px;
+  border:1px solid var(--footer-border);
+  color: var(--footer-link);
+}
+.site-footer .social a:hover{
+  background: var(--footer-link-hover);
+  border-color: var(--footer-link-hover);
+  color:#0b2239;
+}
+
+/* notas de copyright */
+.site-footer .copyright{
+  color: var(--footer-text);
+  opacity:.85;
+  font-size:.925rem;
+}
+.has-error input,
+.has-error select,
+.has-error textarea {
+  border-color: #dc3545; /* rojo bootstrap */
+}
+
+.has-error input:focus,
+.has-error select:focus,
+.has-error textarea:focus {
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* Transición suave para que el cambio de tamaño no sea brusco */
+#brandLogo {
+    transition: height 0.3s ease;
+    width: auto; /* Mantiene la proporción siempre */
+}
+
+/* ESTADO 1: En la portada (Home) cuando estás hasta arriba */
+/* Aquí permitimos que sea grande e impactante */
+.navbar-initial #brandLogo {
+    height: 105px; 
+}
+
+/* ESTADO 2: Al bajar (scroll) O en páginas interiores (Cotizador, Contacto, etc) */
+/* Aquí lo reducimos para que la barra no estorbe */
+.navbar-scrolled #brandLogo {
+    height: 60px; /* Un tamaño estándar y elegante para navegación */
+}
+
+/* ===================== */
+/*  SERVICIOS INTERACTIVOS */
+/* ===================== */
+/* ===================== */
+/*  SERVICIOS INTERACTIVOS CON EFECTO CRISTAL */
+/* ===================== */
+
+section.section-servicios-interactive {
+  /* fondo general oscuro con un pequeño brillo cian */
+  background:
+    radial-gradient(circle at top left, rgba(17,184,228,0.18), transparent 55%),
+    #020814;
+  color: #f1e7c8;
+  padding: 0;
+}
+
+/* 2 columnas y separación entre cuadros */
+section.section-servicios-interactive .servicios-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;  /* separa los cuadros */
+}
+
+/* CUADRO CRISTAL */
+section.section-servicios-interactive .servicio-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.2rem 2.6rem;
+  min-height: 180px;
+
+  /* efecto vidrio (glassmorphism) */
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.12),
+    rgba(255,255,255,0.03)
+  );
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 14px;
+
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.9rem;
+  color: inherit;
+  overflow: hidden;
+}
+
+/* ya no hay ítem full width: todos en 2 columnas */
+section.section-servicios-interactive .servicio-item--full {
+  grid-column: auto;
+}
+
+/* imagen que aparece al hover, detrás del “cristal” */
+section.section-servicios-interactive .servicio-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--servicio-img);
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: 0;
+}
+
+/* ligera franja cian en el borde izquierdo para dar más “vidrio” */
+section.section-servicios-interactive .servicio-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(
+    to bottom,
+    rgba(17,184,228,0.9),
+    rgba(17,184,228,0.0)
+  );
+  opacity: 0.8;
+  z-index: 1;
+}
+
+/* texto y flecha por encima de todo */
+section.section-servicios-interactive .servicio-text,
+section.section-servicios-interactive .servicio-arrow {
+  position: relative;
+  z-index: 2;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+section.section-servicios-interactive .servicio-arrow {
+  font-size: 1.4rem;
+}
+
+/* HOVER: entra la imagen y el “cristal” se ilumina un poco */
+section.section-servicios-interactive .servicio-item:hover {
+  border-color: rgba(255,255,255,0.6);
+  box-shadow: 0 22px 50px rgba(0,0,0,0.75);
+}
+
+section.section-servicios-interactive .servicio-item:hover::before {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+section.section-servicios-interactive .servicio-item:hover .servicio-text,
+section.section-servicios-interactive .servicio-item:hover .servicio-arrow {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* RESPONSIVE: en móvil una columna */
+@media (max-width: 991.98px) {
+  section.section-servicios-interactive .servicios-grid {
+    grid-template-columns: 1fr;
+  }
+
+  section.section-servicios-interactive .servicio-item {
+    padding: 2rem 1.8rem;
+    min-height: 150px;
+  }
+}

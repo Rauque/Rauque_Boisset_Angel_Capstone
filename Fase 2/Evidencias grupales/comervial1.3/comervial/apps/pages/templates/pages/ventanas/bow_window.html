@@ -1,0 +1,76 @@
+{% extends "base.html" %}{% load static %}
+{% block title %}Bow Window | Comervial{% endblock %}
+{% block content %}
+<main class="pt-5 mt-5">
+  <section class="container py-5">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6">
+        <h1 class="h3 mb-3">Bow Window</h1>
+        <p>
+          Conjunto de paños que sobresalen suavemente de la fachada formando una
+          “curvatura”. Genera mayor sensación de amplitud y aporta gran entrada de luz.
+        </p>
+        <ul class="mb-3">
+          <li>Configuraciones combinadas: fijos + abatibles/oscilobatientes.</li>
+          <li>Diseño a medida para radios y ángulos.</li>
+          <li>Excelente opción para comedores y salas de estar.</li>
+        </ul>
+
+        <h2 class="h6 mt-4">Especificaciones</h2>
+        <ul>
+          <li><strong>Perfilería:</strong> PVC o Aluminio con encuentros en ángulo.</li>
+          <li><strong>Vidrios:</strong> Laminado/templado; Termopanel para control térmico.</li>
+          <li><strong>Espesores:</strong> 4–10 mm; Termopanel 20–28 mm.</li>
+          <li><strong>Herrajes:</strong> según módulos operables elegidos.</li>
+          <li><strong>Sellos:</strong> solución de vértices y encastres sellados.</li>
+        </ul>
+
+        <a class="btn btn-primary mt-3" href="{% url 'quotes:cotizador_personalizado' %}">Quiero cotizar</a>
+      </div>
+      <div class="col-lg-6">
+        <img class="img-fluid rounded-3 shadow-sm"
+             src="{% static 'img/bowwindow.jpg' %}"
+             alt="Bow window Comervial">
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
+{% extends "base.html" %}{% load static %}
+{% block title %}Ventana Medio Punto | Comervial{% endblock %}
+{% block content %}
+<main class="pt-5 mt-5">
+  <section class="container py-5">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6">
+        <h1 class="h3 mb-3">Ventana medio punto</h1>
+        <p>
+          Ventana con remate superior en arco (semicircular). Aporta carácter
+          arquitectónico clásico o mediterráneo, manteniendo prestaciones modernas.
+        </p>
+        <ul class="mb-3">
+          <li>Fabricación a medida del radio/diámetro requerido.</li>
+          <li>Combinable con fijos inferiores u hojas operables.</li>
+          <li>Excelente entrada de luz y protagonismo en fachada.</li>
+        </ul>
+
+        <h2 class="h6 mt-4">Especificaciones</h2>
+        <ul>
+          <li><strong>Perfilería:</strong> PVC o Aluminio con curvado/segmentado según diseño.</li>
+          <li><strong>Vidrios:</strong> Templado/laminado; Termopanel en módulos rectos asociados.</li>
+          <li><strong>Espesores:</strong> 4–8 mm típicos (consultar por radios específicos).</li>
+          <li><strong>Herrajes:</strong> según módulos operables.</li>
+          <li><strong>Sellos:</strong> solución de arco con burletes continuos y siliconas estructurales.</li>
+        </ul>
+
+        <a class="btn btn-primary mt-3" href="{% url 'quotes:cotizador_personalizado' %}">Quiero cotizar</a>
+      </div>
+      <div class="col-lg-6">
+        <img class="img-fluid rounded-3 shadow-sm"
+             src="{% static 'img/mediopunto.webp' %}"
+             alt="Ventana medio punto Comervial">
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

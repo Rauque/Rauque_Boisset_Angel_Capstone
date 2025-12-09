@@ -1,0 +1,307 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Ventanas especiales: Bow Window y Medio Punto | Comervial{% endblock %}
+
+{% block content %}
+<main class="pt-5 mt-5">
+  <section class="section py-4">
+    <div class="container">
+
+      {# CSS rápido para que la galería tenga todas las imágenes del mismo tamaño #}
+      <style>
+        .ventanas-especiales-gallery-img {
+          width: 100%;
+          height: 180px;      
+          object-fit: cover;
+          border-radius: 0.75rem;
+          box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+        }
+      </style>
+
+      {# HERO GENERAL #}
+      <header class="text-center mb-5">
+        <h1 class="h3 mb-3">Ventanas especiales: Bow Window y Medio Punto</h1>
+        <p class="text-muted mb-4">
+          Diseñadas para dar protagonismo a la fachada, aumentar la entrada de luz
+          y generar sensación de amplitud, manteniendo prestaciones modernas de aislación.
+        </p>
+      </header>
+
+      {# BLOQUE 1: BOW WINDOW #}
+      <div class="row g-4 align-items-center mb-5">
+        <div class="col-lg-6">
+          <h2 class="h4 mb-3">Bow Window</h2>
+          <p>
+            Conjunto de paños que sobresalen suavemente de la fachada formando una
+            “curvatura”. Genera mayor sensación de amplitud y aporta gran entrada de luz.
+          </p>
+          <ul class="mb-3">
+            <li>Configuraciones combinadas: fijos + abatibles/oscilobatientes.</li>
+            <li>Diseño a medida para radios y ángulos según el proyecto.</li>
+            <li>Excelente opción para comedores, salas de estar y rincones de lectura.</li>
+          </ul>
+
+          <h3 class="h6 mt-4">Especificaciones</h3>
+          <ul class="small">
+            <li><strong>Perfilería:</strong> PVC o Aluminio con encuentros en ángulo.</li>
+            <li><strong>Vidrios:</strong> Laminado/templado; Termopanel para control térmico.</li>
+            <li><strong>Espesores:</strong> 4–10 mm; Termopanel 20–28 mm.</li>
+            <li><strong>Herrajes:</strong> según módulos operables elegidos.</li>
+            <li><strong>Sellos:</strong> solución de vértices y encastres sellados.</li>
+          </ul>
+
+          <div class="d-flex flex-wrap gap-2 mt-3">
+            <a class="btn btn-primary"
+               href="{% url 'quotes:cotizador_personalizado' %}?categoria=bow-window">
+              Cotizar Bow Window
+            </a>
+            <a class="btn btn-outline-secondary"
+               href="https://wa.me/56912345678" target="_blank" rel="noopener">
+              Consultar por Bow Window
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <img class="img-fluid rounded-3 shadow-sm"
+               src="{% static 'img/bowwindow.jpg' %}"
+               alt="Bow Window Comervial">
+        </div>
+      </div>
+
+      <hr class="my-5">
+
+      {# BLOQUE 2: VENTANA MEDIO PUNTO #}
+      <div class="row g-4 align-items-center mb-5">
+        <div class="col-lg-6 order-lg-2">
+          <h2 class="h4 mb-3">Ventana medio punto</h2>
+          <p>
+            Ventana con remate superior en arco (semicircular). Aporta carácter
+            arquitectónico clásico o mediterráneo, manteniendo prestaciones modernas.
+          </p>
+          <ul class="mb-3">
+            <li>Fabricación a medida del radio o diámetro requerido.</li>
+            <li>Combinable con fijos inferiores u hojas operables.</li>
+            <li>Excelente entrada de luz y protagonismo en la fachada.</li>
+          </ul>
+
+          <h3 class="h6 mt-4">Especificaciones</h3>
+          <ul class="small">
+            <li><strong>Perfilería:</strong> PVC o Aluminio con curvado/segmentado según diseño.</li>
+            <li><strong>Vidrios:</strong> Templado/laminado; Termopanel en módulos rectos asociados.</li>
+            <li><strong>Espesores:</strong> 4–8 mm típicos (consultar por radios específicos).</li>
+            <li><strong>Herrajes:</strong> según módulos operables definidos.</li>
+            <li><strong>Sellos:</strong> solución de arco con burletes continuos y siliconas estructurales.</li>
+          </ul>
+
+          <div class="d-flex flex-wrap gap-2 mt-3">
+            <a class="btn btn-primary"
+               href="{% url 'quotes:cotizador_personalizado' %}?categoria=medio-punto">
+              Cotizar ventana medio punto
+            </a>
+            <a class="btn btn-outline-secondary"
+               href="https://wa.me/56912345678" target="_blank" rel="noopener">
+              Consultar por medio punto
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-6 order-lg-1">
+          <img class="img-fluid rounded-3 shadow-sm"
+               src="{% static 'img/mediopunto.webp' %}"
+               alt="Ventana medio punto Comervial">
+        </div>
+      </div>
+
+      {# BENEFICIOS COMPARTIDOS #}
+      <div class="row g-4 mb-5">
+        <div class="col-md-6">
+          <h3 class="h5">¿Cuándo conviene usar ventanas especiales?</h3>
+          <ul class="mb-0">
+            <li>Cuando quieres generar un punto focal en la fachada.</li>
+            <li>Para ganar amplitud visual en comedores o salas de estar.</li>
+            <li>En proyectos con estilos clásicos, mediterráneos o de autor.</li>
+            <li>Cuando se busca mayor entrada de luz sin perder prestaciones térmicas.</li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <h3 class="h5">Opciones de combinación</h3>
+          <ul class="mb-0">
+            <li>Bow Window con módulos fijos y hojas operables.</li>
+            <li>Medio punto superior con paños rectos inferiores.</li>
+            <li>Integración con Termopanel para eficiencia energética.</li>
+            <li>Compatibles con distintos tipos de cortinas y persianas.</li>
+          </ul>
+        </div>
+      </div>
+
+      {# GALERÍA / PROYECTOS REALIZADOS #}
+      <section class="mb-5">
+        <h2 class="h5 mb-3">Ejemplos de ventanas especiales</h2>
+        <p class="text-muted small mb-3">
+          Algunos proyectos con Bow Window y ventanas medio punto en viviendas y locales comerciales.
+        </p>
+        <div class="row g-3">
+          <div class="col-6 col-md-3">
+            <img src="{% static 'img/bow.jpg' %}"
+                 class="ventanas-especiales-gallery-img"
+                 alt="Proyecto Bow Window 1">
+          </div>
+          <div class="col-6 col-md-3">
+            <img src="{% static 'img/bow2.jpg' %}"
+                 class="ventanas-especiales-gallery-img"
+                 alt="Proyecto Bow Window 2">
+          </div>
+          <div class="col-6 col-md-3">
+            <img src="{% static 'img/bow3.jpg' %}"
+                 class="ventanas-especiales-gallery-img"
+                 alt="Proyecto medio punto 1">
+          </div>
+          <div class="col-6 col-md-3">
+            <img src="{% static 'img/bow4.jpg' %}"
+                 class="ventanas-especiales-gallery-img"
+                 alt="Proyecto medio punto 2">
+          </div>
+        </div>
+      </section>
+
+      {# PROCESO DE TRABAJO #}
+      <section class="mb-5">
+        <h2 class="h5 mb-3">Cómo desarrollamos ventanas especiales</h2>
+        <div class="row g-4">
+          <div class="col-md-3">
+            <div class="h-100 p-3 border rounded-3">
+              <span class="badge bg-primary mb-2">1</span>
+              <h3 class="h6">Levantamiento</h3>
+              <p class="small mb-0">
+                Revisamos medidas, tipo de muro, altura y estilo arquitectónico del proyecto.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="h-100 p-3 border rounded-3">
+              <span class="badge bg-primary mb-2">2</span>
+              <h3 class="h6">Diseño y propuesta</h3>
+              <p class="small mb-0">
+                Definimos geometría, módulos fijos/operables, perfilería y tipo de vidrio más adecuado.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="h-100 p-3 border rounded-3">
+              <span class="badge bg-primary mb-2">3</span>
+              <h3 class="h6">Fabricación</h3>
+              <p class="small mb-0">
+                Fabricamos la estructura y los vidrios a medida. Plazos típicos: <strong>20–30 días hábiles</strong>.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="h-100 p-3 border rounded-3">
+              <span class="badge bg-primary mb-2">4</span>
+              <h3 class="h6">Instalación</h3>
+              <p class="small mb-0">
+                Instalamos, sellamos y revisamos funcionamiento y terminaciones en conjunto con el cliente.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {# PREGUNTAS FRECUENTES #}
+      <section class="mb-5">
+        <h2 class="h5 mb-3">Preguntas frecuentes</h2>
+        <div class="accordion" id="faqVentanasEspeciales">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqve1-heading">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqve1"
+                      aria-expanded="false" aria-controls="faqve1">
+                ¿Estas ventanas son mucho más costosas que una ventana estándar?
+              </button>
+            </h2>
+            <div id="faqve1" class="accordion-collapse collapse"
+                 aria-labelledby="faqve1-heading" data-bs-parent="#faqVentanasEspeciales">
+              <div class="accordion-body">
+                Tienen un costo mayor por la complejidad de diseño y fabricación, pero se valorizan como
+                un elemento arquitectónico que agrega valor estético y comercial a la propiedad.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqve2-heading">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqve2"
+                      aria-expanded="false" aria-controls="faqve2">
+                ¿Se pueden hacer con Termopanel y buen nivel de aislación?
+              </button>
+            </h2>
+            <div id="faqve2" class="accordion-collapse collapse"
+                 aria-labelledby="faqve2-heading" data-bs-parent="#faqVentanasEspeciales">
+              <div class="accordion-body">
+                Sí. En la mayoría de los casos combinamos módulos especiales con Termopanel en las zonas rectas,
+                de modo que la solución completa mantenga un buen desempeño térmico y acústico.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqve3-heading">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqve3"
+                      aria-expanded="false" aria-controls="faqve3">
+                ¿Requieren algún tipo de mantención diferente?
+              </button>
+            </h2>
+            <div id="faqve3" class="accordion-collapse collapse"
+                 aria-labelledby="faqve3-heading" data-bs-parent="#faqVentanasEspeciales">
+              <div class="accordion-body">
+                La limpieza y mantención es similar a la de una ventana estándar: limpieza de vidrios, revisión
+                periódica de sellos y herrajes en los módulos operables.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faqve4-heading">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faqve4"
+                      aria-expanded="false" aria-controls="faqve4">
+                ¿Puedo reemplazar una ventana existente por una Bow Window o medio punto?
+              </button>
+            </h2>
+            <div id="faqve4" class="accordion-collapse collapse"
+                 aria-labelledby="faqve4-heading" data-bs-parent="#faqVentanasEspeciales">
+              <div class="accordion-body">
+                En muchos casos sí, pero puede requerir ajustes en la obra civil (ampliar o modificar el vano).
+                Lo evaluamos en conjunto para definir la solución más segura y viable.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {# CTA FINAL #}
+      <section class="py-4 text-center border-top">
+        <h2 class="h5 mb-2">¿Quieres darle protagonismo a tu fachada?</h2>
+        <p class="text-muted mb-3">
+          Cuéntanos tu idea, envíanos fotos o el plano y te ayudamos a definir la mejor
+          solución entre Bow Window, medio punto u otras ventanas especiales.
+        </p>
+        <div class="d-flex flex-wrap justify-content-center gap-2">
+          <a class="btn btn-primary"
+             href="{% url 'quotes:cotizador_personalizado' %}?categoria=ventanas-especiales">
+            Solicitar cotización
+          </a>
+          <a class="btn btn-outline-secondary"
+             href="https://wa.me/56912345678" target="_blank" rel="noopener">
+            Contactar por WhatsApp
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </section>
+</main>
+{% endblock %}
