@@ -245,3 +245,132 @@
 .navbar-scrolled #brandLogo {
     height: 60px; /* Un tamaño estándar y elegante para navegación */
 }
+
+/* ===================== */
+/*  SERVICIOS INTERACTIVOS */
+/* ===================== */
+/* ===================== */
+/*  SERVICIOS INTERACTIVOS CON EFECTO CRISTAL */
+/* ===================== */
+
+section.section-servicios-interactive {
+  /* fondo general oscuro con un pequeño brillo cian */
+  background:
+    radial-gradient(circle at top left, rgba(17,184,228,0.18), transparent 55%),
+    #020814;
+  color: #f1e7c8;
+  padding: 0;
+}
+
+/* 2 columnas y separación entre cuadros */
+section.section-servicios-interactive .servicios-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;  /* separa los cuadros */
+}
+
+/* CUADRO CRISTAL */
+section.section-servicios-interactive .servicio-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.2rem 2.6rem;
+  min-height: 180px;
+
+  /* efecto vidrio (glassmorphism) */
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.12),
+    rgba(255,255,255,0.03)
+  );
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 14px;
+
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.9rem;
+  color: inherit;
+  overflow: hidden;
+}
+
+/* ya no hay ítem full width: todos en 2 columnas */
+section.section-servicios-interactive .servicio-item--full {
+  grid-column: auto;
+}
+
+/* imagen que aparece al hover, detrás del “cristal” */
+section.section-servicios-interactive .servicio-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--servicio-img);
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: 0;
+}
+
+/* ligera franja cian en el borde izquierdo para dar más “vidrio” */
+section.section-servicios-interactive .servicio-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(
+    to bottom,
+    rgba(17,184,228,0.9),
+    rgba(17,184,228,0.0)
+  );
+  opacity: 0.8;
+  z-index: 1;
+}
+
+/* texto y flecha por encima de todo */
+section.section-servicios-interactive .servicio-text,
+section.section-servicios-interactive .servicio-arrow {
+  position: relative;
+  z-index: 2;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+section.section-servicios-interactive .servicio-arrow {
+  font-size: 1.4rem;
+}
+
+/* HOVER: entra la imagen y el “cristal” se ilumina un poco */
+section.section-servicios-interactive .servicio-item:hover {
+  border-color: rgba(255,255,255,0.6);
+  box-shadow: 0 22px 50px rgba(0,0,0,0.75);
+}
+
+section.section-servicios-interactive .servicio-item:hover::before {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+section.section-servicios-interactive .servicio-item:hover .servicio-text,
+section.section-servicios-interactive .servicio-item:hover .servicio-arrow {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* RESPONSIVE: en móvil una columna */
+@media (max-width: 991.98px) {
+  section.section-servicios-interactive .servicios-grid {
+    grid-template-columns: 1fr;
+  }
+
+  section.section-servicios-interactive .servicio-item {
+    padding: 2rem 1.8rem;
+    min-height: 150px;
+  }
+}

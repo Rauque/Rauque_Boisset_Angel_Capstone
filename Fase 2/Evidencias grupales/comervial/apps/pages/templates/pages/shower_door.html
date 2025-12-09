@@ -1,43 +1,306 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Shower Door | Comervial{% endblock %}
+{% block title %}Baños: Shower Door y Mamparas | Comervial{% endblock %}
 
 {% block content %}
 <main class="pt-5 mt-5">
-  <section class="section">
+  <section class="section py-4">
     <div class="container">
-      <div class="row align-items-center g-4">
+
+      {# HERO GENERAL #}
+      <header class="text-center mb-5">
+        <h1 class="h3 mb-3">Shower Door y Mamparas</h1>
+        <p class="text-muted mb-4">
+          Diseñamos e instalamos soluciones a medida para duchas y zonas húmedas, combinando seguridad,
+          estanqueidad y un diseño limpio que aprovecha la luz de tu baño.
+        </p>
+      </header>
+
+      {# BLOQUE 1: SHOWER DOOR #}
+      <div class="row align-items-center g-4 mb-5">
         <div class="col-lg-6 order-lg-2">
           <img class="img-fluid rounded-3 shadow-sm"
                src="{% static 'img/showerdoor2.jpg' %}"
-               alt="Shower Door de vidrio templado">
+               alt="Shower Door de vidrio templado Comervial">
         </div>
         <div class="col-lg-6">
-          <h1 class="h3 mb-3">Shower Door de vidrio templado</h1>
-          <p>Puertas y mamparas de ducha a medida con herrajería de primera calidad.</p>
+          <h2 class="h4 mb-3">Shower Door de vidrio templado</h2>
+          <p>Puertas de ducha a medida con herrajería de primera calidad, ideales para lograr un cierre completo y controlar salpicaduras.</p>
           <ul class="mb-3">
-            <li><strong>Vidrio templado:</strong> 8–10 mm (resistente a golpes térmicos e impacto).</li>
-            <li><strong>Configuraciones:</strong> fijo, abatible, corredera, 90°/inline, “walk-in”.</li>
-            <li><strong>Herrajería:</strong> acero inoxidable o latón cromado, perfiles de estanqueidad y rodamientos de alto desempeño.</li>
+            <li><strong>Vidrio templado:</strong> 8–10 mm, resistente a golpes térmicos e impacto.</li>
+            <li><strong>Configuraciones:</strong> fijo, abatible, corredera, 90° / inline, “walk-in”.</li>
+            <li><strong>Herrajería:</strong> acero inoxidable o latón cromado, con rodamientos de alto desempeño.</li>
             <li><strong>Opcionales:</strong> recubrimiento anti-cal, vidrios extraclaros, arenados o serigrafiados.</li>
-            <li><strong>Seguridad:</strong> el templado se fragmenta en trozos pequeños reduciendo el riesgo de lesiones.</li>
+            <li><strong>Seguridad:</strong> el templado se fragmenta en trozos pequeños, reduciendo el riesgo de lesiones.</li>
           </ul>
-          <a class="btn btn-primary" href="{% url 'quotes:cotizador_personalizado' %}">Cotizar Shower Door</a>
+          <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-primary"
+               href="{% url 'quotes:cotizador_personalizado' %}?categoria=shower-door">
+              Cotizar Shower Door
+            </a>
+            <a class="btn btn-outline-secondary"
+               href="https://wa.me/56912345678" target="_blank" rel="noopener">
+              Consultar por este modelo
+            </a>
+          </div>
         </div>
       </div>
 
       <hr class="my-5">
 
-      <div class="row g-4">
-        <div class="col-md-6">
-          <h2 class="h5">¿Por qué vidrio templado?</h2>
-          <p>Soporta diferencias de temperatura y tiene resistencia mecánica superior, fundamental en ambientes húmedos y de uso diario.</p>
+      {# BLOQUE 2: MAMPARAS #}
+      <div class="row align-items-center g-4 mb-5">
+        <div class="col-lg-6">
+          <h2 class="h4 mb-3">Mamparas de baño a medida</h2>
+          <p>Soluciones modernas para separar zonas húmedas sin perder amplitud ni luminosidad, ideales para duchas a ras de piso.</p>
+          <ul class="mb-3">
+            <li><strong>Vidrio templado:</strong> 8–10 mm; opción laminado templado si se requiere mayor seguridad.</li>
+            <li><strong>Tipos:</strong> panel fijo, abatible, corredera, en “L” o “U”.</li>
+            <li><strong>Terminaciones:</strong> claro, extraclaro, esmerilado o serigrafiado.</li>
+            <li><strong>Herrajería:</strong> acero inoxidable, perfilería mínima y fijaciones ocultas para un look más limpio.</li>
+          </ul>
+          <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-primary"
+               href="{% url 'quotes:cotizador_personalizado' %}?categoria=mampara">
+              Cotizar Mampara
+            </a>
+            <a class="btn btn-outline-secondary"
+               href="https://wa.me/56912345678" target="_blank" rel="noopener">
+              Consultar por mamparas
+            </a>
+          </div>
         </div>
-        <div class="col-md-6">
-          <h2 class="h5">Sellos & estanqueidad</h2>
-          <p>Usamos burletes magnéticos, perfiles de goteo y umbrales cuando el proyecto lo requiere para controlar salpicaduras.</p>
+        <div class="col-lg-6">
+          <img class="img-fluid rounded-3 shadow-sm"
+               src="{% static 'img/mampara.jpg' %}"
+               alt="Mampara de vidrio templado Comervial">
         </div>
       </div>
+
+      {# BENEFICIOS CLAVE #}
+      <div class="row g-4 mb-5">
+        <div class="col-md-6">
+          <h3 class="h5">Beneficios para tu baño</h3>
+          <ul class="mb-0">
+            <li>Aprovecha mejor el espacio en baños pequeños.</li>
+            <li>Reduce filtraciones y agua fuera de la ducha.</li>
+            <li>Diseños limpios que no cortan la luz natural.</li>
+            <li>Fácil limpieza, sin cortinas que juntan humedad.</li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <h3 class="h5">¿Por qué vidrio templado?</h3>
+          <p class="mb-2">
+            Soporta diferencias de temperatura y tiene una resistencia mecánica superior,
+            fundamental en ambientes de uso diario como la ducha.
+          </p>
+          <p class="mb-0">
+            En caso de rotura, se fragmenta en trozos pequeños, reduciendo el riesgo de cortes graves.
+          </p>
+        </div>
+      </div>
+{# GALERÍA / PROYECTOS REALIZADOS #}
+
+<section class="mb-5">
+  <style>
+  .banos-gallery-img {
+    width: 100%;
+    height: 180px;       
+    object-fit: cover;  
+    border-radius: 0.75rem;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+  }
+</style>
+  <h2 class="h5 mb-3">Ejemplos de proyectos realizados</h2>
+  <p class="text-muted small mb-3">
+    Algunas instalaciones de Shower Door y mamparas en departamentos y casas de clientes.
+  </p>
+  <div class="row g-3">
+    <div class="col-6 col-md-3">
+      <img src="{% static 'img/mamparas1.webp' %}"
+           class="banos-gallery-img"
+           alt="Proyecto baño 1">
+    </div>
+    <div class="col-6 col-md-3">
+      <img src="{% static 'img/mamparas2.webp' %}"
+           class="banos-gallery-img"
+           alt="Proyecto baño 2">
+    </div>
+    <div class="col-6 col-md-3">
+      <img src="{% static 'img/mamparas3.jpg' %}"
+           class="banos-gallery-img"
+           alt="Proyecto baño 3">
+    </div>
+    <div class="col-6 col-md-3">
+      <img src="{% static 'img/mamparas4.jpg' %}"
+           class="banos-gallery-img"
+           alt="Proyecto baño 4">
+    </div>
+  </div>
+</section>
+
+
+      {# PROCESO DE TRABAJO #}
+      <section class="mb-5">
+        <h2 class="h5 mb-3">Cómo trabajamos tu proyecto</h2>
+        <div class="row g-4">
+          <div class="col-md-3">
+            <div class="h-100 p-3 border rounded-3">
+              <span class="badge bg-primary mb-2">1</span>
+              <h3 class="h6">Contacto y medidas</h3>
+              <p class="small mb-0">
+                Nos envías fotos y medidas aproximadas, o agendamos una visita para tomar medidas en terreno.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="h-100 p-3 border rounded-3">
+              <span class="badge bg-primary mb-2">2</span>
+              <h3 class="h6">Propuesta y valor</h3>
+              <p class="small mb-0">
+                Te presentamos alternativas de Shower o mampara, con valores estimados y detalles de herrajería.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="h-100 p-3 border rounded-3">
+              <span class="badge bg-primary mb-2">3</span>
+              <h3 class="h6">Fabricación</h3>
+              <p class="small mb-0">
+                Fabricamos el vidrio templado a medida. Plazo típico de producción: <strong>10–15 días hábiles</strong>.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="h-100 p-3 border rounded-3">
+              <span class="badge bg-primary mb-2">4</span>
+              <h3 class="h6">Instalación</h3>
+              <p class="small mb-0">
+                Nuestro equipo instala y ajusta en terreno, revisando estanqueidad y funcionamiento antes de entregar.
+              </p>
+            </div>
+          </div>
+        </div>
+        <p class="small text-muted mt-3 mb-0">
+          Zonas de atención y plazos pueden variar según comuna y complejidad del proyecto.
+        </p>
+      </section>
+
+      {# GARANTÍA Y COBERTURA #}
+      <section class="mb-5">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <h2 class="h5 mb-2">Plazos y garantía</h2>
+            <ul class="small mb-0">
+              <li>Fabricación estándar: 10–15 días hábiles desde la aprobación.</li>
+              <li>Garantía en herrajería e instalación por X meses (ajusta este texto según tu política).</li>
+              <li>Atendemos principalmente en Región Metropolitana y alrededores.</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h2 class="h5 mb-2">¿Por qué Comervial?</h2>
+            <ul class="small mb-0">
+              <li>Experiencia en proyectos residenciales y comerciales.</li>
+              <li>Equipos propios de instalación, sin intermediarios.</li>
+              <li>Herrajería y vidrios de proveedores certificados.</li>
+              <li>Acompañamiento desde el diseño hasta la instalación final.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {# PREGUNTAS FRECUENTES #}
+      <section class="mb-5">
+        <h2 class="h5 mb-3">Preguntas frecuentes</h2>
+        <div class="accordion" id="faqBanos">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faq1-heading">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faq1"
+                      aria-expanded="false" aria-controls="faq1">
+                ¿Qué pasa si los muros de mi baño no están a plomo?
+              </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse" aria-labelledby="faq1-heading"
+                 data-bs-parent="#faqBanos">
+              <div class="accordion-body">
+                Adaptamos perfilería y herrajería para compensar pequeñas diferencias. En la visita técnica
+                verificamos estos detalles antes de fabricar el vidrio templado.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faq2-heading">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faq2"
+                      aria-expanded="false" aria-controls="faq2">
+                ¿Se puede instalar sobre una tina existente?
+              </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse" aria-labelledby="faq2-heading"
+                 data-bs-parent="#faqBanos">
+              <div class="accordion-body">
+                Sí, es posible instalar Shower Door o mamparas sobre tina, siempre que la superficie esté firme
+                y correctamente nivelada. Revisamos esto en la evaluación inicial.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faq3-heading">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faq3"
+                      aria-expanded="false" aria-controls="faq3">
+                ¿Cómo se limpia el vidrio para evitar manchas de sarro?
+              </button>
+            </h2>
+            <div id="faq3" class="accordion-collapse collapse" aria-labelledby="faq3-heading"
+                 data-bs-parent="#faqBanos">
+              <div class="accordion-body">
+                Recomendamos secar el vidrio después de cada uso y limpiar con detergente neutro. Podemos
+                agregar recubrimiento anti-cal para facilitar aún más la mantención.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faq4-heading">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#faq4"
+                      aria-expanded="false" aria-controls="faq4">
+                ¿Qué tan seguro es el vidrio templado?
+              </button>
+            </h2>
+            <div id="faq4" class="accordion-collapse collapse" aria-labelledby="faq4-heading"
+                 data-bs-parent="#faqBanos">
+              <div class="accordion-body">
+                El vidrio templado es varias veces más resistente que un vidrio común y, en caso de rotura,
+                se fragmenta en trozos pequeños y romos, reduciendo el riesgo de cortes profundos.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {# CTA FINAL #}
+      <section class="py-4 text-center border-top">
+        <h2 class="h5 mb-2">¿Listo para renovar tu baño?</h2>
+        <p class="text-muted mb-3">
+          Cuéntanos qué tienes en mente y te ayudamos a elegir entre Shower Door o mampara según tu espacio y presupuesto.
+        </p>
+        <div class="d-flex flex-wrap justify-content-center gap-2">
+          <a class="btn btn-primary"
+             href="{% url 'quotes:cotizador_personalizado' %}?categoria=banos">
+            Solicitar cotización
+          </a>
+          <a class="btn btn-outline-secondary"
+             href="https://wa.me/56912345678" target="_blank" rel="noopener">
+            Enviar fotos por WhatsApp
+          </a>
+        </div>
+      </section>
+
     </div>
   </section>
 </main>

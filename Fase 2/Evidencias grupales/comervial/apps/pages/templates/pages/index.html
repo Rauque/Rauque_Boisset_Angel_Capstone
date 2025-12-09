@@ -6,7 +6,8 @@
 <!-- HERO / CARRUSEL -->
 <header id="heroCarousel" class="carousel slide hero" data-bs-ride="carousel" data-bs-interval="5000">
   <div class="carousel-inner">
-    <div class="carousel-item active" style="background-image:url('{% static "img/hero1.jpeg" %}')">
+    <!-- Slide 1 -->
+    <div class="carousel-item active" style="background-image:url('{% static 'img/hero1.jpeg' %}')">
       <div class="hero-overlay"></div>
       <div class="hero-content container text-center text-white">
         <h1 class="display-5 fw-semibold">VIDRIERÍA COMERVIAL</h1>
@@ -18,7 +19,8 @@
       </div>
     </div>
 
-    <div class="carousel-item" style="background-image:url('{% static "img/hero2.jpeg" %}')">
+    <!-- Slide 2 -->
+    <div class="carousel-item" style="background-image:url('{% static 'img/hero2.jpeg' %}')">
       <div class="hero-overlay"></div>
       <div class="hero-content container text-center text-white">
         <h2 class="display-6 fw-semibold">Ventanas y Puertas de Alto Desempeño</h2>
@@ -27,7 +29,8 @@
       </div>
     </div>
 
-    <div class="carousel-item" style="background-image:url('{% static "img/hero3.jpeg" %}')">
+    <!-- Slide 3 -->
+    <div class="carousel-item" style="background-image:url('{% static 'img/hero3.jpeg' %}')">
       <div class="hero-overlay"></div>
       <div class="hero-content container text-center text-white">
         <h2 class="display-6 fw-semibold">Instalación, Reparación y Mantención</h2>
@@ -44,7 +47,84 @@
     <span class="carousel-control-next-icon"></span>
   </button>
 </header>
-<!-- INTRODUCE YOURSELF (imagen + texto + link) -->
+
+
+<!-- SECCIÓN SERVICIOS (INTERACTIVA, AGRUPADA COMO EN EL MENÚ) -->
+<section id="servicios" class="section section-servicios-interactive">
+  <div class="container-fluid px-0">
+    <div class="servicios-grid">
+      <a href="{% url 'barandas' %}"
+         class="servicio-item servicio-item--full"
+         style="--servicio-img: url('{% static 'img/barandas.jpg' %}');">
+        <span class="servicio-text">BARANDAS</span>
+        <span class="servicio-arrow">&rarr;</span>
+      </a>
+
+      <a href="{% url 'muebles' %}"
+         class="servicio-item"
+         style="--servicio-img: url('{% static 'img/mueble.jpg' %}');">
+        <span class="servicio-text">MUEBLES</span>
+        <span class="servicio-arrow">&rarr;</span>
+      </a>
+
+      <a href="{% url 'shower_door' %}"
+         class="servicio-item"
+         style="--servicio-img: url('{% static 'img/shower1.webp' %}');">
+        <span class="servicio-text">SHOWER DOOR Y MAMPARAS</span>
+        <span class="servicio-arrow">&rarr;</span>
+      </a>
+
+      <a href="{% url 'reposicion_cristales' %}"
+         class="servicio-item"
+         style="--servicio-img: url('{% static 'img/ventana.jpg' %}');">
+        <span class="servicio-text">REPOSICIÓN DE CRISTALES</span>
+        <span class="servicio-arrow">&rarr;</span>
+      </a>
+      <a href="{% url 'corredera' %}"
+         class="servicio-item"
+         style="--servicio-img: url('{% static 'img/vcorrederas.jpg' %}');">
+        <span class="servicio-text">VENTANAS CORREDERAS</span>
+        <span class="servicio-arrow">&rarr;</span>
+      </a>
+
+      <a href="{% url 'abatible' %}"
+         class="servicio-item"
+         style="--servicio-img: url('{% static 'img/ventanabatible.jpg' %}');">
+        <span class="servicio-text">ABATIBLE, OSCILOBATIENTE Y PROYECTANTE</span>
+        <span class="servicio-arrow">&rarr;</span>
+      </a>
+
+      <a href="{% url 'medio_punto' %}"
+         class="servicio-item"
+         style="--servicio-img: url('{% static 'img/bow4.jpg' %}');">
+        <span class="servicio-text">MEDIO PUNTO Y BOW WINDOW</span>
+        <span class="servicio-arrow">&rarr;</span>
+      </a>
+
+      <a href="{% url 'puertas_abatibles' %}"
+         class="servicio-item"
+         style="--servicio-img: url('{% static 'img/correr.jpg' %}');">
+        <span class="servicio-text">ABATIBLES Y CORREDERAS</span>
+        <span class="servicio-arrow">&rarr;</span>
+      </a>
+
+      <a href="{% url 'puertas_elevadoras' %}"
+         class="servicio-item"
+         style="--servicio-img: url('{% static 'img/elevadora.jpg' %}');">
+        <span class="servicio-text">ELEVADORAS (LIFT & SLIDE)</span>
+        <span class="servicio-arrow">&rarr;</span>
+      </a>
+
+      <a href="{% url 'puertas_templado' %}"
+         class="servicio-item"
+         style="--servicio-img: url('{% static 'img/templado1.jpg' %}');">
+        <span class="servicio-text">CRISTAL TEMPLADO</span>
+        <span class="servicio-arrow">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+<!-- INTRO / QUIÉNES SOMOS -->
 <section id="intro" class="section border-bottom">
   <div class="container">
     <div class="row align-items-center g-4">
@@ -56,17 +136,28 @@
         </div>
       </div>
       <div class="col-md-7">
-        <h2 class="h4 mb-3">Vidriería Comervial</h2>
+        <h2 class="h4 mb-2">Vidriería Comervial</h2>
         <p class="mb-3">
-          Somos una vidriería familiar con años de experiencia en instalación, reparación
-          y fabricación de soluciones en cristal. Acompañamos a nuestros clientes desde la
-          asesoría inicial hasta la instalación final, cuidando cada detalle.
+          Somos una vidriería familiar y de tamaño pequeño, con años de trabajo
+          continuo en instalación, reparación y fabricación de soluciones en cristal.
+          No somos una gran cadena: somos las mismas personas que te atienden,
+          miden, instalan y se preocupan de cómo queda el resultado final.
         </p>
         <p class="mb-4">
-          Trabajamos con casas, edificios, locales comerciales y constructoras, siempre con
-          foco en seguridad, aislación térmica y terminaciones prolijas.
+          Hemos trabajado en viviendas, locales y proyectos pequeños de construcción,
+          siempre con foco en dejar el trabajo bien hecho: buenos anclajes,
+          terminaciones prolijas y soluciones pensadas para durar, no solo para
+          verse bien el primer día.
         </p>
-        <!-- En el wireframe aquí va el "link to about" -->
+
+        <h3 class="h6 text-muted mb-2">¿Por qué elegirnos?</h3>
+        <ul class="list-unstyled small mb-4">
+          <li class="mb-1">• Trato directo con un equipo pequeño, sin tanta vuelta ni intermediarios.</li>
+          <li class="mb-1">• Años de experiencia real instalando barandas, ventanas, puertas y shower door.</li>
+          <li class="mb-1">• Asesoría honesta: te decimos qué conviene y qué no para tu espacio y tu presupuesto.</li>
+          <li class="mb-1">• Cuidado en la instalación: nos preocupamos de la limpieza, el sellado y los detalles.</li>
+        </ul>
+
         <a href="{% url 'quotes:cotizador_personalizado' %}" class="btn btn-outline-primary">
           Cuéntanos tu proyecto
         </a>
@@ -74,103 +165,50 @@
     </div>
   </div>
 </section>
-<!-- SECCIÓN SERVICIOS -->
-<section id="servicios" class="section">
+
+<!-- CTA COTIZA CON NOSOTROS -->
+<section class="section section-highlight">
   <div class="container">
-    <h2 class="h3 mb-4">Servicios</h2>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
-          <img class="card-img-top" src="{% static 'img/baranda1.jpg' %}" alt="">
-          <div class="card-body">
-            <h3 class="h5">Barandas de Cristal</h3>
-            <p class="text-secondary mb-3">Máxima visibilidad y seguridad para terrazas, piscinas y escaleras.</p>
-            <a href="{% url 'barandas' %}" class="btn btn-outline-primary btn-sm">Ver más</a>
+    <div class="row align-items-center g-4">
+      <div class="col-lg-6">
+        <h2 class="h4 mb-1">¿Necesitas ayuda?</h2>
+        <p class="mb-0">Pide la visita de un especialista y consigue la mejor solución.</p>
+      </div>
+      <div class="col-lg-6 text-lg-end">
+        <a href="{% url 'quotes:cotizador' %}" class="btn btn-dark me-2">Cotizador rápido</a>
+        <a href="{% url 'quotes:cotizador_personalizado' %}" class="btn btn-outline-dark">Cotizador personalizado</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO RÁPIDO (AGENTES) -->
+<section class="section">
+  <div class="container">
+    <h2 class="h3 mb-4">Consulta con nuestros agentes</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm p-3 d-flex flex-md-row align-items-center gap-3">
+          <img src="{% static 'img/WhatsApp.svg' %}" alt=""
+               style="width:64px;height:64px;border-radius:50%;object-fit:cover">
+          <div>
+            <h3 class="h6 mb-1">Hernan Rauque Alvarez</h3>
+            <a class="btn btn-success btn-sm" href="https://wa.me/56994568206" target="_blank">WhatsApp</a>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
-          <img class="card-img-top" src="{% static 'img/ventanapvc.jpg' %}" alt="">
-          <div class="card-body">
-            <h3 class="h5">Ventanas</h3>
-            <p class="text-secondary mb-3">Correderas, abatibles, oscilobatientes y más, a medida.</p>
-            <a href="#" class="btn btn-outline-primary btn-sm">Ver ventanas</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100 shadow-sm">
-          <img class="card-img-top" src="{% static 'img/abatible.webp' %}" alt="">
-          <div class="card-body">
-            <h3 class="h5">Puertas</h3>
-            <p class="text-secondary mb-3">Soluciones de baño de alta durabilidad y limpieza visual.</p>
-            <a href="#" class="btn btn-outline-primary btn-sm">Ver soluciones</a>
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm p-3 d-flex flex-md-row align-items-center gap-3">
+          <img src="{% static 'img/WhatsApp.svg' %}" alt=""
+               style="width:64px;height:64px;border-radius:50%;object-fit:cover">
+          <div>
+            <h3 class="h6 mb-1">Hernan Rauque Ulloa</h3>
+            <a class="btn btn-success btn-sm" href="https://wa.me/56997003496" target="_blank">WhatsApp</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- EXTRAS: CTA + contacto rápido (como bloque extra del wireframe) -->
-<section id="contacto" class="section">
-  <div class="container">
-    <div class="row g-4">
-      <!-- CTA principal -->
-      <div class="col-lg-6">
-        <div class="p-4 border rounded-3 h-100">
-          <h2 class="h4 mb-2">Cotiza con nosotros</h2>
-          <p class="mb-3">
-            Cuéntanos qué necesitas y te ayudaremos a elegir el cristal y sistema más adecuados
-            para tu proyecto.
-          </p>
-          <div class="d-flex flex-wrap gap-2">
-            <a href="{% url 'quotes:cotizador' %}" class="btn btn-dark">Cotizador rápido</a>
-            <a href="{% url 'quotes:cotizador_personalizado' %}" class="btn btn-outline-dark">
-              Cotización personalizada
-            </a>
-          </div>
-        </div>
-      </div>
 
-      <!-- Contacto por WhatsApp (extra) -->
-      <div class="col-lg-6">
-        <div class="p-4 border rounded-3 h-100">
-          <h3 class="h5 mb-3">Consulta directa por WhatsApp</h3>
-
-          <div class="d-flex flex-column gap-3">
-            <div class="d-flex align-items-center gap-3">
-              <img src="{% static 'img/WhatsApp.svg' %}"
-                   alt=""
-                   style="width:48px;height:48px;border-radius:50%;object-fit:cover">
-              <div>
-                <p class="mb-1 fw-semibold">Hernan Rauque Alvarez</p>
-                <a class="btn btn-success btn-sm"
-                   href="https://wa.me/56994568206"
-                   target="_blank">
-                  Escribir por WhatsApp
-                </a>
-              </div>
-            </div>
-
-            <div class="d-flex align-items-center gap-3">
-              <img src="{% static 'img/WhatsApp.svg' %}"
-                   alt=""
-                   style="width:48px;height:48px;border-radius:50%;object-fit:cover">
-              <div>
-                <p class="mb-1 fw-semibold">Hernan Rauque Ulloa</p>
-                <a class="btn btn-success btn-sm"
-                   href="https://wa.me/56997003496"
-                   target="_blank">
-                  Escribir por WhatsApp
-                </a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 {% endblock %}
